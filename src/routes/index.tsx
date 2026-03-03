@@ -1,5 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { FiPhone, FiGrid } from 'react-icons/fi'
+import { PiHandshakeBold } from "react-icons/pi";
+import { MdOutlineDeliveryDining } from 'react-icons/md'
 import image1 from '../assets/Home/image_1.png'
 import image2 from '../assets/Home/image_2.png'
 import image3 from '../assets/Home/image_3.png'
@@ -9,99 +12,224 @@ export const Route = createFileRoute(`/`)({
   component: Index,
 })
 
+const FEATURES = [
+  {
+    icon: <FiPhone className="text-[#3F51B5]" size={28} />,
+    title: 'Easy Contact',
+    subtitle: 'Call the boss directly',
+  },
+  {
+    icon: <PiHandshakeBold className="text-amber-500" size={30} />,
+    title: 'Jobs for All',
+    subtitle: 'Daily & skilled work',
+  },
+  {
+    icon: <MdOutlineDeliveryDining className="text-[#3F51B5]" size={32} />,
+    title: 'Get Paid Daily',
+    subtitle: 'No need to wait',
+  },
+]
+
 function Index() {
-  const [isModalOpen, setIsModalOpen] = useState(true)
   const [activeSlide, setActiveSlide] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(true)
+  const [prevSlide, setPrevSlide] = useState<number | null>(null)
+  const [transitioning, setTransitioning] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const slides = useMemo(() => [image1, image2, image3, image4], [])
 
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setActiveSlide((previous) => (previous + 1) % slides.length)
-    }, 3500)
+  const goToSlide = (index: number) => {
+    if (index === activeSlide || transitioning) return
+    setPrevSlide(activeSlide)
+    setTransitioning(true)
+    setActiveSlide(index)
+    setTimeout(() => {
+      setPrevSlide(null)
+      setTransitioning(false)
+    }, 700)
+  }
 
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setActiveSlide((prev) => {
+        const next = (prev + 1) % slides.length
+        setPrevSlide(prev)
+        setTransitioning(true)
+        setTimeout(() => {
+          setPrevSlide(null)
+          setTransitioning(false)
+        }, 700)
+        return next
+      })
+    }, 3500)
+  }
+
+  useEffect(() => {
+    startTimer()
     return () => {
-      window.clearInterval(intervalId)
+      if (timerRef.current) clearInterval(timerRef.current)
     }
   }, [slides.length])
 
   return (
-    <main className="relative h-screen w-full overflow-hidden bg-[#f5f7fb] text-slate-900">
-      <section className="mx-auto flex h-full w-full max-w-[1600px] flex-col items-center justify-center px-4 py-4 sm:px-6 sm:py-5 lg:px-10">
-        <div className="relative flex h-[68vh] w-[88vw] max-w-[1200px] min-w-0 items-center justify-center overflow-hidden rounded-xl bg-white/75 sm:w-[84vw] md:h-[69vh] md:w-[82vw] lg:w-[80vw]">
+    <div className="min-h-screen bg-[#f0f2f8] flex flex-col">
+      {/* ── Navbar ── */}
+      <nav className="bg-[#3F51B5] px-8 flex items-center justify-between h-14 shadow-md">
+        <span className="text-white text-2xl font-extrabold tracking-tight select-none">
+          Zupro
+        </span>
+
+        <div className="flex items-center gap-8">
+          <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">Find Jobs</a>
+          <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">Hire Talent</a>
+          <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">FAQs</a>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            className="flex items-center gap-1.5 text-white/90 text-sm font-medium hover:text-white transition-colors"
+          >
+            <FiGrid size={16} />
+            Dashboard
+          </button>
+          <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/60 flex-shrink-0">
+            <img
+              src="https://i.pravatar.cc/64?img=12"
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </nav>
+
+      {/* ── Hero Section ── */}
+      <main className="flex-1 flex flex-col items-center pt-6 pb-8 px-4">
+
+        {/* Carousel */}
+        <div
+          className="w-[85%] max-w-[1200px] relative rounded-2xl overflow-hidden shadow-xl"
+          style={{ aspectRatio: '16/7' }}
+        >
           {slides.map((slide, index) => (
             <img
               key={slide}
               src={slide}
-              alt={`Job marketplace visual ${index + 1}`}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
-                activeSlide === index ? 'opacity-100' : 'opacity-0'
-              }`}
+              alt={`Slide ${index + 1}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                opacity: activeSlide === index ? 1 : 0,
+                transition: 'opacity 700ms cubic-bezier(0.4, 0, 0.2, 1)',
+                zIndex: activeSlide === index ? 2 : prevSlide === index ? 1 : 0,
+              }}
             />
           ))}
 
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2">
+          {/* Dot indicators */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
             {slides.map((_, index) => (
               <button
                 key={`dot-${index}`}
                 type="button"
-                aria-label={`Show slide ${index + 1}`}
-                onClick={() => setActiveSlide(index)}
-                className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                  activeSlide === index ? 'bg-[#3F51B5]' : 'bg-slate-300'
-                }`}
+                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => {
+                  goToSlide(index)
+                  startTimer()
+                }}
+                style={{
+                  width: activeSlide === index ? '24px' : '10px',
+                  height: '10px',
+                  borderRadius: activeSlide === index ? '5px' : '50%',
+                  backgroundColor: activeSlide === index ? '#fff' : 'rgba(255,255,255,0.5)',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'all 300ms ease',
+                }}
               />
             ))}
           </div>
         </div>
 
-        <div className="mt-5 flex w-[88vw] max-w-[560px] min-w-0 flex-col items-center gap-3 sm:mt-6 sm:w-[84vw] sm:flex-row md:w-[82vw] lg:w-[80vw] lg:justify-center">
+        {/* CTA Buttons */}
+        <div className="mt-6 flex gap-4 w-[85%] max-w-[560px]">
           <button
             type="button"
-            className="w-full rounded-lg bg-[#3F51B5] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#3647a3] active:bg-[#303f90]"
+            className="flex-1 rounded-xl bg-[#3F51B5] px-6 py-3.5 text-base font-bold text-white shadow-md
+                       transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]"
           >
             Get a Job
           </button>
           <button
             type="button"
-            className="w-full rounded-lg border-2 border-[#3F51B5] bg-transparent px-6 py-3 text-base font-semibold text-[#3F51B5] transition-colors hover:bg-[#eef1ff] active:bg-[#dde2ff]"
+            className="flex-1 rounded-xl border-2 border-[#3F51B5] bg-white px-6 py-3.5 text-base font-bold
+                       text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff]
+                       hover:shadow-md active:scale-[0.98]"
           >
             Hire Talent
           </button>
         </div>
-      </section>
 
-      {isModalOpen ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 px-4">
-          <div className="relative w-full max-w-[420px] rounded-xl bg-white p-5 sm:p-6">
+        {/* Feature Cards */}
+        <div className="mt-6 w-[85%] max-w-[1200px] grid grid-cols-3 gap-4">
+          {FEATURES.map((f) => (
+            <div
+              key={f.title}
+              className="bg-white rounded-xl px-6 py-5 flex items-center gap-4 shadow-sm
+                         border border-slate-100 hover:shadow-md transition-shadow duration-200"
+            >
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center">
+                {f.icon}
+              </div>
+              <div>
+                <p className="font-bold text-slate-800 text-[15px] leading-tight">{f.title}</p>
+                <p className="text-slate-500 text-sm mt-0.5">{f.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {/* ── Modal ── */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-[400px] rounded-2xl bg-white p-6 shadow-2xl">
             <button
               type="button"
-              aria-label="Close selection modal"
+              aria-label="Close modal"
               onClick={() => setIsModalOpen(false)}
-              className="absolute right-3 top-3 rounded-md px-2 py-1 text-xl leading-none text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 active:bg-slate-200"
+              className="absolute right-4 top-4 w-7 h-7 flex items-center justify-center rounded-full
+                         text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors text-sm font-medium"
             >
-              ?
+              ✕
             </button>
 
-            <p className="pr-8 text-sm font-medium text-slate-600">What are you looking for?</p>
+            <p className="text-slate-700 font-semibold text-base pr-6">What are you looking for?</p>
+            <p className="text-slate-400 text-sm mt-1">Choose how you'd like to use Zupro</p>
 
-            <div className="mt-4 flex flex-col gap-3">
+            <div className="mt-5 flex flex-col gap-3">
               <button
                 type="button"
-                className="w-full rounded-lg bg-[#3F51B5] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3647a3] active:bg-[#303f90]"
+                onClick={() => setIsModalOpen(false)}
+                className="w-full rounded-xl bg-[#3F51B5] px-4 py-3.5 text-sm font-bold text-white
+                           transition-all hover:bg-[#3647a3] active:scale-[0.98]"
               >
-                Do you want to get hired?
+                🙋 I want to get hired
               </button>
               <button
                 type="button"
-                className="w-full rounded-lg bg-[#3F51B5] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3647a3] active:bg-[#303f90]"
+                onClick={() => setIsModalOpen(false)}
+                className="w-full rounded-xl border-2 border-[#3F51B5] bg-white px-4 py-3.5 text-sm
+                           font-bold text-[#3F51B5] transition-all hover:bg-[#eef1ff] active:scale-[0.98]"
               >
-                Do you want to offer jobs?
+                💼 I want to offer jobs
               </button>
             </div>
           </div>
         </div>
-      ) : null}
-    </main>
+      )}
+    </div>
   )
 }
