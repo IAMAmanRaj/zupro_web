@@ -55,10 +55,10 @@ function Index() {
 
   const slides = useMemo(
     () => [
-      '/images/home/image_1.png',
-      '/images/home/image_2.png',
-      '/images/home/image_3.png',
-      '/images/home/image_4.png',
+      '/images/home/image_1.webp',
+      '/images/home/image_2.webp',
+      '/images/home/image_3.webp',
+      '/images/home/image_4.webp',
     ],
     [],
   )
@@ -118,7 +118,7 @@ function Index() {
         <div className="flex items-center gap-4">
           <FaRegUserCircle className="text-[#3F51B5] transition-all duration-300 hover:scale-110 hover:cursor-pointer" size={30} />
           <button type="button" className="flex items-center gap-2 text-[#3F51B5] text-lg font-semibold hover:cursor-pointer transition-colors">
-            <MdOutlineSegment className="text-[#3F51B5] transition-all duration-300 hover:scale-110" size={32} />
+    
             <span>Dashboard</span>
           </button>
         </div>
@@ -176,7 +176,7 @@ function Index() {
         {/* Feature Cards */}
         <div className="mt-6 w-[85%] max-w-[1200px] grid grid-cols-3 gap-4">
           {FEATURES.map((f) => (
-            <div key={f.title} className="bg-white rounded-xl px-6 py-5 flex items-center gap-4 shadow-sm border border-slate-100 hover:shadow-md transition-shadow duration-200">
+            <div key={f.title} className="bg-white hover:cursor-pointer rounded-xl px-6 py-5 flex items-center gap-4 shadow-sm border border-slate-100 hover:shadow-md transition-shadow duration-200">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center">
                 {f.icon}
               </div>
