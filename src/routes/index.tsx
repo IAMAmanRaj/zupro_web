@@ -188,7 +188,7 @@ function Index() {
             {/* Backdrop */}
             <motion.div
               key="backdrop"
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-[3px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -218,9 +218,6 @@ function Index() {
                   <h2 className="text-2xl font-extrabold text-slate-800 leading-snug">
                     How would you like to get started?
                   </h2>
-                  <p className="text-slate-400 text-sm mt-1.5">
-                    Choose your path — you can always switch later.
-                  </p>
                 </div>
 
                 {/* Two-column card area */}
@@ -231,21 +228,25 @@ function Index() {
                     className="relative p-7 flex flex-col cursor-pointer group"
                     onHoverStart={() => setHoveredCard('seeker')}
                     onHoverEnd={() => setHoveredCard(null)}
-                    whileHover={{ backgroundColor: '#f5f7ff' }}
                     transition={{ duration: 0.2 }}
                   >
-                    {/* Icon circle */}
-                    <motion.div
-                      className="w-14 h-14 rounded-2xl bg-[#eef0fd] flex items-center justify-center mb-4"
+                                      {/* Icon circle */}
+                                      <div className='flex flex-row gap-1 items-center'>
+                                      <h3 className="text-lg font-extrabold text-slate-800">Find a Job</h3>
+                                      <motion.div
+                      className="w-8 h-8 mb-2 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
                       <RiSearchLine className="text-[#3F51B5]" size={26} />
+                      
                     </motion.div>
+                                      </div>
 
-                    <h3 className="text-lg font-extrabold text-slate-800 mb-1">Find a Job</h3>
+
+                  
                     <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                      Browse thousands of daily gigs and full-time roles. Get hired fast, get paid faster.
+                      Browse hundreds of daily jobs near you. Start earning today !
                     </p>
 
                     <ul className="flex flex-col gap-2 mb-6">
@@ -265,8 +266,7 @@ function Index() {
 
                     <motion.button
                       type="button"
-                      className="mt-auto w-full rounded-xl bg-[#3F51B5] py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
-                      whileHover={{ scale: 1.02, boxShadow: '0 8px 24px rgba(63,81,181,0.35)' }}
+                      className="mt-auto hover:cursor-pointer w-full rounded-xl bg-[#3F51B5] py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
                       whileTap={{ scale: 0.97 }}
                       onClick={() => setIsModalOpen(false)}
                     >
@@ -285,19 +285,22 @@ function Index() {
                     className="relative p-7 flex flex-col cursor-pointer group"
                     onHoverStart={() => setHoveredCard('hirer')}
                     onHoverEnd={() => setHoveredCard(null)}
-                    whileHover={{ backgroundColor: '#fffbf2' }}
                     transition={{ duration: 0.2 }}
                   >
                     {/* Icon circle */}
-                    <motion.div
-                      className="w-14 h-14 rounded-2xl bg-[#fff3dc] flex items-center justify-center mb-4"
-                      whileHover={{ scale: 1.08, rotate: 4 }}
+                    <div className='flex flex-row gap-1 items-center'>
+                    <h3 className="text-lg font-extrabold text-slate-800 mb-1">Hire</h3>
+                                      <motion.div
+                      className="w-8 h-8 mb-2 flex items-center justify-center"
+                      whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                      <RiBriefcase4Line className="text-amber-500" size={26} />
+                       <RiBriefcase4Line className="text-amber-500" size={26} />
+                      
                     </motion.div>
+                                      </div>
 
-                    <h3 className="text-lg font-extrabold text-slate-800 mb-1">Hire Talent</h3>
+                  
                     <p className="text-slate-500 text-sm leading-relaxed mb-5">
                       Post a job in under a minute and connect with reliable workers ready to start today.
                     </p>
@@ -320,7 +323,6 @@ function Index() {
                     <motion.button
                       type="button"
                       className="mt-auto w-full rounded-xl border-2 border-amber-400 bg-white py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
-                      whileHover={{ scale: 1.02, backgroundColor: '#fff8e6', boxShadow: '0 8px 24px rgba(251,191,36,0.25)' }}
                       whileTap={{ scale: 0.97 }}
                       onClick={() => setIsModalOpen(false)}
                     >
@@ -341,12 +343,17 @@ function Index() {
                     type="button"
                     aria-label="Close modal"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-slate-200 bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.96 }}
+                    className="flex items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-[#3F51B5] hover:cursor-pointer bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
+                    whileHover={{
+                        scale: 1.04,
+                        transition: { duration: 0.2, ease: 'easeOut' },
+                      }}
+                      whileTap={{
+                        scale: 0.96,
+                        transition: { duration: 0.5, ease: 'easeInOut' },
+                      }}
                   >
-                    <RiCloseLine size={16} />
-                    Close for now
+                    <RiCloseLine size={20} />
                   </motion.button>
                 </div>
               </div>
