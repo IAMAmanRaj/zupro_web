@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { FiPhone } from 'react-icons/fi'
 import { PiHandshakeBold } from 'react-icons/pi'
-import { MdOutlineDeliveryDining, MdOutlineSegment } from 'react-icons/md'
+import { MdOutlineSegment } from 'react-icons/md'
+import { TbCurrentLocation } from "react-icons/tb";
 import { FaRegUserCircle } from 'react-icons/fa'
 import { RiBriefcase4Line, RiSearchLine, RiArrowRightLine, RiCloseLine } from 'react-icons/ri'
 import { HiOutlineSparkles } from 'react-icons/hi2'
@@ -15,8 +16,8 @@ export const Route = createFileRoute(`/`)({
 const FEATURES = [
   {
     icon: <FiPhone className="text-[#3F51B5]" size={28} />,
-    title: 'Easy Contact',
-    subtitle: 'Call the boss directly',
+    title: 'Form network',
+    subtitle: 'Connect with an employer easily',
   },
   {
     icon: <PiHandshakeBold className="text-amber-500" size={30} />,
@@ -24,14 +25,14 @@ const FEATURES = [
     subtitle: 'Daily & skilled work',
   },
   {
-    icon: <MdOutlineDeliveryDining className="text-[#3F51B5]" size={32} />,
-    title: 'Get Paid Daily',
+    icon: <TbCurrentLocation className="text-[#3F51B5]" size={32} />,
+    title: 'Jobs near you !',
     subtitle: 'No need to wait',
   },
 ]
 
 const SEEKER_PERKS = [
-  'Browse 10,000+ daily jobs',
+  'Browse 1000+ daily jobs',
   'Get hired same day',
   'Receive instant pay',
   'No experience needed',
@@ -39,7 +40,7 @@ const SEEKER_PERKS = [
 
 const HIRER_PERKS = [
   'Post jobs in 60 seconds',
-  'Find workers',
+  'Find people',
   'Pay only on completion',
   'Rate & review talent',
 ]
@@ -99,19 +100,26 @@ function Index() {
   return (
     <div className="min-h-screen bg-[#f0f2f8] flex flex-col">
       {/* ── Navbar ── */}
-      <nav className="bg-[#3F51B5] px-8 flex items-center justify-between h-14 shadow-md">
-        <span className="text-white text-2xl font-extrabold tracking-tight select-none">Zupro</span>
+      <nav className="px-8 flex items-center justify-between h-16 bg-transparent">
+        <span
+          className="text-[#3F51B5] text-4xl font-extrabold tracking-tight select-none"
+          style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
+        >
+          Zupro
+        </span>
 
-        <div className="flex items-center gap-8">
-          <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">Find Jobs</a>
-          <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">Hire Talent</a>
-          <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">FAQs</a>
+              <div className="flex items-center absolute top-4 left-1/2 -translate-x-1/2 gap-8">
+              <a href="#" className="text-slate-700 text-lg font-semibold hover:text-[#3F51B5] transition-colors">FAQs</a>
+              <a href="#" className="text-slate-700 text-lg font-semibold hover:text-[#3F51B5] transition-colors">Contact Us</a>
+
+                  <a href="#" className="text-slate-700 text-lg font-semibold hover:text-[#3F51B5] transition-colors">About Us</a>
         </div>
 
-        <div className="flex items-center gap-3">
-          <FaRegUserCircle className="text-white/90 hover:text-white transition-all duration-300 hover:scale-110 hover:cursor-pointer" size={26} />
-          <button type="button" className="flex items-center gap-1.5 text-white/90 text-sm font-medium hover:text-white transition-colors">
-            <MdOutlineSegment className="text-white/90 hover:text-white transition-all duration-300 hover:scale-110 hover:cursor-pointer" size={30} />
+        <div className="flex items-center gap-4">
+          <FaRegUserCircle className="text-[#3F51B5] transition-all duration-300 hover:scale-110 hover:cursor-pointer" size={30} />
+          <button type="button" className="flex items-center gap-2 text-[#3F51B5] text-lg font-semibold hover:cursor-pointer transition-colors">
+            <MdOutlineSegment className="text-[#3F51B5] transition-all duration-300 hover:scale-110" size={32} />
+            <span>Dashboard</span>
           </button>
         </div>
       </nav>
@@ -119,7 +127,7 @@ function Index() {
       {/* ── Hero Section ── */}
       <main className="flex-1 flex flex-col items-center pt-6 pb-8 px-4">
         {/* Carousel */}
-        <div className="relative h-[400px] w-[750px] rounded-2xl overflow-hidden shadow-xl">
+        <div className="relative h-[410px] w-[750px] rounded-2xl overflow-hidden shadow-xl">
           {slides.map((slide, index) => (
             <img
               key={slide}
@@ -157,11 +165,11 @@ function Index() {
 
         {/* CTA Buttons */}
         <div className="mt-6 flex gap-4 w-[85%] max-w-[560px]">
-          <button type="button" className="flex-1 rounded-xl bg-[#3F51B5] px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]">
-            Get a Job
+          <button type="button" className="flex-1 hover:cursor-pointer rounded-xl bg-[#3F51B5] px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]">
+            Find jobs
           </button>
-          <button type="button" className="flex-1 rounded-xl border-2 border-[#3F51B5] bg-white px-6 py-3.5 text-base font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]">
-            Hire Talent
+          <button type="button" className="flex-1 hover:cursor-pointer rounded-xl border-2 border-[#3F51B5] bg-white px-6 py-3.5 text-base font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]">
+            Hire Now
           </button>
         </div>
 
@@ -238,7 +246,7 @@ function Index() {
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                      <RiSearchLine className="text-[#3F51B5]" size={26} />
+                      <RiSearchLine className="text-[#3F51B5] mt-1" size={26} />
                       
                     </motion.div>
                                       </div>
@@ -246,7 +254,7 @@ function Index() {
 
                   
                     <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                      Browse hundreds of daily jobs near you. Start earning today !
+                      Browse hundreds of daily jobs near you.
                     </p>
 
                     <ul className="flex flex-col gap-2 mb-6">
@@ -270,7 +278,7 @@ function Index() {
                       whileTap={{ scale: 0.97 }}
                       onClick={() => setIsModalOpen(false)}
                     >
-                      I want to get hired
+                      Search
                       <motion.span
                         animate={hoveredCard === 'seeker' ? { x: 4 } : { x: 0 }}
                         transition={{ duration: 0.2 }}
@@ -295,7 +303,7 @@ function Index() {
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                       <RiBriefcase4Line className="text-amber-500" size={26} />
+                       <RiBriefcase4Line className="text-amber-500 mt-1" size={26} />
                       
                     </motion.div>
                                       </div>
@@ -322,11 +330,11 @@ function Index() {
 
                     <motion.button
                       type="button"
-                      className="mt-auto w-full rounded-xl border-2 border-amber-400 bg-white py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
+                      className="mt-auto w-full rounded-xl hover:cursor-pointer border-2 border-amber-400 bg-white py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
                       whileTap={{ scale: 0.97 }}
                       onClick={() => setIsModalOpen(false)}
                     >
-                      I want to offer jobs
+                      Proceed to hire
                       <motion.span
                         animate={hoveredCard === 'hirer' ? { x: 4 } : { x: 0 }}
                         transition={{ duration: 0.2 }}
