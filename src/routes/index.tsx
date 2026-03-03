@@ -1,12 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { FiPhone, FiGrid } from 'react-icons/fi'
+import { FiPhone } from 'react-icons/fi'
 import { PiHandshakeBold } from "react-icons/pi";
 import { MdOutlineDeliveryDining } from 'react-icons/md'
-import image1 from '../assets/Home/image_1.png'
-import image2 from '../assets/Home/image_2.png'
-import image3 from '../assets/Home/image_3.png'
-import image4 from '../assets/Home/image_4.png'
+import { MdOutlineSegment } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 
 export const Route = createFileRoute(`/`)({
   component: Index,
@@ -37,7 +35,15 @@ function Index() {
   const [transitioning, setTransitioning] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const slides = useMemo(() => [image1, image2, image3, image4], [])
+  const slides = useMemo(
+    () => [
+      '/images/home/image_1.png',
+      '/images/home/image_2.png',
+      '/images/home/image_3.png',
+      '/images/home/image_4.png',
+    ],
+    [],
+  )
 
   const goToSlide = (index: number) => {
     if (index === activeSlide || transitioning) return
@@ -87,21 +93,15 @@ function Index() {
           <a href="#" className="text-white/90 text-sm font-medium hover:text-white transition-colors">FAQs</a>
         </div>
 
-        <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
+              <FaRegUserCircle className="text-white/90 hover:text-white transition-all duration-300 hover:scale-110 hover:cursor-pointer" size={26} />
           <button
             type="button"
             className="flex items-center gap-1.5 text-white/90 text-sm font-medium hover:text-white transition-colors"
           >
-            <FiGrid size={16} />
-            Dashboard
+            <MdOutlineSegment className="text-white/90 hover:text-white transition-all duration-300 hover:scale-110 hover:cursor-pointer" size={30} />
           </button>
-          <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/60 flex-shrink-0">
-            <img
-              src="https://i.pravatar.cc/64?img=12"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
+         
         </div>
       </nav>
 
