@@ -60,7 +60,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                     Welcome to Zupro
                   </p>
                 </div>
-                <h2 className="text-md sm:text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
+                <h2 className="text-[13px] sm:text-md sm:text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
                   How would you like to get started?
                 </h2>
               </div>
@@ -197,7 +197,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   type="button"
                   aria-label="Close modal"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex absolute top-5 right-5 hover:cursor-pointer items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-[#3F51B5] bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
+                  className="flex absolute top-5 right-5 hover:cursor-pointer items-center gap-2 text-slate-400 text-sm font-medium px-3 py-1 sm:px-5 sm:py-2 rounded-full border border-[#3F51B5] bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
                   whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
                   whileTap={{ scale: 0.96, transition: { duration: 0.15 } }}
                 >

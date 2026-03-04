@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 
 type HeroCarouselProps = {
   slides: string[]
 }
 
 export function HeroCarousel({ slides }: HeroCarouselProps) {
+  const navigate = useNavigate()
   const [activeSlide, setActiveSlide] = useState(0)
   const [prevSlide, setPrevSlide] = useState<number | null>(null)
   const [transitioning, setTransitioning] = useState(false)
@@ -91,12 +93,14 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       <div className="mt-4 md:mt-6 flex gap-3 md:gap-4 w-full max-w-[560px] px-1">
         <button
           type="button"
+          onClick={() => navigate({ to: '/onboarding/seeker' })}
           className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl bg-[#3F51B5] px-4 md:px-6 py-3 md:py-3.5 text-sm md:text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]"
         >
           Find jobs
         </button>
         <button
           type="button"
+          onClick={() => navigate({ to: '/onboarding/employer' })}
           className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl border-2 border-[#3F51B5] bg-white px-4 md:px-6 py-3 md:py-3.5 text-sm md:text-base font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]"
         >
           Hire Now
