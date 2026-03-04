@@ -239,7 +239,6 @@ function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
   return (
     <div className="flex items-center border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200 overflow-hidden">
       <div className="flex items-center gap-1.5 pl-4 text-[#3F51B5] shrink-0">
-        <FiDollarSign size={15} />
         <span className="text-sm font-semibold text-slate-500">₹</span>
       </div>
       <input
@@ -258,7 +257,7 @@ function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
             onClick={() => onTypeChange(type)}
             className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
           >
-            {type === 'monthly' ? 'Mo' : 'Yr'}
+            {type === 'monthly' ? 'Day wise' : 'Per Shift'}
           </button>
         ))}
       </div>
@@ -338,10 +337,10 @@ function EmployerOnboardingPage() {
               Tell us about the role you're hiring for. We'll match you with the best candidates quickly.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <Stat value="2.4L+" label="Active job seekers" />
-              <Stat value="48h" label="Avg. first match" />
-              <Stat value="94%" label="Employer satisfaction" />
+              <Stat value="1000+" label="Active job seekers" />
+              <Stat value="12h" label="Avg. first match" />
               <Stat value="Free" label="To post your first job" />
+              <Stat value="Build Trust" label="Hire Again, form network" />
             </div>
           </div>
 

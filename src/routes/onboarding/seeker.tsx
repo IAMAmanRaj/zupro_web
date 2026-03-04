@@ -306,7 +306,7 @@ function OnboardingPage() {
                 className="text-white text-3xl font-extrabold tracking-tight select-none"
                 style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
               >
-                Zupro
+                Zupro.
               </span>
               <div className="mt-0.5 w-10 h-1 rounded-full bg-amber-400" />
             </div>
@@ -343,7 +343,7 @@ function OnboardingPage() {
             <ProgressDots progress={progress} />
           </div>
 
-          <h3 className="text-xl font-bold text-slate-800 mb-5">Seeker Information</h3>
+          <h3 className="text-xl font-bold text-slate-800 mb-5">Your Information</h3>
 
           <div className="flex flex-col gap-3 flex-1">
 
@@ -353,7 +353,7 @@ function OnboardingPage() {
                 type="text"
                 value={form.name}
                 onChange={(e) => set('name')(e.target.value)}
-                placeholder="Your name"
+                placeholder="name"
                 className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
               />
             </FieldBox>
@@ -366,7 +366,7 @@ function OnboardingPage() {
                 max={65}
                 value={form.age}
                 onChange={(e) => set('age')(e.target.value)}
-                placeholder="Your age"
+                placeholder="age"
                 className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </FieldBox>
