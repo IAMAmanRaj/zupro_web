@@ -413,7 +413,7 @@ function OnboardingPage() {
 
           </div>
 
-          {/* Next Step button */}
+          {/* Continue button */}
           <motion.button
             onClick={handleNext}
             disabled={!allFilled}
@@ -425,7 +425,7 @@ function OnboardingPage() {
                 : 'bg-slate-300 cursor-not-allowed'
             }`}
           >
-            Next Step
+            Continue
             <FiArrowRight size={18} />
           </motion.button>
 
