@@ -46,7 +46,10 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
 
   return (
     <>
-      <div className="relative h-[410px] w-[750px] rounded-2xl overflow-hidden shadow-xl">
+      {/* Carousel — full width on mobile, fixed on desktop */}
+      <div className="relative w-full max-w-[750px] rounded-2xl overflow-hidden shadow-xl"
+        style={{ aspectRatio: '750 / 410' }}
+      >
         {slides.map((slide, index) => (
           <img
             key={slide}
@@ -60,22 +63,20 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
             }}
           />
         ))}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
           {slides.map((_, index) => (
             <button
               key={`dot-${index}`}
               type="button"
               aria-label={`Go to slide ${index + 1}`}
-              onClick={() => {
-                goToSlide(index)
-                startTimer()
-              }}
+              onClick={() => { goToSlide(index); startTimer() }}
               style={{
                 width: activeSlide === index ? '24px' : '10px',
                 height: '10px',
                 borderRadius: activeSlide === index ? '5px' : '50%',
-                backgroundColor:
-                  activeSlide === index ? '#fff' : 'rgba(255,255,255,0.5)',
+                backgroundColor: activeSlide === index ? '#fff' : 'rgba(255,255,255,0.5)',
                 border: 'none',
                 padding: 0,
                 cursor: 'pointer',
@@ -86,16 +87,17 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
         </div>
       </div>
 
-      <div className="mt-6 flex gap-4 w-[85%] max-w-[560px]">
+      {/* CTA Buttons */}
+      <div className="mt-4 md:mt-6 flex gap-3 md:gap-4 w-full max-w-[560px] px-1">
         <button
           type="button"
-          className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl bg-[#3F51B5] px-6 py-3.5 text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]"
+          className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl bg-[#3F51B5] px-4 md:px-6 py-3 md:py-3.5 text-sm md:text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]"
         >
           Find jobs
         </button>
         <button
           type="button"
-          className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl border-2 border-[#3F51B5] bg-white px-6 py-3.5 text-base font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]"
+          className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl border-2 border-[#3F51B5] bg-white px-4 md:px-6 py-3 md:py-3.5 text-sm md:text-base font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]"
         >
           Hire Now
         </button>

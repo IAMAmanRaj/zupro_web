@@ -14,15 +14,10 @@ type OnboardingModalProps = {
   hirerPerks: string[]
 }
 
-export function OnboardingModal({
-  seekerPerks,
-  hirerPerks,
-}: OnboardingModalProps) {
+export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProps) {
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(true)
-  const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(
-    null,
-  )
+  const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(null)
 
   const handleRoleSelect = (to: '/onboarding/seeker' | '/onboarding/employer') => {
     setIsModalOpen(false)
@@ -33,6 +28,7 @@ export function OnboardingModal({
     <AnimatePresence>
       {isModalOpen && (
         <>
+          {/* Backdrop */}
           <motion.div
             key="backdrop"
             className="fixed inset-0 z-40 bg-black/50 backdrop-blur-[3px]"
@@ -43,55 +39,58 @@ export function OnboardingModal({
             onClick={() => setIsModalOpen(false)}
           />
 
+          {/* Modal */}
           <motion.div
             key="modal"
-            className="fixed cascadia-mono-light inset-0 z-50 flex items-center justify-center px-4 pointer-events-none"
-            initial={{ opacity: 0, scale: 0.92, y: 24 }}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none"
+            initial={{ opacity: 0, scale: 0.95, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.94, y: 16 }}
+            exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             <div
-              className="pointer-events-auto relative w-full max-w-[760px] rounded-3xl bg-white shadow-2xl overflow-hidden"
+              className="pointer-events-auto relative w-full sm:max-w-[760px] rounded-t-3xl sm:rounded-3xl bg-white shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="px-8 pt-8 pb-5 border-b border-slate-100">
-                <div className="flex items-center gap-2.5 mb-1">
-                  <HiOutlineSparkles className="text-[#3F51B5]" size={20} />
-                  <p className="text-xs font-semibold text-[#3F51B5] tracking-widest">
+              {/* Header */}
+              <div className="px-5 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 border-b border-slate-100">
+                <div className="flex items-center gap-2 mb-1">
+                  <HiOutlineSparkles className="text-[#3F51B5]" size={18} />
+                  <p className="text-xs font-semibold text-[#3F51B5] tracking-widest uppercase">
                     Welcome to Zupro
                   </p>
                 </div>
-                <h2 className="text-2xl font-extrabold text-slate-800 leading-snug">
+                <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
                   How would you like to get started?
                 </h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-0 divide-x divide-slate-100">
+              {/* Cards — stacked on mobile, side-by-side on sm+ */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+
+                {/* Seeker card */}
                 <motion.div
-                  className="relative p-7 flex flex-col cursor-pointer group"
+                  className="relative p-5 md:p-7 flex flex-col cursor-pointer"
                   onHoverStart={() => setHoveredCard('seeker')}
                   onHoverEnd={() => setHoveredCard(null)}
-                  transition={{ duration: 0.2 }}
                 >
-                  <div className="flex flex-row gap-1 items-center">
-                    <h3 className="text-lg font-extrabold text-slate-800">
-                      Find a Job
-                    </h3>
+                  <div className="flex flex-row gap-1 items-center mb-1">
+                    <h3 className="text-base md:text-lg font-extrabold text-slate-800">Find a Job</h3>
                     <motion.div
-                      className="w-8 h-8 mb-2 flex items-center justify-center"
+                      className="w-8 h-8 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                      <RiSearchLine className="text-[#3F51B5] mt-1" size={26} />
+                      <RiSearchLine className="text-[#3F51B5] mt-1" size={22} />
                     </motion.div>
                   </div>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-5">
+                  <p className="text-slate-500 text-sm leading-relaxed mb-4">
                     Browse hundreds of daily jobs near you.
                   </p>
 
-                  <ul className="flex flex-col gap-2 mb-6">
+                  {/* Perks — hide on mobile to save space */}
+                  <ul className="hidden sm:flex flex-col gap-2 mb-5">
                     {seekerPerks.map((perk) => (
                       <motion.li
                         key={perk}
@@ -106,13 +105,22 @@ export function OnboardingModal({
                     ))}
                   </ul>
 
+                  {/* Mobile perks — compact chips */}
+                  <div className="flex sm:hidden flex-wrap gap-2 mb-4">
+                    {seekerPerks.map((perk) => (
+                      <span key={perk} className="text-xs bg-indigo-50 text-[#3F51B5] font-medium px-2.5 py-1 rounded-full">
+                        {perk}
+                      </span>
+                    ))}
+                  </div>
+
                   <motion.button
                     type="button"
-                    className="mt-auto hover:cursor-pointer w-full rounded-xl bg-[#3F51B5] py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
+                    className="mt-auto w-full rounded-xl bg-[#3F51B5] py-2.5 md:py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/seeker')}
                   >
-                    Search
+                    Search Jobs
                     <motion.span
                       animate={hoveredCard === 'seeker' ? { x: 4 } : { x: 0 }}
                       transition={{ duration: 0.2 }}
@@ -122,30 +130,29 @@ export function OnboardingModal({
                   </motion.button>
                 </motion.div>
 
+                {/* Hirer card */}
                 <motion.div
-                  className="relative p-7 flex flex-col cursor-pointer group"
+                  className="relative p-5 md:p-7 flex flex-col cursor-pointer"
                   onHoverStart={() => setHoveredCard('hirer')}
                   onHoverEnd={() => setHoveredCard(null)}
-                  transition={{ duration: 0.2 }}
                 >
-                  <div className="flex flex-row gap-1 items-center">
-                    <h3 className="text-lg font-extrabold text-slate-800 mb-1">
-                      Hire
-                    </h3>
+                  <div className="flex flex-row gap-1 items-center mb-1">
+                    <h3 className="text-base md:text-lg font-extrabold text-slate-800">Hire</h3>
                     <motion.div
-                      className="w-8 h-8 mb-2 flex items-center justify-center"
+                      className="w-8 h-8 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                      <RiBriefcase4Line className="text-amber-500 mt-1" size={26} />
+                      <RiBriefcase4Line className="text-amber-500 mt-1" size={22} />
                     </motion.div>
                   </div>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                    Hire now, and get the work done !
+                  <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                    Hire now, and get the work done!
                   </p>
 
-                  <ul className="flex flex-col gap-2 mb-6">
+                  {/* Perks — hide on mobile */}
+                  <ul className="hidden sm:flex flex-col gap-2 mb-5">
                     {hirerPerks.map((perk) => (
                       <motion.li
                         key={perk}
@@ -160,13 +167,22 @@ export function OnboardingModal({
                     ))}
                   </ul>
 
+                  {/* Mobile perks — compact chips */}
+                  <div className="flex sm:hidden flex-wrap gap-2 mb-4">
+                    {hirerPerks.map((perk) => (
+                      <span key={perk} className="text-xs bg-amber-50 text-amber-600 font-medium px-2.5 py-1 rounded-full">
+                        {perk}
+                      </span>
+                    ))}
+                  </div>
+
                   <motion.button
                     type="button"
-                    className="mt-auto w-full rounded-xl hover:cursor-pointer border-2 border-amber-400 bg-white py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
+                    className="mt-auto w-full rounded-xl border-2 border-amber-400 bg-white py-2.5 md:py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/employer')}
                   >
-                    Proceed to hire
+                    Proceed to Hire
                     <motion.span
                       animate={hoveredCard === 'hirer' ? { x: 4 } : { x: 0 }}
                       transition={{ duration: 0.2 }}
@@ -177,20 +193,15 @@ export function OnboardingModal({
                 </motion.div>
               </div>
 
-              <div className="flex justify-center py-5 border-t border-slate-100 bg-slate-50/60">
+              {/* Footer close */}
+              <div className="flex justify-center py-4 border-t border-slate-100 bg-slate-50/60">
                 <motion.button
                   type="button"
                   aria-label="Close modal"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-[#3F51B5] hover:cursor-pointer bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
-                  whileHover={{
-                    scale: 1.04,
-                    transition: { duration: 0.2, ease: 'easeOut' },
-                  }}
-                  whileTap={{
-                    scale: 0.96,
-                    transition: { duration: 0.5, ease: 'easeInOut' },
-                  }}
+                  className="flex items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-[#3F51B5] bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
+                  whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.96, transition: { duration: 0.15 } }}
                 >
                   <RiCloseLine size={20} />
                 </motion.button>
