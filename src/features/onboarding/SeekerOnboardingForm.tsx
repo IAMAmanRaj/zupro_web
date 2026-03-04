@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import {
   FiUser, FiCalendar, FiChevronDown, FiSearch,
-  FiMapPin, FiBookOpen, FiChevronRight, FiArrowRight,
+  FiMapPin, FiBookOpen, FiArrowRight,
 } from 'react-icons/fi'
 import { PiGenderIntersexBold } from 'react-icons/pi'
 import { motion, AnimatePresence } from 'framer-motion'

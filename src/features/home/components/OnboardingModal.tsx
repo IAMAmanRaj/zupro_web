@@ -22,7 +22,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
   const handleRoleSelect = (to: '/onboarding/seeker' | '/onboarding/employer') => {
     setIsModalOpen(false)
     navigate({ to })
-  }
+  } 
 
   return (
     <AnimatePresence>

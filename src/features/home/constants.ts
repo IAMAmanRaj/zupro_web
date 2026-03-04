@@ -31,25 +31,27 @@ export const FEATURES: HomeFeature[] = [
     iconClassName: 'text-[#3F51B5]',
     iconSize: 32,
     title: 'Near you',
-    subtitle: `We connect nearby employers to workers. No hassle !`,
+    subtitle: `We connect workers to nearby employers. No hassle !`,
   },
   {
     Icon: FaPeopleArrows,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 28,
     title: 'Connecting People',
-    subtitle: 'With Zupro, finding a worker becomes easier than ever !',
+    subtitle: 'With Zupro, finding a worker becomes easier & faster !',
   },
 ]
 
 export const SEEKER_PERKS = [
+  '100+ Nearby jobs posted, daily',
   'Get hired same day',
   'Start working and earning',
-  'No experience needed !',
+  'Build Trust, and Grow !',
 ]
 
 export const HIRER_PERKS = [
-  'Find people',
+  'Find nearby workers, faster',
+  'Review profiles, hire wisely',
   'Pay on project completion',
-  'Get help, for all your needs !',
+  'Get help, at your doorstep !',
 ]
