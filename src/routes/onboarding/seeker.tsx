@@ -287,7 +287,7 @@ function OnboardingPage() {
 
   const handleNext = () => {
     if (!allFilled) return
-    navigate({ to: '/auth/new' })
+    navigate({ to: '/auth' })
   }
 
   return (

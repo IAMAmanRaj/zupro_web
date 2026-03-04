@@ -42,7 +42,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
           {/* Modal */}
           <motion.div
             key="modal"
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none"
+            className="fixed cascadia-mono-bold inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none"
             initial={{ opacity: 0, scale: 0.95, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
@@ -81,7 +81,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                      <RiSearchLine className="text-[#3F51B5] mt-1" size={22} />
+                      <RiSearchLine className="text-[#3F51B5] mt-0" size={22} />
                     </motion.div>
                   </div>
 
@@ -116,7 +116,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
 
                   <motion.button
                     type="button"
-                    className="mt-auto w-full rounded-xl bg-[#3F51B5] py-2.5 md:py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
+                    className="mt-auto hover:cursor-pointer w-full rounded-xl bg-[#3F51B5] py-2.5 md:py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/seeker')}
                   >
@@ -143,7 +143,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                       whileHover={{ scale: 1.08, rotate: -4 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
-                      <RiBriefcase4Line className="text-amber-500 mt-1" size={22} />
+                      <RiBriefcase4Line className="text-amber-500 mt-0" size={22} />
                     </motion.div>
                   </div>
 
@@ -178,7 +178,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
 
                   <motion.button
                     type="button"
-                    className="mt-auto w-full rounded-xl border-2 border-amber-400 bg-white py-2.5 md:py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
+                    className="mt-auto w-full hover:cursor-pointer rounded-xl border-2 border-amber-400 bg-white py-2.5 md:py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/employer')}
                   >
@@ -193,19 +193,16 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                 </motion.div>
               </div>
 
-              {/* Footer close */}
-              <div className="flex justify-center py-4 border-t border-slate-100 bg-slate-50/60">
-                <motion.button
+              <motion.button
                   type="button"
                   aria-label="Close modal"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-[#3F51B5] bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
+                  className="flex absolute top-5 right-5 hover:cursor-pointer items-center gap-2 text-slate-400 text-sm font-medium px-5 py-2 rounded-full border border-[#3F51B5] bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
                   whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
                   whileTap={{ scale: 0.96, transition: { duration: 0.15 } }}
                 >
                   <RiCloseLine size={20} />
                 </motion.button>
-              </div>
             </div>
           </motion.div>
         </>

@@ -7,7 +7,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <nav className="px-5 md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
+    <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer border-gray-50 border-b-[1px] md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
       {/* Logo */}
       <span
         className="text-[#3F51B5] text-2xl md:text-4xl font-extrabold tracking-tight select-none"
@@ -25,10 +25,10 @@ export function Navbar() {
 
       {/* Desktop right actions */}
       <div className="hidden md:flex items-center gap-4">
-        <Link to="/auth/new" className="hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
+        <Link to="/auth" className="hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
           Sign in
         </Link>
-        <Link to="/auth/new" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-sm text-white bg-[#3F51B5] px-6 py-2  transition-all">
+        <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-sm text-white bg-[#3F51B5] px-6 py-2  transition-all">
           Sign up
         </Link>
       </div>
@@ -57,8 +57,8 @@ export function Navbar() {
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">Contact Us</Link>
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">About Us</Link>
             <div className="flex gap-3 pt-2 border-t border-slate-100">
-              <Link to="/auth/new" className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm">Sign in</Link>
-              <Link to="/auth/new" className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm">Sign up</Link>
+              <Link to="/auth" className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm">Sign in</Link>
+              <Link to="/auth" className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm">Sign up</Link>
             </div>
           </motion.div>
         )}

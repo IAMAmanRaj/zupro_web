@@ -44,12 +44,12 @@ export const FEATURES: HomeFeature[] = [
 
 export const SEEKER_PERKS = [
   'Get hired same day',
-  'Receive instant pay',
-  'No experience needed',
+  'Start working and earning',
+  'No experience needed !',
 ]
 
 export const HIRER_PERKS = [
   'Find people',
-  'Pay on completion',
+  'Pay on project completion',
   'Get help, for all your needs !',
 ]

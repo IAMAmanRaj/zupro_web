@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { OtpSection } from '../../features/auth/components/OtpSection'
-import { PhoneStep } from '../../features/auth/components/PhoneStep'
+import { OtpSection } from '../features/auth/components/OtpSection'
+import { PhoneStep } from '../features/auth/components/PhoneStep'
 
-export const Route = createFileRoute('/auth/new')({
+export const Route = createFileRoute('/auth')({
   component: RouteComponent,
 })
 
