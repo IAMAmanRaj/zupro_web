@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -36,3 +38,146 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+
+.cascadia-mono-bold {
+  font-family: "Cascadia Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Paste everything below into your index.css (after your Tailwind directives)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+   /* ── CSS Variables ── */
+   :root {
+     --primary: #3F51B5;
+     --primary-light: rgba(63, 81, 181, 0.12);
+     --primary-hover-shadow: 0 8px 24px rgba(63, 81, 181, 0.38);
+   }
+   
+   /* ── Tailwind custom class shorthands ── */
+   .bg-primary   { background-color: var(--primary); }
+   .text-primary { color: var(--primary); }
+   .border-primary { border-color: var(--primary); }
+   
+   /* ── Base font ── */
+   .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+   .otp-font  { font-family: 'DM Mono', 'Fira Code', 'Courier New', monospace; }
+   
+   /* ── Keyframe animations ── */
+   
+   @keyframes shake {
+     0%, 100% { transform: translateX(0); }
+     20%       { transform: translateX(-6px); }
+     40%       { transform: translateX(6px); }
+     60%       { transform: translateX(-4px); }
+     80%       { transform: translateX(4px); }
+   }
+   
+   @keyframes fadeSlideUp {
+     from { opacity: 0; transform: translateY(18px); }
+     to   { opacity: 1; transform: translateY(0); }
+   }
+   
+   @keyframes scaleIn {
+     from { opacity: 0; transform: scale(0.88); }
+     to   { opacity: 1; transform: scale(1); }
+   }
+   
+   @keyframes checkPop {
+     0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+     60%  { transform: scale(1.2) rotate(4deg); opacity: 1; }
+     100% { transform: scale(1) rotate(0deg);   opacity: 1; }
+   }
+   
+   @keyframes spin {
+     to { transform: rotate(360deg); }
+   }
+   
+   @keyframes shimmer {
+     from { transform: translateX(-100%); }
+     to   { transform: translateX(100%); }
+   }
+   
+   /* ── Animation utility classes ── */
+   .animate-shake { animation: shake 0.4s ease-in-out; }
+   .fade-up       { animation: fadeSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+   .scale-in      { animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+   .check-pop     { animation: checkPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+   .spinner       { animation: spin 0.8s linear infinite; }
+   
+   /* ── OTP cell states ── */
+   .otp-cell--focused {
+     border-color: var(--primary);
+     background: #fff;
+     box-shadow: 0 0 0 4px var(--primary-light);
+     transform: scale(1.05);
+     color: #1e293b;
+   }
+   
+   .otp-cell--error {
+     border-color: #f87171;
+     background: #fef2f2;
+     box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+     color: #1e293b;
+   }
+   
+   .otp-cell--filled {
+     border-color: rgba(63, 81, 181, 0.6);
+     background: #fff;
+     color: #1e293b;
+   }
+   
+   .otp-cell--empty {
+     border-color: #e2e8f0;
+     color: #1e293b;
+   }
+   
+   .otp-cell--empty:hover {
+     border-color: rgba(63, 81, 181, 0.4);
+     background: #fff;
+   }
+   
+   /* ── Phone field wrapper ── */
+   .phone-field {
+     display: flex;
+     align-items: center;
+     border-radius: 0.75rem;
+     overflow: hidden;
+     background: #f8fafc;
+     box-shadow: 0 0 0 2px #e2e8f0;
+     transition: box-shadow 0.2s ease, background 0.2s ease;
+   }
+   
+   .phone-field:focus-within {
+     background: #fff;
+     box-shadow: 0 0 0 2px var(--primary), 0 0 0 5px var(--primary-light);
+   }
+   
+   /* ── Primary button ── */
+   .btn-primary {
+     position: relative;
+     overflow: hidden;
+     transition: transform 0.2s ease, box-shadow 0.2s ease;
+   }
+   
+   .btn-primary::after {
+     content: '';
+     position: absolute;
+     inset: 0;
+     background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+     transform: translateX(-100%);
+     transition: transform 0.5s ease;
+   }
+   
+   .btn-primary:not(:disabled):hover::after { transform: translateX(100%); }
+   .btn-primary:not(:disabled):hover  { box-shadow: var(--primary-hover-shadow); transform: translateY(-1px); }
+   .btn-primary:not(:disabled):active { transform: translateY(0); box-shadow: 0 2px 8px rgba(63,81,181,0.25); }
+   
+   /* ── Back button ── */
+   .back-btn { transition: color 0.2s ease; }
+   .back-btn:hover { color: var(--primary); }
+   .back-btn svg { transition: transform 0.2s ease; }
+   .back-btn:hover svg { transform: translateX(-2px); }
