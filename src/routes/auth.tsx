@@ -30,16 +30,24 @@ function RouteComponent() {
   const isPhoneValid = phone.length === 10
 
   return (
-    <div className="h-screen flex font-sans">
-      <div className="hidden sm:block w-[50%] relative overflow-hidden">
+    <div className="h-screen flex flex-col sm:flex-row font-sans">
+      <div className="w-full h-1/2 hidden sm:block sm:h-auto sm:w-1/2 relative overflow-hidden">
         <img
           src="/images/auth/left_asset.png"
           alt="Zupro banner"
           className="w-full h-full object-cover"
         />
       </div>
+{/*for mobile, we use a different image*/}
+      <div className="bg-white h-1/2 -mt-12 vs:-mt-8  xs:mt-4 sm:mt-0 sm:hidden  relative overflow-hidden">
+        <img
+          src="/images/auth/top_asset_mobile.png"
+          alt="Zupro banner"
+          className="w-full h-full object-contain sm:object-cover"
+        />
+      </div>
 
-      <div className="flex-1 flex items-center justify-center px-8 py-12 bg-white">
+      <div className="w-full h-1/2 sm:h-auto flex-1 flex items-center justify-center px-6 py-8 sm:px-8 pb-12 pt-0 xs:py-12 sm:py-12 bg-white overflow-y-auto">
         <div className="w-full max-w-sm">
           {isVerified ? (
             <div className="scale-in flex flex-col items-center gap-4 py-12 text-center">
