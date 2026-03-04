@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { FeatureCards } from '../features/home/components/FeatureCards'
 import { HeroCarousel } from '../features/home/components/HeroCarousel'
-import { Navbar } from '../features/home/components/Navbar'
+import { Navbar } from '../features/General/Navbar'
 import { OnboardingModal } from '../features/home/components/OnboardingModal'
 import {
   FEATURES,

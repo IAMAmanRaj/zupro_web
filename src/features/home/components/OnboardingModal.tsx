@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineSparkles } from 'react-icons/hi2'
 import {
@@ -17,10 +18,16 @@ export function OnboardingModal({
   seekerPerks,
   hirerPerks,
 }: OnboardingModalProps) {
+  const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(true)
   const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(
     null,
   )
+
+  const handleRoleSelect = (to: '/onboarding/seeker' | '/onboarding/employer') => {
+    setIsModalOpen(false)
+    navigate({ to })
+  }
 
   return (
     <AnimatePresence>
@@ -103,7 +110,7 @@ export function OnboardingModal({
                     type="button"
                     className="mt-auto hover:cursor-pointer w-full rounded-xl bg-[#3F51B5] py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
                     whileTap={{ scale: 0.97 }}
-                    onClick={() => setIsModalOpen(false)}
+                    onClick={() => handleRoleSelect('/onboarding/seeker')}
                   >
                     Search
                     <motion.span
@@ -157,7 +164,7 @@ export function OnboardingModal({
                     type="button"
                     className="mt-auto w-full rounded-xl hover:cursor-pointer border-2 border-amber-400 bg-white py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
                     whileTap={{ scale: 0.97 }}
-                    onClick={() => setIsModalOpen(false)}
+                    onClick={() => handleRoleSelect('/onboarding/employer')}
                   >
                     Proceed to hire
                     <motion.span

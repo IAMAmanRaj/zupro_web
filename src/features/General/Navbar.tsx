@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router'
+
 export function Navbar() {
   return (
     <nav className="px-8 flex items-center justify-between h-16 bg-transparent">
@@ -9,36 +11,39 @@ export function Navbar() {
       </span>
 
       <div className="flex items-center absolute top-5 left-1/2 -translate-x-1/2 gap-8">
-        <a
-          href="#"
+        <Link
+          to="/"
           className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors"
         >
           FAQs
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          to="/"
           className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors"
         >
           Contact Us
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          to="/"
           className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors"
         >
           About Us
-        </a>
+        </Link>
       </div>
 
       <div className="flex items-center gap-4">
-        <span className='hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold '>
-        Sign in
-        </span>
-        <button
-          type="button"
-          className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-sm text-white bg-[#3F51B5] px-6 py-2 font-semibold transition-all "
+        <Link
+          to="/auth/new"
+          className="hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold"
+        >
+          Sign in
+        </Link>
+        <Link
+          to="/auth/new"
+          className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-sm text-white bg-[#3F51B5] px-6 py-2 font-semibold transition-all"
         >
           <span>Sign up</span>
-        </button>
+        </Link>
       </div>
     </nav>
   )

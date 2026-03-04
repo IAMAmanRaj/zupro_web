@@ -9,55 +9,73 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OnboardingSeekerRouteImport } from './routes/onboarding/seeker'
+import { Route as OnboardingEmployerRouteImport } from './routes/onboarding/employer'
+import { Route as AuthNewRouteImport } from './routes/auth/new'
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingSeekerRoute = OnboardingSeekerRouteImport.update({
+  id: '/onboarding/seeker',
+  path: '/onboarding/seeker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingEmployerRoute = OnboardingEmployerRouteImport.update({
+  id: '/onboarding/employer',
+  path: '/onboarding/employer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthNewRoute = AuthNewRouteImport.update({
+  id: '/auth/new',
+  path: '/auth/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth/new': typeof AuthNewRoute
+  '/onboarding/employer': typeof OnboardingEmployerRoute
+  '/onboarding/seeker': typeof OnboardingSeekerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth/new': typeof AuthNewRoute
+  '/onboarding/employer': typeof OnboardingEmployerRoute
+  '/onboarding/seeker': typeof OnboardingSeekerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth/new': typeof AuthNewRoute
+  '/onboarding/employer': typeof OnboardingEmployerRoute
+  '/onboarding/seeker': typeof OnboardingSeekerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth'
+  fullPaths: '/' | '/auth/new' | '/onboarding/employer' | '/onboarding/seeker'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth'
-  id: '__root__' | '/' | '/auth'
+  to: '/' | '/auth/new' | '/onboarding/employer' | '/onboarding/seeker'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth/new'
+    | '/onboarding/employer'
+    | '/onboarding/seeker'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRoute
+  AuthNewRoute: typeof AuthNewRoute
+  OnboardingEmployerRoute: typeof OnboardingEmployerRoute
+  OnboardingSeekerRoute: typeof OnboardingSeekerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +83,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/seeker': {
+      id: '/onboarding/seeker'
+      path: '/onboarding/seeker'
+      fullPath: '/onboarding/seeker'
+      preLoaderRoute: typeof OnboardingSeekerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/employer': {
+      id: '/onboarding/employer'
+      path: '/onboarding/employer'
+      fullPath: '/onboarding/employer'
+      preLoaderRoute: typeof OnboardingEmployerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/new': {
+      id: '/auth/new'
+      path: '/auth/new'
+      fullPath: '/auth/new'
+      preLoaderRoute: typeof AuthNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRoute: AuthRoute,
+  AuthNewRoute: AuthNewRoute,
+  OnboardingEmployerRoute: OnboardingEmployerRoute,
+  OnboardingSeekerRoute: OnboardingSeekerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

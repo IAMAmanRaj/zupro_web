@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { OtpSection } from '../features/auth/components/OtpSection'
-import { PhoneStep } from '../features/auth/components/PhoneStep'
+import { OtpSection } from '../../features/auth/components/OtpSection'
+import { PhoneStep } from '../../features/auth/components/PhoneStep'
 
-export const Route = createFileRoute('/auth')({
+export const Route = createFileRoute('/auth/new')({
   component: RouteComponent,
 })
 
@@ -38,7 +38,7 @@ function RouteComponent() {
           className="w-full h-full object-cover"
         />
       </div>
-{/*for mobile, we use a different image*/}
+      {/*for mobile, we use a different image*/}
       <div className="bg-white h-1/2 -mt-12 vs:-mt-8  xs:mt-4 sm:mt-0 sm:hidden  relative overflow-hidden">
         <img
           src="/images/auth/top_asset_mobile.png"

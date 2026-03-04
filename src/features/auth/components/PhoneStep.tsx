@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import type { RefObject } from 'react'
 
 type PhoneStepProps = {
@@ -100,13 +101,13 @@ export function PhoneStep({
 
       <p className="text-xs text-slate-400 text-center mt-5 leading-relaxed">
         By continuing, you agree to our{' '}
-        <a href="#" className="text-primary font-medium hover:underline">
+        <Link to="/" className="text-primary font-medium hover:underline">
           Terms of Service
-        </a>
+        </Link>
         {' '}&{' '}
-        <a href="#" className="text-primary font-medium hover:underline">
+        <Link to="/" className="text-primary font-medium hover:underline">
           Privacy Policy
-        </a>
+        </Link>
       </p>
     </div>
   )
