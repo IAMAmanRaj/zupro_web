@@ -30,8 +30,8 @@ function RouteComponent() {
   const isPhoneValid = phone.length === 10
 
   return (
-    <div className="h-[100vh] flex font-sans">
-      <div className="hidden lg:block w-[50%] relative overflow-hidden">
+    <div className="h-screen flex font-sans">
+      <div className="hidden sm:block w-[50%] relative overflow-hidden">
         <img
           src="/images/auth/left_asset.png"
           alt="Zupro banner"
