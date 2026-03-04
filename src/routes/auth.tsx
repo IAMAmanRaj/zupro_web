@@ -46,7 +46,7 @@ function RouteComponent() {
       {/* ── Desktop left image panel (md+) ─────────────────────────────────── */}
       <div className="hidden md:block md:w-[55%] relative overflow-hidden">
         <img
-          src="/images/auth/left_asset.png"
+          src="/images/auth/left_asset.webp"
           alt="Zupro banner"
           className="w-full h-full object-cover"
         />

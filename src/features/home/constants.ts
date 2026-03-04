@@ -1,7 +1,7 @@
 import type { IconType } from 'react-icons'
-import { FiPhone } from 'react-icons/fi'
 import { PiHandshakeBold } from 'react-icons/pi'
 import { TbCurrentLocation } from 'react-icons/tb'
+import { FaPeopleArrows } from "react-icons/fa";
 
 export type HomeFeature = {
   Icon: IconType
@@ -20,13 +20,6 @@ export const HOME_SLIDES = [
 
 export const FEATURES: HomeFeature[] = [
   {
-    Icon: FiPhone,
-    iconClassName: 'text-[#3F51B5]',
-    iconSize: 28,
-    title: 'Form network',
-    subtitle: 'Connect with an employer easily',
-  },
-  {
     Icon: PiHandshakeBold,
     iconClassName: 'text-amber-500',
     iconSize: 30,
@@ -37,8 +30,15 @@ export const FEATURES: HomeFeature[] = [
     Icon: TbCurrentLocation,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 32,
-    title: 'Jobs near you !',
-    subtitle: 'No need to wait',
+    title: 'Near you',
+    subtitle: `Looking for Job or Work ?. Zupro is here for you.`,
+  },
+  {
+    Icon: FaPeopleArrows,
+    iconClassName: 'text-[#3F51B5]',
+    iconSize: 28,
+    title: 'Connecting People',
+    subtitle: 'With Zupro, finding work or job becomes easier than ever !',
   },
 ]
 
