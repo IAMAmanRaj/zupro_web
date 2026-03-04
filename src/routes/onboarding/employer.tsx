@@ -255,7 +255,7 @@ function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
             key={type}
             type="button"
             onClick={() => onTypeChange(type)}
-            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
           >
             {type === 'monthly' ? 'Day wise' : 'Per Shift'}
           </button>

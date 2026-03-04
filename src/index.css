@@ -4,6 +4,7 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-vss:350px;
   --breakpoint-vs:400px;
   --breakpoint-xs: 500px;
 }

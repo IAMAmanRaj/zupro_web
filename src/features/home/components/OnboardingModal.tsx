@@ -60,7 +60,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                     Welcome to Zupro
                   </p>
                 </div>
-                <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
+                <h2 className="text-md sm:text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
                   How would you like to get started?
                 </h2>
               </div>
