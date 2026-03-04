@@ -41,7 +41,7 @@ function RouteComponent() {
   const isPhoneValid = phone.length === 10
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row font-sans">
+    <div className="h-screen flex flex-col md:flex-row font-sans">
 
       {/* ── Desktop left image panel (md+) ─────────────────────────────────── */}
       <div className="hidden md:block md:w-[55%] relative overflow-hidden">
@@ -75,10 +75,10 @@ function RouteComponent() {
           Secure Login
         </div>
         <h2 className="text-white text-xl font-bold leading-snug mb-1">
-          Your next job is<br />one tap away.
+         Whether you're an employer, or seeking a job, we care for you.
         </h2>
         <p className="text-indigo-300 text-xs leading-relaxed mb-5">
-          Log in to browse thousands of jobs near you, apply instantly, and get hired fast.
+          connecting employers to workers, faster than ever !
         </p>
 
         {/* Stats row */}

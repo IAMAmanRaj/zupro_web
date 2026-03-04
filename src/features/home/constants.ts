@@ -24,21 +24,21 @@ export const FEATURES: HomeFeature[] = [
     iconClassName: 'text-amber-500',
     iconSize: 30,
     title: 'Jobs for All',
-    subtitle: 'Daily & skilled work',
+    subtitle: 'Find daily & skilled workers',
   },
   {
     Icon: TbCurrentLocation,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 32,
     title: 'Near you',
-    subtitle: `Looking for Job or Work ?. Zupro is here for you.`,
+    subtitle: `We connect nearby employers to workers. No hassle !`,
   },
   {
     Icon: FaPeopleArrows,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 28,
     title: 'Connecting People',
-    subtitle: 'With Zupro, finding work or job becomes easier than ever !',
+    subtitle: 'With Zupro, finding a worker becomes easier than ever !',
   },
 ]
 
