@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineSparkles } from 'react-icons/hi2'
@@ -18,21 +18,6 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(true)
   const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(null)
-
-  useEffect(() => {
-    if (!isModalOpen) return
-
-    const prevBodyOverflow = document.body.style.overflow
-    const prevHtmlOverflow = document.documentElement.style.overflow
-
-    document.body.style.overflow = 'hidden'
-    document.documentElement.style.overflow = 'hidden'
-
-    return () => {
-      document.body.style.overflow = prevBodyOverflow
-      document.documentElement.style.overflow = prevHtmlOverflow
-    }
-  }, [isModalOpen])
 
   const handleRoleSelect = (to: '/onboarding/seeker' | '/onboarding/employer') => {
     setIsModalOpen(false)
@@ -57,14 +42,14 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
           {/* Modal */}
           <motion.div
             key="modal"
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none overscroll-none"
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none overflow-hidden overscroll-none"
             initial={{ opacity: 0, scale: 0.95, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             <div
-              className="pointer-events-auto relative w-full sm:max-w-[760px] rounded-t-3xl sm:rounded-3xl bg-white shadow-2xl max-h-[92dvh] sm:max-h-[90vh] overflow-y-auto overscroll-contain"
+              className="pointer-events-auto relative w-full sm:max-w-[760px] rounded-t-3xl sm:rounded-3xl bg-white shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
