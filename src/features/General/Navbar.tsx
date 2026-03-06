@@ -7,7 +7,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer border-gray-50 border-b-[1px] md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
+    <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
       {/* Logo */}
       <span
         className="text-[#3F51B5] text-2xl md:text-4xl font-extrabold tracking-tight select-none"

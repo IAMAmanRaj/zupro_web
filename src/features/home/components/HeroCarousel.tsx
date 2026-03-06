@@ -48,13 +48,11 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
 
   return (
     <>
-      {/* Carousel — full width on mobile, fixed on desktop */}
-      <div className="relative w-full max-w-[750px] rounded-2xl overflow-hidden shadow-xl"
-        style={{ aspectRatio: '750 / 410' }}
-      >
+      {/* Mobile carousel (<768px) */}
+      <div className="relative w-full h-[300px] rounded-2xl overflow-hidden shadow-xl md:hidden">
         {slides.map((slide, index) => (
           <img
-            key={slide}
+            key={`mobile-${slide}`}
             src={slide}
             alt={`Slide ${index + 1}`}
             className="absolute inset-0 w-full h-full object-cover"
@@ -66,14 +64,57 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
           />
         ))}
 
-        {/* Dot indicators */}
-        <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
           {slides.map((_, index) => (
             <button
-              key={`dot-${index}`}
+              key={`mobile-dot-${index}`}
               type="button"
               aria-label={`Go to slide ${index + 1}`}
-              onClick={() => { goToSlide(index); startTimer() }}
+              onClick={() => {
+                goToSlide(index)
+                startTimer()
+              }}
+              style={{
+                width: activeSlide === index ? '20px' : '8px',
+                height: '8px',
+                borderRadius: activeSlide === index ? '4px' : '50%',
+                backgroundColor: activeSlide === index ? '#fff' : 'rgba(255,255,255,0.5)',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                transition: 'all 300ms ease',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop carousel (>=768px) */}
+      <div className="relative hidden md:block md:-mt-4 w-full max-w-[680px] h-[400px] rounded-2xl overflow-hidden">
+        {slides.map((slide, index) => (
+          <img
+            key={`desktop-${slide}`}
+            src={slide}
+            alt={`Slide ${index + 1}`}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: activeSlide === index ? 1 : 0,
+              transition: 'opacity 700ms cubic-bezier(0.4, 0, 0.2, 1)',
+              zIndex: activeSlide === index ? 2 : prevSlide === index ? 1 : 0,
+            }}
+          />
+        ))}
+
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+          {slides.map((_, index) => (
+            <button
+              key={`desktop-dot-${index}`}
+              type="button"
+              aria-label={`Go to slide ${index + 1}`}
+              onClick={() => {
+                goToSlide(index)
+                startTimer()
+              }}
               style={{
                 width: activeSlide === index ? '24px' : '10px',
                 height: '10px',
