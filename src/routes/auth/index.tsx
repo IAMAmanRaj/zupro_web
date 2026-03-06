@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { OtpSection } from '../features/auth/components/OtpSection'
-import { PhoneStep } from '../features/auth/components/PhoneStep'
+import { OtpSection } from '../../features/auth/components/OtpSection'
+import { PhoneStep } from '../../features/auth/components/PhoneStep'
 import { RiShieldCheckLine } from 'react-icons/ri'
 
-export const Route = createFileRoute('/auth')({
+export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
 })
 
@@ -75,7 +75,7 @@ function RouteComponent() {
           Secure Login
         </div>
         <h2 className="text-white text-xl font-bold leading-snug mb-1">
-         Whether you're an employer, or seeking a job, we care for you.
+          Whether you're an employer, or seeking a job, we care for you.
         </h2>
         <p className="text-indigo-300 text-xs leading-relaxed mb-5">
           connecting employers to workers, faster than ever !
