@@ -16,7 +16,7 @@ export const Route = createFileRoute(`/`)({
 
 function Index() {
   return (
-    <div className="h-screen overflow-hidden bg-[#f0f2f8] flex flex-col">
+    <div className="min-h-dvh overflow-hidden bg-[#f0f2f8] flex flex-col">
       <Navbar />
       <main className="flex-1 flex flex-col items-center pt-6 px-4">
         <HeroCarousel slides={HOME_SLIDES} />

@@ -394,7 +394,7 @@ export function SeekerOnboardingForm() {
                 value={form.location}
                 onChange={(e) => set('location')(e.target.value)}
                 placeholder="Current location (e.g. Mumbai, Maharashtra)"
-                className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
+                className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 placeholder:text-[13px] bg-transparent outline-none"
               />
             </FieldBox>
 
