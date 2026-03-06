@@ -45,13 +45,13 @@ export const FEATURES: HomeFeature[] = [
 export const SEEKER_PERKS = [
   '100+ Nearby jobs posted, daily',
   'Get hired same day',
-  'Start working and earning',
-  'Build Trust, and Grow !',
+  'Start working and earning today',
+  'Build trust, with more work !',
 ]
 
 export const HIRER_PERKS = [
   'Find nearby workers, faster',
   'Review profiles, hire wisely',
   'Pay on project completion',
-  'Get help, at your doorstep !',
+  'Get instant help, at your doorstep !',
 ]

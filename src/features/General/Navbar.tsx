@@ -17,7 +17,7 @@ export function Navbar() {
       </span>
 
       {/* Desktop center links */}
-      <div className="hidden md:flex items-center absolute top-5 left-1/2 -translate-x-1/2 gap-8">
+      <div className="hidden sora-bold md:flex items-center absolute top-5 left-1/2 -translate-x-1/2 gap-8">
         <Link to="/" className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors">FAQs</Link>
         <Link to="/" className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors">Contact Us</Link>
         <Link to="/" className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors">About Us</Link>
@@ -51,7 +51,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-14 left-0 right-0 bg-white shadow-lg border-t border-slate-100 px-6 py-5 flex flex-col gap-4 md:hidden"
+            className="absolute top-14 sora-bold left-0 right-0 bg-white shadow-lg border-t border-slate-100 px-6 py-5 flex flex-col gap-4 md:hidden"
           >
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">FAQs</Link>
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">Contact Us</Link>

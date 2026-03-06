@@ -42,7 +42,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
           {/* Modal */}
           <motion.div
             key="modal"
-            className="fixed cascadia-mono-bold inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none"
+            className="fixed  inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none"
             initial={{ opacity: 0, scale: 0.95, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
@@ -56,11 +56,11 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
               <div className="px-5 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 border-b border-slate-100">
                 <div className="flex items-center gap-2 mb-1">
                   <HiOutlineSparkles className="text-[#3F51B5]" size={18} />
-                  <p className="text-xs font-semibold text-[#3F51B5] tracking-widest uppercase">
+                  <p className="text-sm font-semibold text-[#3F51B5] tracking-widest uppercase">
                     Welcome to Zupro
                   </p>
                 </div>
-                <h2 className="text-[13px] sm:text-md sm:text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
+                <h2 className="text-[15px] dosis-semibold sm:text-md sm:text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
                   How would you like to get started?
                 </h2>
               </div>
@@ -75,7 +75,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   onHoverEnd={() => setHoveredCard(null)}
                 >
                   <div className="flex flex-row gap-1 items-center mb-1">
-                    <h3 className="text-base md:text-lg font-extrabold text-slate-800">Find a Job</h3>
+                    <h3 className="text-base sora-bold md:text-lg font-extrabold text-slate-800">Find a Job</h3>
                     <motion.div
                       className="w-8 h-8 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
@@ -85,7 +85,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                     </motion.div>
                   </div>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                  <p className="text-slate-500 sora-semibold text-sm leading-relaxed mb-4">
                     Browse hundreds of daily jobs near you.
                   </p>
 
@@ -108,7 +108,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   {/* Mobile perks — compact chips */}
                   <div className="flex sm:hidden flex-wrap gap-2 mb-4">
                     {seekerPerks.map((perk) => (
-                      <span key={perk} className="text-xs bg-indigo-50 text-[#3F51B5] font-medium px-2.5 py-1 rounded-full">
+                      <span key={perk} className="text-xs dosis-semibold bg-indigo-50 text-[#3F51B5] font-medium px-2.5 py-1 rounded-full">
                         {perk}
                       </span>
                     ))}
@@ -116,7 +116,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
 
                   <motion.button
                     type="button"
-                    className="mt-auto hover:cursor-pointer w-full rounded-xl bg-[#3F51B5] py-2.5 md:py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
+                    className="mt-auto sora-bold hover:cursor-pointer w-full rounded-xl bg-[#3F51B5] py-2.5 md:py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md"
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/seeker')}
                   >
@@ -137,7 +137,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   onHoverEnd={() => setHoveredCard(null)}
                 >
                   <div className="flex flex-row gap-1 items-center mb-1">
-                    <h3 className="text-base md:text-lg font-extrabold text-slate-800">Hire</h3>
+                    <h3 className="text-base sora-bold md:text-lg font-extrabold text-slate-800">Hire</h3>
                     <motion.div
                       className="w-8 h-8 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
@@ -147,11 +147,11 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                     </motion.div>
                   </div>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-4">
-                    Hire now, and get the work done!
+                  <p className="text-slate-500 sora-semibold text-sm leading-relaxed mb-4">
+                    Hire quickly. No more waiting !
                   </p>
 
-                  {/* Perks — hide on mobile */}
+                  {/* Perks — desktop */}
                   <ul className="hidden sm:flex flex-col gap-2 mb-5">
                     {hirerPerks.map((perk) => (
                       <motion.li
@@ -170,7 +170,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   {/* Mobile perks — compact chips */}
                   <div className="flex sm:hidden flex-wrap gap-2 mb-4">
                     {hirerPerks.map((perk) => (
-                      <span key={perk} className="text-xs bg-amber-50 text-amber-600 font-medium px-2.5 py-1 rounded-full">
+                      <span key={perk} className="text-xs dosis-semibold bg-amber-50 text-amber-600 font-extrabold px-2.5 py-1 rounded-full">
                         {perk}
                       </span>
                     ))}
@@ -178,7 +178,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
 
                   <motion.button
                     type="button"
-                    className="mt-auto w-full hover:cursor-pointer rounded-xl border-2 border-amber-400 bg-white py-2.5 md:py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
+                    className="mt-auto w-full sora-bold hover:cursor-pointer rounded-xl border-2 border-amber-400 bg-white py-2.5 md:py-3 text-sm font-bold text-amber-600 flex items-center justify-center gap-2"
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/employer')}
                   >
