@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineSparkles } from 'react-icons/hi2'
@@ -18,6 +18,23 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(true)
   const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(null)
+  const closeModal = () => setIsModalOpen(false)
+
+  useEffect(() => {
+    if (!isModalOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsModalOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isModalOpen])
 
   const handleRoleSelect = (to: '/onboarding/seeker' | '/onboarding/employer') => {
     setIsModalOpen(false)
@@ -31,12 +48,12 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
           {/* Backdrop */}
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-[3px]"
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            onClick={() => setIsModalOpen(false)}
+            onClick={closeModal}
           />
 
           {/* Modal */}
@@ -196,7 +213,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
               <motion.button
                   type="button"
                   aria-label="Close modal"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={closeModal}
                   className="flex absolute top-5 right-5 hover:cursor-pointer items-center gap-2 text-slate-400 text-sm font-medium px-3 py-1 sm:px-5 sm:py-2 rounded-full border border-[#3F51B5] bg-white hover:border-slate-300 hover:text-slate-600 transition-colors"
                   whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
                   whileTap={{ scale: 0.96, transition: { duration: 0.15 } }}

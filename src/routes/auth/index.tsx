@@ -53,7 +53,7 @@ function RouteComponent() {
       </div>
 
       {/* ── Mobile top banner (< md only) ──────────────────────────────────── */}
-      <div className="md:hidden relative bg-[#1e1b4b] px-6 pt-8 pb-6 overflow-hidden">
+      <div className="md:hidden relative bg-[#1e1b4b] px-6 pt-8 pb-8 overflow-hidden">
         {/* Decorative circles */}
         <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/5 pointer-events-none" />
@@ -129,7 +129,7 @@ function RouteComponent() {
               </div>
 
               {/* Mobile step label (brand already in banner) */}
-              <p className="md:hidden text-sm font-semibold text-slate-500 mb-6 fade-up">
+              <p className="md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
                 {step === 'phone' ? 'Login / Sign Up' : 'Enter verification code'}
               </p>
 

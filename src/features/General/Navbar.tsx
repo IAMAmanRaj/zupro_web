@@ -13,7 +13,7 @@ export function Navbar() {
         className="text-[#3F51B5] text-2xl md:text-4xl font-extrabold tracking-tight select-none"
         style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
       >
-        Zupro.
+        Zupro
       </span>
 
       {/* Desktop center links */}

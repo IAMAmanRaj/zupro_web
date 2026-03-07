@@ -303,7 +303,7 @@ export function SeekerOnboardingForm() {
                 className="text-white text-3xl font-extrabold tracking-tight select-none"
                 style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
               >
-                Zupro.
+                Zupro
               </span>
               <div className="mt-0.5 w-10 h-1 rounded-full bg-amber-400" />
             </div>
