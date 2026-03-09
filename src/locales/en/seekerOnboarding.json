@@ -1,11 +1,12 @@
 {
   "leftPanel": {
+    "brand": "Zupro",
     "titleLine1": "Let's get",
     "titleLine2": "you started!",
     "description": "Please fill in a few details to find your next job. We are here to make your job search easy and quick.",
     "alreadyWithUs": "Already with us?",
     "signIn": "Sign in",
-    "needHelp": "Need help?"
+    "needHelp": "Have a query? Please email us at"
   },
   "form": {
     "title": "Your Information",

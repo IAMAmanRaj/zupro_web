@@ -361,10 +361,9 @@ export function EmployerOnboardingForm() {
 
           <div>
             <span
-              className="text-white text-3xl font-extrabold tracking-tight select-none"
-              style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
+              className="text-white sora-bold text-3xl font-extrabold tracking-tight select-none"
             >
-              Zupro
+              {t('leftPanel.brand')}
             </span>
             <div className="mt-0.5 w-10 h-1 rounded-full bg-amber-400" />
           </div>

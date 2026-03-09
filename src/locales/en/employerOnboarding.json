@@ -1,5 +1,6 @@
 {
   "leftPanel": {
+    "brand": "Zupro",
     "badge": "Employer Portal",
     "titleLine1": "Post a job,",
     "titleLine2": "find the right fit.",
@@ -10,7 +11,7 @@
       "firstJobFree": "To post your first job",
       "buildTrust": "Hire again, form network"
     },
-    "needHelp": "Need help?"
+    "needHelp": "Have a query? Please email us at"
   },
   "header": {
     "stepLabel": "Step {{current}} of {{total}}",
