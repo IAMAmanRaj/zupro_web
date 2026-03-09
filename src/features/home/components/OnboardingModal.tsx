@@ -107,16 +107,16 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   </p>
 
                   {/* Perks — desktop */}
-                  <ul className="hidden sm:flex flex-col gap-2 mb-5">
+                  <ul className="hidden dosis-semibold sm:flex flex-col gap-2 mb-5">
                     {seekerPerks.map((perk) => (
                       <motion.li
                         key={perk}
-                        className="flex items-center gap-2 text-sm text-slate-600"
+                        className="flex  items-center gap-2 text-md text-slate-600"
                         initial={{ x: 0 }}
                         whileHover={{ x: 3 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3F51B5] dosis-semibold flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3F51B5]  flex-shrink-0" />
                         {perk}
                       </motion.li>
                     ))}
@@ -169,11 +169,11 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   </p>
 
                   {/* Perks — desktop */}
-                  <ul className="hidden sm:flex flex-col gap-2 mb-5">
+                  <ul className="hidden dosis-semibold sm:flex flex-col gap-2 mb-5">
                     {hirerPerks.map((perk) => (
                       <motion.li
                         key={perk}
-                        className="flex items-center gap-2 text-sm text-slate-600"
+                        className="flex items-center gap-2 text-md text-slate-600"
                         initial={{ x: 0 }}
                         whileHover={{ x: 3 }}
                         transition={{ duration: 0.15 }}

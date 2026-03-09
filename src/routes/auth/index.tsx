@@ -129,7 +129,7 @@ function RouteComponent() {
               </div>
 
               {/* Mobile step label (brand already in banner) */}
-              <p className="md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
+              <p className="-mt-56 md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
                 {step === 'phone' ? 'Login / Sign Up' : 'Enter verification code'}
               </p>
 
