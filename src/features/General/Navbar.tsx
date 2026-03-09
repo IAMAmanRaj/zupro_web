@@ -26,7 +26,7 @@ export function Navbar() {
         className="text-[#3F51B5] text-3xl lg:text-4xl font-extrabold tracking-tight select-none"
         style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
       >
-        Zupro
+        {t('appName')}
       </span>
 
       {/* Desktop center links */}
@@ -43,7 +43,7 @@ export function Navbar() {
       </div>
 
       {/* Desktop right actions */}
-      <div className="hidden md:flex gap-[10px] lg:gap-[12px] text-[12px] lg:text-[15px] items-center">
+      <div className="hidden md:flex gap-[10px] lg:gap-[24px] text-[12px] lg:text-[15px] items-center">
         {/* Language switcher (desktop) */}
         <div className="relative">
           <button
@@ -88,9 +88,9 @@ export function Navbar() {
           </AnimatePresence>
         </div>
 
-        {/* <Link to="/auth" className="hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
+        <Link to="/auth" className="hidden lg:block hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
           {t('navbar.signIn')}
-        </Link> */}
+        </Link>
         <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2  transition-all">
           {t('navbar.signUp')}
         </Link>
