@@ -288,7 +288,7 @@ export function SeekerOnboardingForm() {
 
   return (
     <div
-      className="min-h-screen bg-[#f0f0f5] flex items-center justify-center p-4"
+      className="min-h-screen bg-[#f0f0f5] flex items-center justify-center pt-4 p-4 pb-2 -mt-8"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex min-h-[600px]">
