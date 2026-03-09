@@ -135,8 +135,8 @@ function RouteComponent() {
               {/* Brand — hidden on mobile since the banner above shows it */}
               <div className="mb-8 fade-up hidden md:block">
                 <div className="flex items-baseline gap-0.5 mb-1">
-                  <span className="text-3xl font-extrabold tracking-tight text-primary">Zu</span>
-                  <span className="text-3xl font-extrabold tracking-tight text-slate-800">pro</span>
+                  <span className="text-3xl font-extrabold tracking-tight text-primary">{t('brand.zu')}</span>
+                  <span className="text-3xl font-extrabold tracking-tight text-slate-800">{t('brand.pro')}</span>
                   <span className="ml-1 mb-0.5 inline-block w-2 h-2 rounded-full bg-primary" />
                 </div>
                 <p className="text-sm font-medium text-slate-500">
@@ -145,7 +145,7 @@ function RouteComponent() {
               </div>
 
               {/* Mobile step label (brand already in banner) */}
-              <p className="-mt-56 md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
+              <p className="-mt-12  md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
                 {stepLabel}
               </p>
 

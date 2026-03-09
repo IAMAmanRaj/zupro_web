@@ -1,5 +1,9 @@
 {
   "appName": "Zupro",
+  "brand": {
+    "zu": "Zu",
+    "pro": "pro"
+  },
   "welcome": "Welcome",
   "navbar": {
     "faqs": "FAQs",
