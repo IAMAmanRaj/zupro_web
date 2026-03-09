@@ -23,35 +23,35 @@ export const FEATURES: HomeFeature[] = [
     Icon: PiHandshakeBold,
     iconClassName: 'text-amber-500',
     iconSize: 30,
-    titleKey: 'home.features.jobs.title',
-    subtitleKey: 'home.features.jobs.subtitle',
+    titleKey: 'features.jobs.title',
+    subtitleKey: 'features.jobs.subtitle',
   },
   {
     Icon: TbCurrentLocation,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 32,
-    titleKey: 'home.features.nearYou.title',
-    subtitleKey: 'home.features.nearYou.subtitle',
+    titleKey: 'features.nearYou.title',
+    subtitleKey: 'features.nearYou.subtitle',
   },
   {
     Icon: FaPeopleArrows,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 28,
-    titleKey: 'home.features.connectingPeople.title',
-    subtitleKey: 'home.features.connectingPeople.subtitle',
+    titleKey: 'features.connectingPeople.title',
+    subtitleKey: 'features.connectingPeople.subtitle',
   },
 ]
 
 export const SEEKER_PERKS = [
-  'home.seekerPerks.jobs',
-  'home.seekerPerks.hired',
-  'home.seekerPerks.startWorking',
-  'home.seekerPerks.buildTrust',
+  'seekerPerks.jobs',
+  'seekerPerks.hired',
+  'seekerPerks.startWorking',
+  'seekerPerks.buildTrust',
 ]
 
 export const HIRER_PERKS = [
-  'home.hirerPerks.findWorkers',
-  'home.hirerPerks.reviewProfiles',
-  'home.hirerPerks.payOnCompletion',
-  'home.hirerPerks.instantHelp',
+  'hirerPerks.findWorkers',
+  'hirerPerks.reviewProfiles',
+  'hirerPerks.payOnCompletion',
+  'hirerPerks.instantHelp',
 ]
