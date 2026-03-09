@@ -63,7 +63,7 @@ function RouteComponent() {
         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/5 pointer-events-none" />
 
         {/* Logo */}
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <span
             className="text-white text-2xl font-extrabold tracking-tight select-none"
             style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
@@ -71,7 +71,7 @@ function RouteComponent() {
             Zupro
           </span>
           <div className="mt-0.5 w-8 h-1 rounded-full bg-amber-400" />
-        </div>
+        </div> */}
 
         {/* Headline + badge */}
         <div className="inline-flex items-center gap-1.5 bg-white/10 text-indigo-200 text-[11px] font-medium px-2.5 py-1 rounded-full mb-2">
@@ -145,7 +145,7 @@ function RouteComponent() {
               </div>
 
               {/* Mobile step label (brand already in banner) */}
-              <p className="-mt-12  md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
+              <p className="-mt-4  md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
                 {stepLabel}
               </p>
 
