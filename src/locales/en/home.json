@@ -1,5 +1,49 @@
 {
   "headline": "Find jobs near you",
-  "subheadline": "Connect with nearby employers and workers."
+  "subheadline": "Connect with nearby employers and workers.",
+  "features": {
+    "jobs": {
+      "title": "Jobs for All",
+      "subtitle": "Find daily & skilled workers"
+    },
+    "nearYou": {
+      "title": "Near you",
+      "subtitle": "We connect workers to nearby employers. No hassle!"
+    },
+    "connectingPeople": {
+      "title": "Connecting People",
+      "subtitle": "With Zupro, finding a worker becomes easier & faster!"
+    }
+  },
+  "seekerPerks": {
+    "jobs": "100+ Nearby jobs posted, daily",
+    "hired": "Get hired same day",
+    "startWorking": "Start working and earning today",
+    "buildTrust": "Build trust, with more work!"
+  },
+  "hirerPerks": {
+    "findWorkers": "Find nearby workers, faster",
+    "reviewProfiles": "Review profiles, hire wisely",
+    "payOnCompletion": "Pay on project completion",
+    "instantHelp": "Get instant help, at your doorstep!"
+  },
+  "hero": {
+    "findJobsCta": "Find jobs",
+    "hireNowCta": "Hire now"
+  },
+  "onboardingModal": {
+    "badge": "Welcome to Zupro",
+    "title": "How would you like to get started?",
+    "seeker": {
+      "title": "Find a job",
+      "description": "Browse hundreds of daily jobs near you.",
+      "cta": "Search jobs"
+    },
+    "hirer": {
+      "title": "Hire",
+      "description": "Hire quickly. No more waiting!",
+      "cta": "Proceed to hire"
+    }
+  }
 }
 

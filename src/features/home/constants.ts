@@ -7,8 +7,8 @@ export type HomeFeature = {
   Icon: IconType
   iconClassName: string
   iconSize: number
-  title: string
-  subtitle: string
+  titleKey: string
+  subtitleKey: string
 }
 
 export const HOME_SLIDES = [
@@ -23,35 +23,35 @@ export const FEATURES: HomeFeature[] = [
     Icon: PiHandshakeBold,
     iconClassName: 'text-amber-500',
     iconSize: 30,
-    title: 'Jobs for All',
-    subtitle: 'Find daily & skilled workers',
+    titleKey: 'home.features.jobs.title',
+    subtitleKey: 'home.features.jobs.subtitle',
   },
   {
     Icon: TbCurrentLocation,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 32,
-    title: 'Near you',
-    subtitle: `We connect workers to nearby employers. No hassle !`,
+    titleKey: 'home.features.nearYou.title',
+    subtitleKey: 'home.features.nearYou.subtitle',
   },
   {
     Icon: FaPeopleArrows,
     iconClassName: 'text-[#3F51B5]',
     iconSize: 28,
-    title: 'Connecting People',
-    subtitle: 'With Zupro, finding a worker becomes easier & faster !',
+    titleKey: 'home.features.connectingPeople.title',
+    subtitleKey: 'home.features.connectingPeople.subtitle',
   },
 ]
 
 export const SEEKER_PERKS = [
-  '100+ Nearby jobs posted, daily',
-  'Get hired same day',
-  'Start working and earning today',
-  'Build trust, with more work !',
+  'home.seekerPerks.jobs',
+  'home.seekerPerks.hired',
+  'home.seekerPerks.startWorking',
+  'home.seekerPerks.buildTrust',
 ]
 
 export const HIRER_PERKS = [
-  'Find nearby workers, faster',
-  'Review profiles, hire wisely',
-  'Pay on project completion',
-  'Get instant help, at your doorstep !',
+  'home.hirerPerks.findWorkers',
+  'home.hirerPerks.reviewProfiles',
+  'home.hirerPerks.payOnCompletion',
+  'home.hirerPerks.instantHelp',
 ]

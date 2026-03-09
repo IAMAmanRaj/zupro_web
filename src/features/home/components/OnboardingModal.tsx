@@ -8,6 +8,7 @@ import {
   RiArrowRightLine,
   RiCloseLine,
 } from 'react-icons/ri'
+import { useTranslation } from 'react-i18next'
 
 type OnboardingModalProps = {
   seekerPerks: string[]
@@ -16,6 +17,7 @@ type OnboardingModalProps = {
 
 export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProps) {
   const navigate = useNavigate()
+  const { t } = useTranslation('home')
   const [isModalOpen, setIsModalOpen] = useState(true)
   const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(null)
   const closeModal = () => setIsModalOpen(false)
@@ -74,11 +76,11 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                 <div className="flex items-center gap-2 mb-1">
                   <HiOutlineSparkles className="text-[#3F51B5]" size={18} />
                   <p className="text-sm font-semibold text-[#3F51B5] tracking-widest uppercase">
-                    Welcome to Zupro
+                    {t('onboardingModal.badge')}
                   </p>
                 </div>
                 <h2 className="text-[15px] dosis-semibold sm:text-md sm:text-xl md:text-2xl font-extrabold text-slate-800 leading-snug">
-                  How would you like to get started?
+                  {t('onboardingModal.title')}
                 </h2>
               </div>
 
@@ -92,7 +94,9 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   onHoverEnd={() => setHoveredCard(null)}
                 >
                   <div className="flex flex-row gap-1 items-center mb-1">
-                    <h3 className="text-base sora-bold md:text-lg font-extrabold text-slate-800">Find a job</h3>
+                    <h3 className="text-base sora-bold md:text-lg font-extrabold text-slate-800">
+                      {t('onboardingModal.seeker.title')}
+                    </h3>
                     <motion.div
                       className="w-8 h-8 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
@@ -103,7 +107,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   </div>
 
                   <p className="text-slate-500 sora-semibold text-sm leading-relaxed mb-4">
-                    Browse hundreds of daily jobs near you.
+                    {t('onboardingModal.seeker.description')}
                   </p>
 
                   {/* Perks — desktop */}
@@ -115,9 +119,9 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                         initial={{ x: 0 }}
                         whileHover={{ x: 3 }}
                         transition={{ duration: 0.15 }}
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3F51B5]  flex-shrink-0" />
-                        {perk}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#3F51B5]  flex-shrink-0" />
+                          {t(perk)}
                       </motion.li>
                     ))}
                   </ul>
@@ -126,7 +130,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   <div className="flex sm:hidden flex-wrap gap-2 mb-4">
                     {seekerPerks.map((perk) => (
                       <span key={perk} className="text-xs dosis-semibold bg-indigo-50 text-[#3F51B5] font-medium px-2.5 py-1 rounded-full">
-                        {perk}
+                        {t(perk)}
                       </span>
                     ))}
                   </div>
@@ -137,7 +141,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/seeker')}
                   >
-                    Search Jobs
+                    {t('onboardingModal.seeker.cta')}
                     <motion.span
                       animate={hoveredCard === 'seeker' ? { x: 4 } : { x: 0 }}
                       transition={{ duration: 0.2 }}
@@ -154,7 +158,9 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   onHoverEnd={() => setHoveredCard(null)}
                 >
                   <div className="flex flex-row gap-1 items-center mb-1">
-                    <h3 className="text-base sora-bold md:text-lg font-extrabold text-slate-800">Hire</h3>
+                    <h3 className="text-base sora-bold md:text-lg font-extrabold text-slate-800">
+                      {t('onboardingModal.hirer.title')}
+                    </h3>
                     <motion.div
                       className="w-8 h-8 flex items-center justify-center"
                       whileHover={{ scale: 1.08, rotate: -4 }}
@@ -165,7 +171,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   </div>
 
                   <p className="text-slate-500 sora-semibold text-sm leading-relaxed mb-4">
-                    Hire quickly. No more waiting !
+                    {t('onboardingModal.hirer.description')}
                   </p>
 
                   {/* Perks — desktop */}
@@ -177,9 +183,9 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                         initial={{ x: 0 }}
                         whileHover={{ x: 3 }}
                         transition={{ duration: 0.15 }}
-                      >
-                        <span className="w-1.5 h-1.5 dosis-semibold rounded-full bg-amber-400 flex-shrink-0" />
-                        {perk}
+                        >
+                          <span className="w-1.5 h-1.5 dosis-semibold rounded-full bg-amber-400 flex-shrink-0" />
+                          {t(perk)}
                       </motion.li>
                     ))}
                   </ul>
@@ -188,7 +194,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                   <div className="flex sm:hidden flex-wrap gap-2 mb-4">
                     {hirerPerks.map((perk) => (
                       <span key={perk} className="text-xs dosis-semibold bg-amber-50 text-amber-600 font-extrabold px-2.5 py-1 rounded-full">
-                        {perk}
+                        {t(perk)}
                       </span>
                     ))}
                   </div>
@@ -199,7 +205,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
                     whileTap={{ scale: 0.97 }}
                     onClick={() => handleRoleSelect('/onboarding/employer')}
                   >
-                    Proceed to Hire
+                    {t('onboardingModal.hirer.cta')}
                     <motion.span
                       animate={hoveredCard === 'hirer' ? { x: 4 } : { x: 0 }}
                       transition={{ duration: 0.2 }}

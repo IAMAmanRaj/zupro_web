@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { RiArrowRightLine, RiCloseLine, RiTranslate2 } from 'react-icons/ri'
+import { useTranslation } from 'react-i18next'
 import { useLanguageStore } from '../../../stores/languageStore'
 
 type LanguagePreferenceModalProps = {
@@ -13,6 +14,7 @@ export function LanguagePreferenceModal({
   onClose,
 }: LanguagePreferenceModalProps) {
   const { language: currentLanguage, setLanguage } = useLanguageStore()
+  const { t } = useTranslation('language')
   const [isOpen, setIsOpen] = useState(true)
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'hi'>(
     currentLanguage ?? 'en',
@@ -73,14 +75,14 @@ export function LanguagePreferenceModal({
                 <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 text-[#3F51B5] px-3 py-1 mb-3">
                   <RiTranslate2 size={16} />
                   <span className="text-xs font-semibold tracking-wide uppercase">
-                    Language
+                    {t('badge')}
                   </span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 leading-tight">
-                  Choose your language
+                  {t('title')}
                 </h2>
                 <p className="mt-1 text-sm text-slate-500">
-                  Select your preferred app language.
+                  {t('subtitle')}
                 </p>
               </div>
 
@@ -94,9 +96,11 @@ export function LanguagePreferenceModal({
                   }`}
                   onClick={() => setSelectedLanguage('en')}
                 >
-                  <p className="sora-bold text-base text-slate-800">English</p>
+                  <p className="sora-bold text-base text-slate-800">
+                    {t('options.en.label')}
+                  </p>
                   <p className="dosis-semibold text-sm text-slate-500">
-                    Continue in English
+                    {t('options.en.description')}
                   </p>
                 </button>
 
@@ -109,9 +113,11 @@ export function LanguagePreferenceModal({
                   }`}
                   onClick={() => setSelectedLanguage('hi')}
                 >
-                  <p className="sora-bold text-base text-slate-800">Hindi</p>
+                  <p className="sora-bold text-base text-slate-800">
+                    {t('options.hi.label')}
+                  </p>
                   <p className="dosis-semibold text-sm text-slate-500">
-                    Hindi mein jari rakhen
+                    {t('options.hi.description')}
                   </p>
                 </button>
 
@@ -120,7 +126,7 @@ export function LanguagePreferenceModal({
                   className="mt-1 w-full rounded-xl bg-[#3F51B5] hover:cursor-pointer py-3 text-sm font-bold text-white flex items-center justify-center gap-2 shadow-md transition-all duration-200 hover:bg-[#3647a3]"
                   onClick={handleProceed}
                 >
-                  Proceed
+                  {t('proceed')}
                   <RiArrowRightLine size={16} />
                 </button>
               </div>

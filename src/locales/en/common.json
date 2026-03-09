@@ -1,5 +1,12 @@
 {
   "appName": "Zupro",
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "navbar": {
+    "faqs": "FAQs",
+    "contact": "Contact Us",
+    "about": "About Us",
+    "signIn": "Sign in",
+    "signUp": "Sign up"
+  }
 }
 

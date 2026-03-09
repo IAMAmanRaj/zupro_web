@@ -1,6 +1,17 @@
 {
+  "badge": "Language",
   "title": "Choose your language",
   "subtitle": "Select your preferred app language",
+  "options": {
+    "en": {
+      "label": "English",
+      "description": "Continue in English"
+    },
+    "hi": {
+      "label": "Hindi",
+      "description": "Continue in Hindi"
+    }
+  },
   "proceed": "Proceed"
 }
 
