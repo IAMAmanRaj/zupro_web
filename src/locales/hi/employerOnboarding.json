@@ -9,7 +9,11 @@
       "activeSeekers": "सक्रिय जॉब सीकर्स",
       "avgMatch": "पहला मैच औसतन",
       "firstJobFree": "पहली जॉब पोस्ट के लिए",
-      "buildTrust": "बार-बार हायर करें, नेटवर्क बनाएं"
+      "buildTrust": "बार-बार हायर करें, नेटवर्क बनाएं",
+      "activeSeekersValue": "1000+",
+      "avgMatchValue": "12 घंटे",
+      "firstJobFreeValue": "फ्री",
+      "buildTrustValue": "विश्वास बनाएँ"
     },
     "needHelp": "कोई सवाल है? कृपया हमें इस ईमेल पर लिखें:"
   },
@@ -28,6 +32,7 @@
     "payTypeDayWise": "दैनिक",
     "payTypePerShift": "प्रति शिफ्ट",
     "payHint": "वैकल्पिक - तय न हो तो खाली छोड़ दें",
+    "currencyLabel": "₹",
     "educationPlaceholder": "न्यूनतम शिक्षा स्तर",
     "searchPlaceholder": "खोजें...",
     "noResults": "कोई परिणाम नहीं",

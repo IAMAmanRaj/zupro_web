@@ -134,7 +134,7 @@ export function LanguagePreferenceModal({
               <button
                 type="button"
                 aria-label="Close language preference modal"
-                className="absolute top-5 right-5 h-10 w-10 rounded-full border border-indigo-200 text-slate-500 hover:text-slate-700 hover:border-indigo-300 transition-colors flex items-center justify-center"
+                className="absolute hover:cursor-pointer top-5 right-5 h-10 w-10 rounded-full border border-indigo-200 text-slate-500 hover:text-slate-700 hover:border-indigo-300 transition-colors flex items-center justify-center"
                 onClick={handleClose}
               >
                 <RiCloseLine size={18} />

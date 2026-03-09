@@ -1,4 +1,4 @@
-﻿import { useNavigate } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import {
   FiUser,
@@ -271,6 +271,7 @@ function PayInput({
   placeholder,
   dayWiseLabel,
   perShiftLabel,
+  currencyLabel,
 }: {
   amount: string
   payType: 'monthly' | 'yearly'
@@ -279,11 +280,12 @@ function PayInput({
   placeholder: string
   dayWiseLabel: string
   perShiftLabel: string
+  currencyLabel: string
 }) {
   return (
     <div className="flex items-center border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200 overflow-hidden">
-      <div className="flex items-center gap-1.5 pl-4 text-[#3F51B5] shrink-0">
-        <span className="text-sm font-semibold text-slate-500">Rs</span>
+      <div className="flex items-center gap-1 pl-4 text-[#3F51B5] shrink-0">
+        <span className="text-xs font-semibold text-slate-500 ml-0.5">{currencyLabel}</span>
       </div>
       <input
         type="number"
@@ -379,10 +381,22 @@ export function EmployerOnboardingForm() {
             </h2>
             <p className="text-indigo-200 text-sm leading-relaxed">{t('leftPanel.description')}</p>
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <Stat value="1000+" label={t('leftPanel.stats.activeSeekers')} />
-              <Stat value="12h" label={t('leftPanel.stats.avgMatch')} />
-              <Stat value="Free" label={t('leftPanel.stats.firstJobFree')} />
-              <Stat value="Build Trust" label={t('leftPanel.stats.buildTrust')} />
+              <Stat
+                value={t('leftPanel.stats.activeSeekersValue')}
+                label={t('leftPanel.stats.activeSeekers')}
+              />
+              <Stat
+                value={t('leftPanel.stats.avgMatchValue')}
+                label={t('leftPanel.stats.avgMatch')}
+              />
+              <Stat
+                value={t('leftPanel.stats.firstJobFreeValue')}
+                label={t('leftPanel.stats.firstJobFree')}
+              />
+              <Stat
+                value={t('leftPanel.stats.buildTrustValue')}
+                label={t('leftPanel.stats.buildTrust')}
+              />
             </div>
           </div>
 
@@ -456,6 +470,7 @@ export function EmployerOnboardingForm() {
                   placeholder={t('form.payPlaceholder')}
                   dayWiseLabel={t('form.payTypeDayWise')}
                   perShiftLabel={t('form.payTypePerShift')}
+                  currencyLabel={t('form.currencyLabel')}
                 />
                 <p className="text-[11px] text-slate-400 mt-1 ml-1">{t('form.payHint')}</p>
               </div>

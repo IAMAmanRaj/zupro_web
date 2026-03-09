@@ -9,7 +9,11 @@
       "activeSeekers": "Active job seekers",
       "avgMatch": "Avg. first match",
       "firstJobFree": "To post your first job",
-      "buildTrust": "Hire again, form network"
+      "buildTrust": "Hire again, form network",
+      "activeSeekersValue": "1000+",
+      "avgMatchValue": "12h",
+      "firstJobFreeValue": "Free",
+      "buildTrustValue": "Build Trust"
     },
     "needHelp": "Have a query? Please email us at"
   },
@@ -28,6 +32,7 @@
     "payTypeDayWise": "Day wise",
     "payTypePerShift": "Per Shift",
     "payHint": "Optional - leave blank if not decided yet",
+    "currencyLabel": "Rs",
     "educationPlaceholder": "Minimum education level required",
     "searchPlaceholder": "Search...",
     "noResults": "No results",

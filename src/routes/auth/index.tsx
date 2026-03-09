@@ -91,7 +91,7 @@ function RouteComponent() {
       </div>
 
       {/* ── Right / bottom form panel ───────────────────────────────────────── */}
-      <div className="flex-1 flex items-center justify-center px-6 py-8 sm:px-8 sm:py-12 bg-white overflow-y-auto">
+      <div className="flex-1 flex items-center justify-center px-6 py-8 sm:px-8 sm:py-12 bg-[#F3F4F4] overflow-y-auto">
         <div className="w-full max-w-sm">
 
           {isVerified ? (
