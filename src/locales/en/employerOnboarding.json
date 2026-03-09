@@ -1,0 +1,68 @@
+{
+  "leftPanel": {
+    "badge": "Employer Portal",
+    "titleLine1": "Post a job,",
+    "titleLine2": "find the right fit.",
+    "description": "Tell us about the role you're hiring for. We'll match you with the best candidates quickly.",
+    "stats": {
+      "activeSeekers": "Active job seekers",
+      "avgMatch": "Avg. first match",
+      "firstJobFree": "To post your first job",
+      "buildTrust": "Hire again, form network"
+    },
+    "needHelp": "Need help?"
+  },
+  "header": {
+    "stepLabel": "Step {{current}} of {{total}}",
+    "title": "Job Details",
+    "subtitle": "Fill in the role you're looking to hire for."
+  },
+  "form": {
+    "employerNamePlaceholder": "Your name / Company name",
+    "jobTitlePlaceholder": "Job Title",
+    "jobTitleSubLabel": "e.g. Software Engineer, Sales Executive",
+    "jobDescriptionPlaceholder": "Job description - responsibilities, requirements, perks...",
+    "jobLocationPlaceholder": "Job location (e.g. Bangalore, Karnataka)",
+    "payPlaceholder": "Tentative pay (optional)",
+    "payTypeDayWise": "Day wise",
+    "payTypePerShift": "Per Shift",
+    "payHint": "Optional - leave blank if not decided yet",
+    "educationPlaceholder": "Minimum education level required",
+    "searchPlaceholder": "Search...",
+    "noResults": "No results",
+    "continue": "Continue"
+  },
+  "options": {
+    "education": ["10th Pass", "12th Pass", "Graduate", "Post Graduate", "Other", "Prefer not to say"],
+    "jobTitles": [
+      "Software Engineer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Full Stack Developer",
+      "UI/UX Designer",
+      "Product Manager",
+      "Data Analyst",
+      "Data Scientist",
+      "DevOps Engineer",
+      "QA Engineer",
+      "Business Analyst",
+      "Marketing Manager",
+      "Sales Executive",
+      "HR Manager",
+      "Content Writer",
+      "Graphic Designer",
+      "Operations Manager",
+      "Finance Analyst",
+      "Customer Support",
+      "Project Manager",
+      "Accountant",
+      "Teacher / Educator",
+      "Healthcare Worker",
+      "Legal Professional",
+      "Delivery Executive",
+      "Store Manager",
+      "Field Agent",
+      "Other"
+    ]
+  }
+}

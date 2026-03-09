@@ -1,14 +1,18 @@
-import { useNavigate } from '@tanstack/react-router'
+﻿import { useNavigate } from '@tanstack/react-router'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import {
-  FiUser, FiCalendar, FiChevronDown, FiSearch,
-  FiMapPin, FiBookOpen, FiArrowRight,
+  FiUser,
+  FiCalendar,
+  FiChevronDown,
+  FiSearch,
+  FiMapPin,
+  FiBookOpen,
+  FiArrowRight,
 } from 'react-icons/fi'
 import { PiGenderIntersexBold } from 'react-icons/pi'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface FormData {
   name: string
   age: string
@@ -18,31 +22,17 @@ interface FormData {
   education: string
 }
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-const GENDERS = ['Male', 'Female', 'Non-binary', 'Prefer not to say']
-
-const PROFESSIONS = [
-  'Software Engineer', 'Frontend Developer', 'Backend Developer', 'Full Stack Developer',
-  'UI/UX Designer', 'Product Manager', 'Data Analyst', 'Data Scientist',
-  'DevOps Engineer', 'QA Engineer', 'Business Analyst', 'Marketing Manager',
-  'Sales Executive', 'HR Manager', 'Content Writer', 'Graphic Designer',
-  'Operations Manager', 'Finance Analyst', 'Customer Support', 'Project Manager',
-  'Accountant', 'Teacher / Educator', 'Healthcare Worker', 'Legal Professional',
-  'Freelancer', 'Student', 'Other',
+const FIELDS: (keyof FormData)[] = [
+  'name',
+  'age',
+  'gender',
+  'profession',
+  'location',
+  'education',
 ]
 
-const EDUCATION_OPTIONS = [
-  '10th Pass', '12th Pass', 'Diploma', 'ITI',
-  'Graduate', 'Post Graduate', 'PhD', 'Other',
-]
-
-const FIELDS: (keyof FormData)[] = ['name', 'age', 'gender', 'profession', 'location', 'education']
-
-// ─── Progress Dots ────────────────────────────────────────────────────────────
 function ProgressDots({ progress }: { progress: number }) {
-  // progress: 0–1
   const dots = 3
-  // dot 0 active when progress >= 0, dot 1 at >= 0.5, dot 2 at >= 1
   const thresholds = [0, 0.5, 1]
 
   return (
@@ -53,15 +43,12 @@ function ProgressDots({ progress }: { progress: number }) {
 
         return (
           <div key={i} className="flex items-center">
-            {/* Dot */}
             <div className="relative w-5 h-5 flex items-center justify-center">
-              {/* outer ring */}
               <motion.div
                 className="absolute inset-0 rounded-full border-2"
                 animate={{ borderColor: active ? '#3F51B5' : '#d1d5db' }}
                 transition={{ duration: 0.4 }}
               />
-              {/* filled inner */}
               <motion.div
                 className="rounded-full bg-[#3F51B5]"
                 animate={{ width: active ? 8 : 0, height: active ? 8 : 0, opacity: active ? 1 : 0 }}
@@ -69,7 +56,6 @@ function ProgressDots({ progress }: { progress: number }) {
               />
             </div>
 
-            {/* Connector line */}
             {!isLast && (
               <div className="relative w-12 h-0.5 bg-gray-200 overflow-hidden">
                 <motion.div
@@ -86,7 +72,6 @@ function ProgressDots({ progress }: { progress: number }) {
   )
 }
 
-// ─── Field Wrapper ────────────────────────────────────────────────────────────
 function FieldBox({ children, icon }: { children: React.ReactNode; icon?: React.ReactNode }) {
   return (
     <div className="relative flex items-start border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200">
@@ -100,7 +85,6 @@ function FieldBox({ children, icon }: { children: React.ReactNode; icon?: React.
   )
 }
 
-// ─── Searchable Dropdown ──────────────────────────────────────────────────────
 function SearchDropdown({
   options,
   value,
@@ -108,6 +92,8 @@ function SearchDropdown({
   placeholder,
   icon,
   subLabel,
+  searchPlaceholder,
+  noResultsLabel,
 }: {
   options: string[]
   value: string
@@ -115,6 +101,8 @@ function SearchDropdown({
   placeholder: string
   icon: React.ReactNode
   subLabel?: string
+  searchPlaceholder: string
+  noResultsLabel: string
 }) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -122,7 +110,7 @@ function SearchDropdown({
 
   const filtered = useMemo(
     () => options.filter((o) => o.toLowerCase().includes(query.toLowerCase())),
-    [options, query]
+    [options, query],
   )
 
   useEffect(() => {
@@ -139,17 +127,17 @@ function SearchDropdown({
         className="relative flex items-center border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200 cursor-pointer"
         onClick={() => setOpen((o) => !o)}
       >
-        <div className="flex items-center justify-center pl-4 text-[#3F51B5] shrink-0">
-          {icon}
-        </div>
+        <div className="flex items-center justify-center pl-4 text-[#3F51B5] shrink-0">{icon}</div>
         <div className="flex-1 px-3 py-3.5">
           <div className="text-sm font-semibold text-slate-700">{placeholder}</div>
           {value && <div className="text-[13px] text-slate-500 mt-0.5">{value}</div>}
-          {!value && subLabel && <div className="text-[13px] text-slate-400 mt-0.5 flex items-center gap-1">{subLabel}</div>}
+          {!value && subLabel && (
+            <div className="text-[13px] text-slate-400 mt-0.5 flex items-center gap-1">{subLabel}</div>
+          )}
         </div>
         <FiChevronDown
           size={16}
-          className={`mr-4 text-slate-400 transition-transform duration-200 ${open ? `rotate-180` : ``}`}
+          className={`mr-4 text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
       </div>
 
@@ -162,7 +150,6 @@ function SearchDropdown({
             transition={{ duration: 0.18 }}
             className="absolute left-0 right-0 mt-1.5 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden"
           >
-            {/* Search bar inside dropdown */}
             <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-100">
               <FiSearch size={14} className="text-slate-400 shrink-0" />
               <input
@@ -170,21 +157,25 @@ function SearchDropdown({
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search…"
+                placeholder={searchPlaceholder}
                 className="flex-1 text-sm outline-none bg-transparent placeholder-slate-400 text-slate-700"
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
             <div className="max-h-48 overflow-y-auto zupro-scroll">
               {filtered.length === 0 ? (
-                <div className="px-4 py-3 text-sm text-slate-400">No results</div>
+                <div className="px-4 py-3 text-sm text-slate-400">{noResultsLabel}</div>
               ) : (
                 filtered.map((opt) => (
                   <button
                     key={opt}
                     type="button"
-                    onClick={() => { onChange(opt); setOpen(false); setQuery('') }}
-                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? `bg-[#3F51B5]/8 text-[#3F51B5] font-semibold` : `text-slate-700 hover:bg-slate-50`}`}
+                    onClick={() => {
+                      onChange(opt)
+                      setOpen(false)
+                      setQuery('')
+                    }}
+                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? 'bg-[#3F51B5]/8 text-[#3F51B5] font-semibold' : 'text-slate-700 hover:bg-slate-50'}`}
                   >
                     {opt}
                   </button>
@@ -198,7 +189,6 @@ function SearchDropdown({
   )
 }
 
-// ─── Simple Dropdown ──────────────────────────────────────────────────────────
 function SimpleDropdown({
   options,
   value,
@@ -230,12 +220,12 @@ function SimpleDropdown({
         onClick={() => setOpen((o) => !o)}
       >
         <span className="text-[#3F51B5] shrink-0">{icon}</span>
-        <span className={`flex-1 text-sm font-medium ${value ? `text-slate-800` : `text-slate-400`}`}>
+        <span className={`flex-1 text-sm font-medium ${value ? 'text-slate-800' : 'text-slate-400'}`}>
           {value || placeholder}
         </span>
         <FiChevronDown
           size={16}
-          className={`text-slate-400 transition-transform duration-200 ${open ? `rotate-180` : ``}`}
+          className={`text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
       </div>
 
@@ -252,8 +242,11 @@ function SimpleDropdown({
               <button
                 key={opt}
                 type="button"
-                onClick={() => { onChange(opt); setOpen(false) }}
-                className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? `text-[#3F51B5] font-semibold bg-indigo-50` : `text-slate-700 hover:bg-slate-50`}`}
+                onClick={() => {
+                  onChange(opt)
+                  setOpen(false)
+                }}
+                className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? 'text-[#3F51B5] font-semibold bg-indigo-50' : 'text-slate-700 hover:bg-slate-50'}`}
               >
                 {opt}
               </button>
@@ -265,21 +258,27 @@ function SimpleDropdown({
   )
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
 export function SeekerOnboardingForm() {
   const navigate = useNavigate()
+  const { t } = useTranslation('seekerOnboarding')
+
+  const genders = t('options.genders', { returnObjects: true }) as string[]
+  const professions = t('options.professions', { returnObjects: true }) as string[]
+  const educationOptions = t('options.education', { returnObjects: true }) as string[]
 
   const [form, setForm] = useState<FormData>({
-    name: '', age: '', gender: '', profession: '', location: '', education: '',
+    name: '',
+    age: '',
+    gender: '',
+    profession: '',
+    location: '',
+    education: '',
   })
 
-  const set = (key: keyof FormData) => (val: string) =>
-    setForm((prev) => ({ ...prev, [key]: val }))
+  const set = (key: keyof FormData) => (val: string) => setForm((prev) => ({ ...prev, [key]: val }))
 
-  // Progress: count filled fields / total, clamp 0–1
   const filledCount = FIELDS.filter((f) => form[f].trim() !== '').length
-  const progress = filledCount / FIELDS.length  // 0 → 1
-
+  const progress = filledCount / FIELDS.length
   const allFilled = filledCount === FIELDS.length
 
   const handleNext = () => {
@@ -293,10 +292,7 @@ export function SeekerOnboardingForm() {
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex min-h-[600px]">
-
-        {/* ── Left Panel ─────────────────────────────────────────────────────── */}
         <div className="hidden md:flex flex-col justify-between w-[42%] bg-[#1e1b4b] p-9">
-          {/* Logo */}
           <div>
             <div className="mb-1">
               <span
@@ -309,53 +305,47 @@ export function SeekerOnboardingForm() {
             </div>
           </div>
 
-          {/* Hero text */}
           <div>
             <h2 className="text-white text-3xl font-bold leading-snug mb-4">
-              Let's get<br />you started!
+              {t('leftPanel.titleLine1')}<br />
+              {t('leftPanel.titleLine2')}
             </h2>
-            <p className="text-indigo-200 text-sm leading-relaxed">
-              Please fill in a few details to find your next job. We are here to make your job search easy &amp; quick.
-            </p>
+            <p className="text-indigo-200 text-sm leading-relaxed">{t('leftPanel.description')}</p>
             <p className="mt-6 text-indigo-300 text-sm">
-              Already with us?{' '}
-              <a href="/auth" className="text-white underline underline-offset-2 font-medium hover:text-amber-300 transition-colors">
-                Sign in
+              {t('leftPanel.alreadyWithUs')}{' '}
+              <a
+                href="/auth"
+                className="text-white underline underline-offset-2 font-medium hover:text-amber-300 transition-colors"
+              >
+                {t('leftPanel.signIn')}
               </a>
             </p>
           </div>
 
-          {/* Footer */}
           <div>
-            <p className="text-indigo-300 text-xs">Need help?</p>
+            <p className="text-indigo-300 text-xs">{t('leftPanel.needHelp')}</p>
             <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.in</p>
           </div>
         </div>
 
-        {/* ── Right Panel ────────────────────────────────────────────────────── */}
         <div className="flex-1 flex flex-col px-8 pt-8 pb-12 overflow-y-auto zupro-scroll">
-
-          {/* Progress dots */}
           <div className="flex justify-end mb-6">
             <ProgressDots progress={progress} />
           </div>
 
-          <h3 className="text-xl font-bold text-slate-800 mb-5">Your Information</h3>
+          <h3 className="text-xl font-bold text-slate-800 mb-5">{t('form.title')}</h3>
 
           <div className="flex flex-col gap-3 flex-1">
-
-            {/* Name */}
             <FieldBox icon={<FiUser size={16} />}>
               <input
                 type="text"
                 value={form.name}
                 onChange={(e) => set('name')(e.target.value)}
-                placeholder="name"
+                placeholder={t('form.namePlaceholder')}
                 className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
               />
             </FieldBox>
 
-            {/* Age */}
             <FieldBox icon={<FiCalendar size={16} />}>
               <input
                 type="number"
@@ -363,54 +353,52 @@ export function SeekerOnboardingForm() {
                 max={65}
                 value={form.age}
                 onChange={(e) => set('age')(e.target.value)}
-                placeholder="age"
+                placeholder={t('form.agePlaceholder')}
                 className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </FieldBox>
 
-            {/* Gender */}
             <SimpleDropdown
-              options={GENDERS}
+              options={genders}
               value={form.gender}
               onChange={set('gender')}
-              placeholder="Gender"
+              placeholder={t('form.genderPlaceholder')}
               icon={<PiGenderIntersexBold size={16} />}
             />
 
-            {/* Profession */}
             <SearchDropdown
-              options={PROFESSIONS}
+              options={professions}
               value={form.profession}
               onChange={set('profession')}
-              placeholder="What do you do?"
-              subLabel="Select your profession"
+              placeholder={t('form.professionPlaceholder')}
+              subLabel={t('form.professionSubLabel')}
+              searchPlaceholder={t('form.searchPlaceholder')}
+              noResultsLabel={t('form.noResults')}
               icon={<FiSearch size={16} />}
             />
 
-            {/* Location */}
             <FieldBox icon={<FiMapPin size={16} />}>
               <input
                 type="text"
                 value={form.location}
                 onChange={(e) => set('location')(e.target.value)}
-                placeholder="Current location (e.g. Mumbai, Maharashtra)"
+                placeholder={t('form.locationPlaceholder')}
                 className="w-full px-3 py-3.5 text-sm text-slate-800 placeholder-slate-400 placeholder:text-[13px] bg-transparent outline-none"
               />
             </FieldBox>
 
-            {/* Education */}
             <SearchDropdown
-              options={EDUCATION_OPTIONS}
+              options={educationOptions}
               value={form.education}
               onChange={set('education')}
-              placeholder="Education"
-              subLabel="Select your qualification"
+              placeholder={t('form.educationPlaceholder')}
+              subLabel={t('form.educationSubLabel')}
+              searchPlaceholder={t('form.searchPlaceholder')}
+              noResultsLabel={t('form.noResults')}
               icon={<FiBookOpen size={16} />}
             />
-
           </div>
 
-          {/* Continue button */}
           <motion.button
             onClick={handleNext}
             disabled={!allFilled}
@@ -422,10 +410,9 @@ export function SeekerOnboardingForm() {
                 : 'bg-slate-300 cursor-not-allowed'
             }`}
           >
-            Continue
+            {t('form.continue')}
             <FiArrowRight size={18} />
           </motion.button>
-
         </div>
       </div>
     </div>

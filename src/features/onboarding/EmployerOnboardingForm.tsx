@@ -6,6 +6,7 @@ import {
   FiBriefcase,
 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguageStore } from '../../stores/languageStore'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface FormData {
@@ -22,6 +23,9 @@ interface FormData {
 const EDUCATION_LEVELS = [
   '10th Pass', '12th Pass', 'Graduate', 'Post Graduate', 'Other', 'Prefer not to say',
 ]
+const EDUCATION_LEVELS_HI = [
+  '10वीं पास', '12वीं पास', 'ग्रेजुएट', 'पोस्ट ग्रेजुएट', 'अन्य', 'न बताना चाहें',
+]
 
 const JOB_TITLES = [
   'Software Engineer', 'Frontend Developer', 'Backend Developer', 'Full Stack Developer',
@@ -31,6 +35,15 @@ const JOB_TITLES = [
   'Operations Manager', 'Finance Analyst', 'Customer Support', 'Project Manager',
   'Accountant', 'Teacher / Educator', 'Healthcare Worker', 'Legal Professional',
   'Delivery Executive', 'Store Manager', 'Field Agent', 'Other',
+]
+const JOB_TITLES_HI = [
+  'सॉफ्टवेयर इंजीनियर', 'फ्रंटेंड डेवलपर', 'बैकेंड डेवलपर', 'फुल स्टैक डेवलपर',
+  'UI/UX डिज़ाइनर', 'प्रोडक्ट मैनेजर', 'डेटा एनालिस्ट', 'डेटा साइंटिस्ट',
+  'डेवऑप्स इंजीनियर', 'QA इंजीनियर', 'बिज़नेस एनालिस्ट', 'मार्केटिंग मैनेजर',
+  'सेल्स एक्जीक्यूटिव', 'HR मैनेजर', 'कंटेंट राइटर', 'ग्राफिक डिज़ाइनर',
+  'ऑपरेशंस मैनेजर', 'फाइनेंस एनालिस्ट', 'कस्टमर सपोर्ट', 'प्रोजेक्ट मैनेजर',
+  'अकाउंटेंट', 'शिक्षक / एजुकेटर', 'हेल्थकेयर वर्कर', 'लीगल प्रोफेशनल',
+  'डिलीवरी एक्जीक्यूटिव', 'स्टोर मैनेजर', 'फील्ड एजेंट', 'अन्य',
 ]
 
 const REQUIRED_FIELDS: (keyof FormData)[] = [
@@ -251,7 +264,7 @@ function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
             key={type}
             type="button"
             onClick={() => onTypeChange(type)}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-2.5 hover:cursor-pointer opacity-80 hover:opacity-100 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
           >
             {type === 'monthly' ? 'Day wise' : 'Per Shift'}
           </button>
@@ -274,6 +287,10 @@ function Stat({ value, label }: { value: string; label: string }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 export function EmployerOnboardingForm() {
   const navigate = useNavigate()
+  const language = useLanguageStore((state) => state.language)
+
+  const jobTitles = language === 'hi' ? JOB_TITLES_HI : JOB_TITLES
+  const educationLevels = language === 'hi' ? EDUCATION_LEVELS_HI : EDUCATION_LEVELS
 
   const [form, setForm] = useState<FormData>({
     employerName: '', jobTitle: '', jobDescription: '',
@@ -380,7 +397,7 @@ export function EmployerOnboardingForm() {
               </FieldBox>
 
               <SearchDropdown
-                options={JOB_TITLES}
+                options={jobTitles}
                 value={form.jobTitle}
                 onChange={set('jobTitle')}
                 placeholder="Job Title"
@@ -419,7 +436,7 @@ export function EmployerOnboardingForm() {
               </div>
 
               <SimpleDropdown
-                options={EDUCATION_LEVELS}
+                options={educationLevels}
                 value={form.educationLevel}
                 onChange={set('educationLevel')}
                 placeholder="Minimum education level required"

@@ -89,7 +89,7 @@ export function LanguagePreferenceModal({
               <div className="p-5 sm:p-6 flex flex-col gap-3">
                 <button
                   type="button"
-                  className={`w-full text-left rounded-2xl border px-4 py-4 transition-all duration-200 ${
+                  className={`w-full hover:cursor-pointer text-left rounded-2xl border px-4 py-4 transition-all duration-200 ${
                     selectedLanguage === 'en'
                       ? 'border-[#3F51B5] bg-indigo-50 shadow-sm'
                       : 'border-slate-200 bg-white hover:border-indigo-200 hover:bg-indigo-50/40'
@@ -106,7 +106,7 @@ export function LanguagePreferenceModal({
 
                 <button
                   type="button"
-                  className={`w-full text-left rounded-2xl border px-4 py-4 transition-all duration-200 ${
+                  className={`w-full hover:cursor-pointer text-left rounded-2xl border px-4 py-4 transition-all duration-200 ${
                     selectedLanguage === 'hi'
                       ? 'border-[#3F51B5] bg-indigo-50 shadow-sm'
                       : 'border-slate-200 bg-white hover:border-indigo-200 hover:bg-indigo-50/40'
