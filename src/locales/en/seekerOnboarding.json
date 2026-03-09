@@ -1,58 +1,71 @@
-{
-  "leftPanel": {
-    "brand": "Zupro",
-    "titleLine1": "Let's get",
-    "titleLine2": "you started!",
-    "description": "Please fill in a few details to find your next job. We are here to make your job search easy and quick.",
-    "alreadyWithUs": "Already with us?",
-    "signIn": "Sign in",
-    "needHelp": "Have a query? Please email us at"
-  },
-  "form": {
-    "title": "Your Information",
-    "namePlaceholder": "Name",
-    "agePlaceholder": "Age",
-    "genderPlaceholder": "Gender",
-    "professionPlaceholder": "What do you do?",
-    "professionSubLabel": "Select your profession",
-    "locationPlaceholder": "Current location (e.g. Mumbai, Maharashtra)",
-    "educationPlaceholder": "Education",
-    "educationSubLabel": "Select your qualification",
-    "searchPlaceholder": "Search...",
-    "noResults": "No results",
-    "continue": "Continue"
-  },
-  "options": {
-    "genders": ["Male", "Female", "Non-binary", "Prefer not to say"],
-    "professions": [
-      "Software Engineer",
-      "Frontend Developer",
-      "Backend Developer",
-      "Full Stack Developer",
-      "UI/UX Designer",
-      "Product Manager",
-      "Data Analyst",
-      "Data Scientist",
-      "DevOps Engineer",
-      "QA Engineer",
-      "Business Analyst",
-      "Marketing Manager",
-      "Sales Executive",
-      "HR Manager",
-      "Content Writer",
-      "Graphic Designer",
-      "Operations Manager",
-      "Finance Analyst",
-      "Customer Support",
-      "Project Manager",
-      "Accountant",
-      "Teacher / Educator",
-      "Healthcare Worker",
-      "Legal Professional",
-      "Freelancer",
-      "Student",
-      "Other"
-    ],
-    "education": ["10th Pass", "12th Pass", "Diploma", "ITI", "Graduate", "Post Graduate", "PhD", "Other"]
-  }
+﻿{
+    "leftPanel":  {
+                      "brand":  "Zupro",
+                      "titleLine1":  "Let\u0027s get",
+                      "titleLine2":  "you started!",
+                      "description":  "Please fill in a few details to find your next job. We are here to make your job search easy and quick.",
+                      "alreadyWithUs":  "Already with us?",
+                      "signIn":  "Sign in",
+                      "needHelp":  "Have a query? Please email us at"
+                  },
+    "form":  {
+                 "title":  "Your Information",
+                 "namePlaceholder":  "Name",
+                 "agePlaceholder":  "Age",
+                 "genderPlaceholder":  "Gender",
+                 "professionPlaceholder":  "What do you do?",
+                 "professionSubLabel":  "Select your profession",
+                 "locationPlaceholder":  "Current location (e.g. Mumbai, Maharashtra)",
+                 "educationPlaceholder":  "Education",
+                 "educationSubLabel":  "Select your qualification",
+                 "searchPlaceholder":  "Search...",
+                 "noResults":  "No results",
+                 "continue":  "Continue"
+             },
+    "options":  {
+                    "genders":  [
+                                    "Male",
+                                    "Female",
+                                    "Non-binary",
+                                    "Prefer not to say"
+                                ],
+                    "professions":  [
+                                        "Plumber",
+                                        "Electrician",
+                                        "Carpenter",
+                                        "Welder",
+                                        "Mason",
+                                        "Painter",
+                                        "Tile Installer",
+                                        "Roofer",
+                                        "HVAC Technician",
+                                        "AC Mechanic",
+                                        "Refrigerator Mechanic",
+                                        "Motor Mechanic",
+                                        "Bike Mechanic",
+                                        "Auto Driver",
+                                        "Truck Driver",
+                                        "Delivery Rider",
+                                        "Security Guard",
+                                        "Housekeeper",
+                                        "Cleaner / Janitor",
+                                        "Cook",
+                                        "Helper / Assistant",
+                                        "Machine Operator",
+                                        "Warehouse Worker",
+                                        "Loader / Unloader",
+                                        "Farm Worker",
+                                        "Tailor",
+                                        "Other"
+                                    ],
+                    "education":  [
+                                      "10th Pass",
+                                      "12th Pass",
+                                      "Diploma",
+                                      "Graduate",
+                                      "Post Graduate",
+                                      "PhD",
+                                      "Other"
+                                  ]
+                }
 }

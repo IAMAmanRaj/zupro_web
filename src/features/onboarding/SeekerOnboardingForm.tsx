@@ -175,7 +175,7 @@ function SearchDropdown({
                       setOpen(false)
                       setQuery('')
                     }}
-                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? 'bg-[#3F51B5]/8 text-[#3F51B5] font-semibold' : 'text-slate-700 hover:bg-slate-50'}`}
+                    className={`w-full hover:cursor-pointer text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? 'bg-[#3F51B5]/8 text-[#3F51B5] font-semibold' : 'text-slate-700 hover:bg-slate-50'}`}
                   >
                     {opt}
                   </button>
