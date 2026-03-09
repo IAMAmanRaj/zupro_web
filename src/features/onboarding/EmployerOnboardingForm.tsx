@@ -1,14 +1,18 @@
-import { useNavigate } from '@tanstack/react-router'
+﻿import { useNavigate } from '@tanstack/react-router'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import {
-  FiUser, FiChevronDown, FiSearch, FiMapPin,
-  FiArrowRight, FiFileText, FiBookOpen,
+  FiUser,
+  FiChevronDown,
+  FiSearch,
+  FiMapPin,
+  FiArrowRight,
+  FiFileText,
+  FiBookOpen,
   FiBriefcase,
 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLanguageStore } from '../../stores/languageStore'
+import { useTranslation } from 'react-i18next'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface FormData {
   employerName: string
   jobTitle: string
@@ -19,38 +23,14 @@ interface FormData {
   educationLevel: string
 }
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-const EDUCATION_LEVELS = [
-  '10th Pass', '12th Pass', 'Graduate', 'Post Graduate', 'Other', 'Prefer not to say',
-]
-const EDUCATION_LEVELS_HI = [
-  '10वीं पास', '12वीं पास', 'ग्रेजुएट', 'पोस्ट ग्रेजुएट', 'अन्य', 'न बताना चाहें',
-]
-
-const JOB_TITLES = [
-  'Software Engineer', 'Frontend Developer', 'Backend Developer', 'Full Stack Developer',
-  'UI/UX Designer', 'Product Manager', 'Data Analyst', 'Data Scientist',
-  'DevOps Engineer', 'QA Engineer', 'Business Analyst', 'Marketing Manager',
-  'Sales Executive', 'HR Manager', 'Content Writer', 'Graphic Designer',
-  'Operations Manager', 'Finance Analyst', 'Customer Support', 'Project Manager',
-  'Accountant', 'Teacher / Educator', 'Healthcare Worker', 'Legal Professional',
-  'Delivery Executive', 'Store Manager', 'Field Agent', 'Other',
-]
-const JOB_TITLES_HI = [
-  'सॉफ्टवेयर इंजीनियर', 'फ्रंटेंड डेवलपर', 'बैकेंड डेवलपर', 'फुल स्टैक डेवलपर',
-  'UI/UX डिज़ाइनर', 'प्रोडक्ट मैनेजर', 'डेटा एनालिस्ट', 'डेटा साइंटिस्ट',
-  'डेवऑप्स इंजीनियर', 'QA इंजीनियर', 'बिज़नेस एनालिस्ट', 'मार्केटिंग मैनेजर',
-  'सेल्स एक्जीक्यूटिव', 'HR मैनेजर', 'कंटेंट राइटर', 'ग्राफिक डिज़ाइनर',
-  'ऑपरेशंस मैनेजर', 'फाइनेंस एनालिस्ट', 'कस्टमर सपोर्ट', 'प्रोजेक्ट मैनेजर',
-  'अकाउंटेंट', 'शिक्षक / एजुकेटर', 'हेल्थकेयर वर्कर', 'लीगल प्रोफेशनल',
-  'डिलीवरी एक्जीक्यूटिव', 'स्टोर मैनेजर', 'फील्ड एजेंट', 'अन्य',
-]
-
 const REQUIRED_FIELDS: (keyof FormData)[] = [
-  'employerName', 'jobTitle', 'jobDescription', 'jobLocation', 'educationLevel',
+  'employerName',
+  'jobTitle',
+  'jobDescription',
+  'jobLocation',
+  'educationLevel',
 ]
 
-// ─── Progress Dots ────────────────────────────────────────────────────────────
 function ProgressDots({ progress }: { progress: number }) {
   const thresholds = [0, 0.5, 1]
   return (
@@ -88,9 +68,14 @@ function ProgressDots({ progress }: { progress: number }) {
   )
 }
 
-// ─── Field Box ────────────────────────────────────────────────────────────────
-function FieldBox({ children, icon, noPadIcon }: {
-  children: React.ReactNode; icon?: React.ReactNode; noPadIcon?: boolean
+function FieldBox({
+  children,
+  icon,
+  noPadIcon,
+}: {
+  children: React.ReactNode
+  icon?: React.ReactNode
+  noPadIcon?: boolean
 }) {
   return (
     <div className="flex items-start border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200">
@@ -104,10 +89,24 @@ function FieldBox({ children, icon, noPadIcon }: {
   )
 }
 
-// ─── Searchable Dropdown ──────────────────────────────────────────────────────
-function SearchDropdown({ options, value, onChange, placeholder, icon, subLabel }: {
-  options: string[]; value: string; onChange: (v: string) => void
-  placeholder: string; icon: React.ReactNode; subLabel?: string
+function SearchDropdown({
+  options,
+  value,
+  onChange,
+  placeholder,
+  icon,
+  subLabel,
+  searchPlaceholder,
+  noResultsLabel,
+}: {
+  options: string[]
+  value: string
+  onChange: (v: string) => void
+  placeholder: string
+  icon: React.ReactNode
+  subLabel?: string
+  searchPlaceholder: string
+  noResultsLabel: string
 }) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -115,7 +114,7 @@ function SearchDropdown({ options, value, onChange, placeholder, icon, subLabel 
 
   const filtered = useMemo(
     () => options.filter((o) => o.toLowerCase().includes(query.toLowerCase())),
-    [options, query]
+    [options, query],
   )
 
   useEffect(() => {
@@ -135,12 +134,16 @@ function SearchDropdown({ options, value, onChange, placeholder, icon, subLabel 
         <div className="flex items-center justify-center pl-4 text-[#3F51B5] shrink-0">{icon}</div>
         <div className="flex-1 px-3 py-3">
           <div className="text-sm font-semibold text-slate-700">{placeholder}</div>
-          {value
-            ? <div className="text-[12px] text-slate-500 mt-0.5">{value}</div>
-            : subLabel && <div className="text-[12px] text-slate-400 mt-0.5">{subLabel}</div>
-          }
+          {value ? (
+            <div className="text-[12px] text-slate-500 mt-0.5">{value}</div>
+          ) : (
+            subLabel && <div className="text-[12px] text-slate-400 mt-0.5">{subLabel}</div>
+          )}
         </div>
-        <FiChevronDown size={16} className={`mr-4 text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        <FiChevronDown
+          size={16}
+          className={`mr-4 text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
       </div>
 
       <AnimatePresence>
@@ -160,23 +163,29 @@ function SearchDropdown({ options, value, onChange, placeholder, icon, subLabel 
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
-                placeholder="Search…"
+                placeholder={searchPlaceholder}
                 className="flex-1 text-sm outline-none bg-transparent placeholder-slate-400 text-slate-700"
               />
             </div>
             <div className="max-h-36 overflow-y-auto zupro-scroll">
-              {filtered.length === 0
-                ? <div className="px-4 py-3 text-sm text-slate-400">No results</div>
-                : filtered.map((opt) => (
+              {filtered.length === 0 ? (
+                <div className="px-4 py-3 text-sm text-slate-400">{noResultsLabel}</div>
+              ) : (
+                filtered.map((opt) => (
                   <button
                     key={opt}
                     type="button"
-                    onClick={() => { onChange(opt); setOpen(false); setQuery('') }}
+                    onClick={() => {
+                      onChange(opt)
+                      setOpen(false)
+                      setQuery('')
+                    }}
                     className={`w-full text-left px-4 py-2 text-sm transition-colors duration-100 ${value === opt ? 'bg-indigo-50 text-[#3F51B5] font-semibold' : 'text-slate-700 hover:bg-slate-50'}`}
                   >
                     {opt}
                   </button>
-                ))}
+                ))
+              )}
             </div>
           </motion.div>
         )}
@@ -185,10 +194,18 @@ function SearchDropdown({ options, value, onChange, placeholder, icon, subLabel 
   )
 }
 
-// ─── Simple Dropdown ──────────────────────────────────────────────────────────
-function SimpleDropdown({ options, value, onChange, placeholder, icon }: {
-  options: string[]; value: string; onChange: (v: string) => void
-  placeholder: string; icon: React.ReactNode
+function SimpleDropdown({
+  options,
+  value,
+  onChange,
+  placeholder,
+  icon,
+}: {
+  options: string[]
+  value: string
+  onChange: (v: string) => void
+  placeholder: string
+  icon: React.ReactNode
 }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -211,7 +228,10 @@ function SimpleDropdown({ options, value, onChange, placeholder, icon }: {
         <span className={`flex-1 text-sm font-medium ${value ? 'text-slate-800' : 'text-slate-400'}`}>
           {value || placeholder}
         </span>
-        <FiChevronDown size={16} className={`text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        <FiChevronDown
+          size={16}
+          className={`text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
       </div>
 
       <AnimatePresence>
@@ -227,7 +247,10 @@ function SimpleDropdown({ options, value, onChange, placeholder, icon }: {
               <button
                 key={opt}
                 type="button"
-                onClick={() => { onChange(opt); setOpen(false) }}
+                onClick={() => {
+                  onChange(opt)
+                  setOpen(false)
+                }}
                 className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-100 ${value === opt ? 'bg-indigo-50 text-[#3F51B5] font-semibold' : 'text-slate-700 hover:bg-slate-50'}`}
               >
                 {opt}
@@ -240,22 +263,34 @@ function SimpleDropdown({ options, value, onChange, placeholder, icon }: {
   )
 }
 
-// ─── Pay Input ────────────────────────────────────────────────────────────────
-function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
-  amount: string; payType: 'monthly' | 'yearly'
-  onAmountChange: (v: string) => void; onTypeChange: (v: 'monthly' | 'yearly') => void
+function PayInput({
+  amount,
+  payType,
+  onAmountChange,
+  onTypeChange,
+  placeholder,
+  dayWiseLabel,
+  perShiftLabel,
+}: {
+  amount: string
+  payType: 'monthly' | 'yearly'
+  onAmountChange: (v: string) => void
+  onTypeChange: (v: 'monthly' | 'yearly') => void
+  placeholder: string
+  dayWiseLabel: string
+  perShiftLabel: string
 }) {
   return (
     <div className="flex items-center border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200 overflow-hidden">
       <div className="flex items-center gap-1.5 pl-4 text-[#3F51B5] shrink-0">
-        <span className="text-sm font-semibold text-slate-500">₹</span>
+        <span className="text-sm font-semibold text-slate-500">Rs</span>
       </div>
       <input
         type="number"
         min={0}
         value={amount}
         onChange={(e) => onAmountChange(e.target.value)}
-        placeholder="Tentative pay (optional)"
+        placeholder={placeholder}
         className="flex-1 px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
       <div className="flex items-center gap-1 mr-3 bg-slate-100 rounded-lg p-1">
@@ -266,7 +301,7 @@ function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
             onClick={() => onTypeChange(type)}
             className={`px-2.5 hover:cursor-pointer opacity-80 hover:opacity-100 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
           >
-            {type === 'monthly' ? 'Day wise' : 'Per Shift'}
+            {type === 'monthly' ? dayWiseLabel : perShiftLabel}
           </button>
         ))}
       </div>
@@ -274,7 +309,6 @@ function PayInput({ amount, payType, onAmountChange, onTypeChange }: {
   )
 }
 
-// ─── Stat ─────────────────────────────────────────────────────────────────────
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
@@ -284,21 +318,24 @@ function Stat({ value, label }: { value: string; label: string }) {
   )
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
 export function EmployerOnboardingForm() {
   const navigate = useNavigate()
-  const language = useLanguageStore((state) => state.language)
+  const { t } = useTranslation('employerOnboarding')
 
-  const jobTitles = language === 'hi' ? JOB_TITLES_HI : JOB_TITLES
-  const educationLevels = language === 'hi' ? EDUCATION_LEVELS_HI : EDUCATION_LEVELS
+  const jobTitles = t('options.jobTitles', { returnObjects: true }) as string[]
+  const educationLevels = t('options.education', { returnObjects: true }) as string[]
 
   const [form, setForm] = useState<FormData>({
-    employerName: '', jobTitle: '', jobDescription: '',
-    jobLocation: '', payAmount: '', payType: 'monthly', educationLevel: '',
+    employerName: '',
+    jobTitle: '',
+    jobDescription: '',
+    jobLocation: '',
+    payAmount: '',
+    payType: 'monthly',
+    educationLevel: '',
   })
 
-  const set = (key: keyof FormData) => (val: string) =>
-    setForm((prev) => ({ ...prev, [key]: val }))
+  const set = (key: keyof FormData) => (val: string) => setForm((prev) => ({ ...prev, [key]: val }))
 
   const filledCount = REQUIRED_FIELDS.filter((f) => form[f].trim() !== '').length
   const progress = filledCount / REQUIRED_FIELDS.length
@@ -310,23 +347,18 @@ export function EmployerOnboardingForm() {
   }
 
   return (
-    // Outer shell: full viewport, no overflow whatsoever
     <div
       className="h-screen w-screen overflow-hidden bg-[#f0f0f5] flex items-center justify-center p-4"
       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
     >
-      {/* Card: fixed height, never grows beyond viewport */}
       <div
         className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex"
         style={{ height: 'min(700px, calc(100vh - 2rem))' }}
       >
-
-        {/* ── Left Panel (static, no scroll) ── */}
         <div className="hidden md:flex flex-col justify-between w-[42%] bg-[#1e1b4b] p-8 relative overflow-hidden shrink-0">
           <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
 
-          {/* Logo */}
           <div>
             <span
               className="text-white text-3xl font-extrabold tracking-tight select-none"
@@ -337,61 +369,50 @@ export function EmployerOnboardingForm() {
             <div className="mt-0.5 w-10 h-1 rounded-full bg-amber-400" />
           </div>
 
-          {/* Hero */}
           <div>
             <div className="inline-flex items-center gap-2 bg-white/10 text-indigo-200 text-xs font-medium px-3 py-1.5 rounded-full mb-3">
               <FiBriefcase size={12} />
-              Employer Portal
+              {t('leftPanel.badge')}
             </div>
             <h2 className="text-white text-2xl font-bold leading-snug mb-3">
-              Post a job,<br />find the right fit.
+              {t('leftPanel.titleLine1')}<br />
+              {t('leftPanel.titleLine2')}
             </h2>
-            <p className="text-indigo-200 text-sm leading-relaxed">
-              Tell us about the role you're hiring for. We'll match you with the best candidates quickly.
-            </p>
+            <p className="text-indigo-200 text-sm leading-relaxed">{t('leftPanel.description')}</p>
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <Stat value="1000+" label="Active job seekers" />
-              <Stat value="12h" label="Avg. first match" />
-              <Stat value="Free" label="To post your first job" />
-              <Stat value="Build Trust" label="Hire Again, form network" />
+              <Stat value="1000+" label={t('leftPanel.stats.activeSeekers')} />
+              <Stat value="12h" label={t('leftPanel.stats.avgMatch')} />
+              <Stat value="Free" label={t('leftPanel.stats.firstJobFree')} />
+              <Stat value="Build Trust" label={t('leftPanel.stats.buildTrust')} />
             </div>
           </div>
 
-          {/* Footer */}
           <div>
-            <p className="text-indigo-300 text-xs">Need help?</p>
+            <p className="text-indigo-300 text-xs">{t('leftPanel.needHelp')}</p>
             <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.in</p>
           </div>
         </div>
 
-        {/* ── Right Panel: three-row flex column ── */}
-        {/*   Row 1 (shrink-0): heading + progress — never scrolls               */}
-        {/*   Row 2 (flex-1, overflow-y-auto): form fields — scrolls internally  */}
-        {/*   Row 3 (shrink-0): CTA button — always visible at bottom            */}
         <div className="flex-1 flex flex-col min-h-0 px-7 pt-6 pb-5 overflow-hidden">
-
-          {/* Row 1 — fixed header */}
           <div className="shrink-0 mb-3">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs text-slate-400 font-medium">
-                Step <span className="text-[#3F51B5] font-bold">1</span> of 2
+                {t('header.stepLabel', { current: 1, total: 2 })}
               </p>
               <ProgressDots progress={progress} />
             </div>
-            <h3 className="text-lg font-bold text-slate-800 leading-tight">Job Details</h3>
-            <p className="text-sm text-slate-400 mt-0.5">Fill in the role you're looking to hire for.</p>
+            <h3 className="text-lg font-bold text-slate-800 leading-tight">{t('header.title')}</h3>
+            <p className="text-sm text-slate-400 mt-0.5">{t('header.subtitle')}</p>
           </div>
 
-          {/* Row 2 — scrollable fields */}
           <div className="flex-1 overflow-y-auto zupro-scroll min-h-0">
             <div className="flex flex-col gap-2.5 py-1 pr-1">
-
               <FieldBox icon={<FiUser size={15} />}>
                 <input
                   type="text"
                   value={form.employerName}
                   onChange={(e) => set('employerName')(e.target.value)}
-                  placeholder="Your name / Company name"
+                  placeholder={t('form.employerNamePlaceholder')}
                   className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
                 />
               </FieldBox>
@@ -400,8 +421,10 @@ export function EmployerOnboardingForm() {
                 options={jobTitles}
                 value={form.jobTitle}
                 onChange={set('jobTitle')}
-                placeholder="Job Title"
-                subLabel="e.g. Software Engineer, Sales Executive"
+                placeholder={t('form.jobTitlePlaceholder')}
+                subLabel={t('form.jobTitleSubLabel')}
+                searchPlaceholder={t('form.searchPlaceholder')}
+                noResultsLabel={t('form.noResults')}
                 icon={<FiBriefcase size={15} />}
               />
 
@@ -409,7 +432,7 @@ export function EmployerOnboardingForm() {
                 <textarea
                   value={form.jobDescription}
                   onChange={(e) => set('jobDescription')(e.target.value)}
-                  placeholder="Job description — responsibilities, requirements, perks…"
+                  placeholder={t('form.jobDescriptionPlaceholder')}
                   rows={2}
                   className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none resize-none"
                 />
@@ -420,7 +443,7 @@ export function EmployerOnboardingForm() {
                   type="text"
                   value={form.jobLocation}
                   onChange={(e) => set('jobLocation')(e.target.value)}
-                  placeholder="Job location (e.g. Bangalore, Karnataka)"
+                  placeholder={t('form.jobLocationPlaceholder')}
                   className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
                 />
               </FieldBox>
@@ -431,22 +454,23 @@ export function EmployerOnboardingForm() {
                   payType={form.payType}
                   onAmountChange={set('payAmount')}
                   onTypeChange={(v) => setForm((p) => ({ ...p, payType: v }))}
+                  placeholder={t('form.payPlaceholder')}
+                  dayWiseLabel={t('form.payTypeDayWise')}
+                  perShiftLabel={t('form.payTypePerShift')}
                 />
-                <p className="text-[11px] text-slate-400 mt-1 ml-1">Optional — leave blank if not decided yet</p>
+                <p className="text-[11px] text-slate-400 mt-1 ml-1">{t('form.payHint')}</p>
               </div>
 
               <SimpleDropdown
                 options={educationLevels}
                 value={form.educationLevel}
                 onChange={set('educationLevel')}
-                placeholder="Minimum education level required"
+                placeholder={t('form.educationPlaceholder')}
                 icon={<FiBookOpen size={15} />}
               />
-
             </div>
           </div>
 
-          {/* Row 3 — fixed CTA */}
           <div className="shrink-0 pt-4">
             <motion.button
               onClick={handleNext}
@@ -459,11 +483,10 @@ export function EmployerOnboardingForm() {
                   : 'bg-slate-300 cursor-not-allowed'
               }`}
             >
-              Continue
+              {t('form.continue')}
               <FiArrowRight size={18} />
             </motion.button>
           </div>
-
         </div>
       </div>
     </div>
