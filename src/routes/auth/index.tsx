@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { OtpSection } from '../../features/auth/components/OtpSection'
 import { PhoneStep } from '../../features/auth/components/PhoneStep'
 import { RiShieldCheckLine } from 'react-icons/ri'
+import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
@@ -25,6 +26,7 @@ function RouteComponent() {
   const [isVerified, setIsVerified] = useState(false)
 
   const phoneRef = useRef<HTMLInputElement>(null)
+  const { t } = useTranslation('common')
 
   useEffect(() => {
     phoneRef.current?.focus()
@@ -40,6 +42,8 @@ function RouteComponent() {
 
   const isPhoneValid = phone.length === 10
 
+  const stepLabel = step === 'phone' ? t('auth.header.stepLabelPhone') : t('auth.header.stepLabelOtp')
+
   return (
     <div className="h-screen flex flex-col md:flex-row font-sans">
 
@@ -47,7 +51,7 @@ function RouteComponent() {
       <div className="hidden md:block md:w-[55%] relative overflow-hidden">
         <img
           src="/images/auth/left_asset.webp"
-          alt="Zupro banner"
+          alt={t('auth.desktop.bannerAlt')}
           className="w-full h-full object-cover"
         />
       </div>
@@ -72,21 +76,33 @@ function RouteComponent() {
         {/* Headline + badge */}
         <div className="inline-flex items-center gap-1.5 bg-white/10 text-indigo-200 text-[11px] font-medium px-2.5 py-1 rounded-full mb-2">
           <RiShieldCheckLine size={11} />
-          Secure Login
+          {t('auth.mobile.badge')}
         </div>
         <h2 className="text-white text-xl font-bold leading-snug mb-1">
-          Whether you're an employer, or seeking a job, we care for you.
+          {t('auth.mobile.title')}
         </h2>
         <p className="text-indigo-300 text-xs leading-relaxed mb-5">
-          connecting employers to workers, faster than ever !
+          {t('auth.mobile.subtitle')}
         </p>
 
         {/* Stats row */}
         <div className="grid grid-cols-4 gap-2 border-t border-white/10 pt-4">
-          <MobileStat value="1000+" label="Active jobs" />
-          <MobileStat value="12h" label="Avg. match" />
-          <MobileStat value="Free" label="To apply" />
-          <MobileStat value="Trusted" label="By employers" />
+          <MobileStat
+            value={t('auth.mobile.stats.activeJobsValue')}
+            label={t('auth.mobile.stats.activeJobsLabel')}
+          />
+          <MobileStat
+            value={t('auth.mobile.stats.avgMatchValue')}
+            label={t('auth.mobile.stats.avgMatchLabel')}
+          />
+          <MobileStat
+            value={t('auth.mobile.stats.freeValue')}
+            label={t('auth.mobile.stats.freeLabel')}
+          />
+          <MobileStat
+            value={t('auth.mobile.stats.trustedValue')}
+            label={t('auth.mobile.stats.trustedLabel')}
+          />
         </div>
       </div>
 
@@ -110,8 +126,8 @@ function RouteComponent() {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-slate-800">You're in!</h2>
-              <p className="text-sm text-slate-500">Verified successfully. Redirecting...</p>
+              <h2 className="text-2xl font-bold text-slate-800">{t('auth.verified.title')}</h2>
+              <p className="text-sm text-slate-500">{t('auth.verified.subtitle')}</p>
             </div>
 
           ) : (
@@ -124,13 +140,13 @@ function RouteComponent() {
                   <span className="ml-1 mb-0.5 inline-block w-2 h-2 rounded-full bg-primary" />
                 </div>
                 <p className="text-sm font-medium text-slate-500">
-                  {step === 'phone' ? 'Login / Sign Up' : 'Enter verification code'}
+                  {stepLabel}
                 </p>
               </div>
 
               {/* Mobile step label (brand already in banner) */}
               <p className="-mt-56 md:hidden text-xl font-semibold text-slate-500 mb-6 fade-up">
-                {step === 'phone' ? 'Login / Sign Up' : 'Enter verification code'}
+                {stepLabel}
               </p>
 
               {step === 'phone' && (

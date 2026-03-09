@@ -8,6 +8,57 @@
     "language": "भाषा",
     "signIn": "साइन इन",
     "signUp": "साइन अप"
+  },
+  "auth": {
+    "mobile": {
+      "badge": "सुरक्षित लॉगिन",
+      "title": "चाहे आप एम्प्लॉयर हों या नौकरी ढूंढ रहे हों, हम आपके साथ हैं।",
+      "subtitle": "एम्प्लॉयर्स और वर्कर्स को पहले से भी तेज़ जोड़ना।",
+      "stats": {
+        "activeJobsValue": "1000+",
+        "activeJobsLabel": "सक्रिय नौकरियाँ",
+        "avgMatchValue": "12 घंटे",
+        "avgMatchLabel": "औसत मैच समय",
+        "freeValue": "फ्री",
+        "freeLabel": "आवेदन करने के लिए",
+        "trustedValue": "विश्वसनीय",
+        "trustedLabel": "एम्प्लॉयर्स के बीच"
+      }
+    },
+    "desktop": {
+      "bannerAlt": "ज़ुप्रो बैनर"
+    },
+    "header": {
+      "stepLabelPhone": "लॉगिन / साइन अप",
+      "stepLabelOtp": "वेरिफिकेशन कोड दर्ज करें"
+    },
+    "verified": {
+      "title": "आप लॉगिन हो चुके हैं!",
+      "subtitle": "सफलतापूर्वक वेरिफाई किया गया। रीडायरेक्ट किया जा रहा है..."
+    },
+    "phone": {
+      "inputPlaceholder": "मोबाइल नंबर दर्ज करें",
+      "sendingOtp": "OTP भेजा जा रहा है...",
+      "getOtp": "OTP प्राप्त करें",
+      "termsPrefix": "आगे बढ़ते हुए, आप हमारी",
+      "termsTos": "टर्म्स ऑफ सर्विस",
+      "termsAnd": "और",
+      "termsPrivacy": "प्राइवेसी पॉलिसी",
+      "termsSuffix": "से सहमत होते हैं।"
+    },
+    "otp": {
+      "back": "वापस जाएँ",
+      "descriptionPrefix": "हमने आपके नंबर पर 6 अंकों का OTP भेजा है। यह",
+      "descriptionHighlight": "5 मिनट",
+      "descriptionSuffix": "में एक्सपायर हो जाएगा।",
+      "invalid": "अमान्य OTP। कृपया फिर से प्रयास करें।",
+      "verifying": "वेरिफाई किया जा रहा है...",
+      "verifyButton": "वेरिफाई करें और आगे बढ़ें",
+      "resendInPrefix": "OTP दोबारा भेजें",
+      "resendInUnit": "सेकंड में",
+      "resendButton": "OTP फिर से भेजें",
+      "digitAria": "OTP अंक {{index}}"
+    }
   }
 }
 

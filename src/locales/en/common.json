@@ -8,6 +8,55 @@
     "language": "Language",
     "signIn": "Sign in",
     "signUp": "Sign up"
+  },
+  "auth": {
+    "mobile": {
+      "badge": "Secure Login",
+      "title": "Whether you're an employer, or seeking a job, we care for you.",
+      "subtitle": "Connecting employers to workers, faster than ever!",
+      "stats": {
+        "activeJobsValue": "1000+",
+        "activeJobsLabel": "Active jobs",
+        "avgMatchValue": "12h",
+        "avgMatchLabel": "Avg. match",
+        "freeValue": "Free",
+        "freeLabel": "To apply",
+        "trustedValue": "Trusted",
+        "trustedLabel": "By employers"
+      }
+    },
+    "desktop": {
+      "bannerAlt": "Zupro banner"
+    },
+    "header": {
+      "stepLabelPhone": "Login / Sign Up",
+      "stepLabelOtp": "Enter verification code"
+    },
+    "verified": {
+      "title": "You're in!",
+      "subtitle": "Verified successfully. Redirecting..."
+    },
+    "phone": {
+      "inputPlaceholder": "Enter mobile number",
+      "sendingOtp": "Sending OTP...",
+      "getOtp": "Get OTP",
+      "termsPrefix": "By continuing, you agree to our",
+      "termsTos": "Terms of Service",
+      "termsAnd": "and",
+      "termsPrivacy": "Privacy Policy"
+    },
+    "otp": {
+      "back": "Back",
+      "descriptionPrefix": "We sent a 6-digit OTP to your number. It expires in",
+      "descriptionHighlight": "5 minutes",
+      "invalid": "Invalid OTP. Please try again.",
+      "verifying": "Verifying...",
+      "verifyButton": "Verify & Continue",
+      "resendInPrefix": "Resend OTP in",
+      "resendInUnit": "s",
+      "resendButton": "Resend OTP",
+      "digitAria": "OTP digit {{index}}"
+    }
   }
 }
 

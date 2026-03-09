@@ -52,7 +52,7 @@ export function Navbar() {
             onClick={() => setShowLangMenu((o) => !o)}
           >
             <FaGlobe size={14} />
-            <span className="uppercase">{language}</span>
+            <span className="uppercase">{language === "hi" ? "हिंदी" : "en"}</span>
           </button>
           <AnimatePresence>
             {showLangMenu && (
@@ -105,8 +105,10 @@ export function Navbar() {
             onClick={() => setShowMobileLangMenu((o) => !o)}
             aria-label="Change language"
           >
-            <FaGlobe size={14} />
-            <span className="uppercase">{language}</span>
+           <FaGlobe size={14} />
+<span className="uppercase">
+  {language === "hi" ? "हिंदी" : "en"}
+</span>
           </button>
           <AnimatePresence>
             {showMobileLangMenu && (
@@ -118,7 +120,7 @@ export function Navbar() {
                 transition={{ duration: 0.15 }}
                 className="absolute right-0 mt-2 w-40 rounded-xl bg-white shadow-lg border border-slate-100 py-2 z-50"
               >
-                <div className="px-3 pb-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wide">
+                <div className="px-3 pb-2 text-[11px] font-semibold text-slate-400 tracking-wide">
                   {t('navbar.language')}
                 </div>
                 <div className="flex items-center gap-1 mx-3 bg-slate-100 rounded-lg p-1">
