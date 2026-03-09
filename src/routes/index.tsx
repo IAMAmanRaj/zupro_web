@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { FeatureCards } from '../features/home/components/FeatureCards'
 import { HeroCarousel } from '../features/home/components/HeroCarousel'
 import { Navbar } from '../features/General/Navbar'
 import { OnboardingModal } from '../features/home/components/OnboardingModal'
+import { LanguagePreferenceModal } from '../features/home/components/LanguagePreferenceModal'
 import {
   FEATURES,
   HIRER_PERKS,
@@ -15,6 +17,14 @@ export const Route = createFileRoute(`/`)({
 })
 
 function Index() {
+  const [showLanguageModal, setShowLanguageModal] = useState(true)
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false)
+
+  const openOnboarding = () => {
+    setShowLanguageModal(false)
+    setShowOnboardingModal(true)
+  }
+
   return (
     <div className="fixed inset-0 overflow-hidden overscroll-none bg-[#f0f2f8] flex flex-col">
       <Navbar />
@@ -22,7 +32,15 @@ function Index() {
         <HeroCarousel slides={HOME_SLIDES} />
         <FeatureCards features={FEATURES} />
       </main>
-      <OnboardingModal seekerPerks={SEEKER_PERKS} hirerPerks={HIRER_PERKS} />
+      {showLanguageModal && (
+        <LanguagePreferenceModal
+          onProceed={() => openOnboarding()}
+          onClose={openOnboarding}
+        />
+      )}
+      {showOnboardingModal && (
+        <OnboardingModal seekerPerks={SEEKER_PERKS} hirerPerks={HIRER_PERKS} />
+      )}
     </div>
   )
 }
