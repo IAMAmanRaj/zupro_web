@@ -23,32 +23,32 @@ export function Navbar() {
     <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
       {/* Logo */}
       <span
-        className="text-[#3F51B5] text-2xl md:text-4xl font-extrabold tracking-tight select-none"
+        className="text-[#3F51B5] text-3xl lg:text-4xl font-extrabold tracking-tight select-none"
         style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
       >
         Zupro
       </span>
 
       {/* Desktop center links */}
-      <div className="hidden sora-bold md:flex items-center absolute top-5 left-1/2 -translate-x-1/2 gap-8">
-        <Link to="/" className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors">
+      <div className="hidden sora-bold md:flex md:gap-6 lg:gap-10 mt-1 items-center text-[13px] lg:text-[15px]  absolute top-5 left-1/2 -translate-x-1/2 gap-8">
+        <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.faqs')}
         </Link>
-        <Link to="/" className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors">
+        <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.contact')}
         </Link>
-        <Link to="/" className="text-slate-700 text-md font-semibold hover:text-[#3F51B5] transition-colors">
+        <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.about')}
         </Link>
       </div>
 
       {/* Desktop right actions */}
-      <div className="hidden md:flex items-center gap-4">
+      <div className="hidden md:flex text-[12px] lg:text-[15px] items-center gap-4">
         {/* Language switcher (desktop) */}
         <div className="relative">
           <button
             type="button"
-            className="flex hover:cursor-pointer items-center gap-1 px-3 py-1.5 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] hover:shadow-sm transition-all"
+            className="flex hover:cursor-pointer items-center gap-1 px-3 py-1.5 text-[11px] rounded-full border border-slate-200 bg-white font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] hover:shadow-sm transition-all"
             onClick={() => setShowLangMenu((o) => !o)}
           >
             <FaGlobe size={14} />
@@ -91,7 +91,7 @@ export function Navbar() {
         <Link to="/auth" className="hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
           {t('navbar.signIn')}
         </Link>
-        <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-sm text-white bg-[#3F51B5] px-6 py-2  transition-all">
+        <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2  transition-all">
           {t('navbar.signUp')}
         </Link>
       </div>
