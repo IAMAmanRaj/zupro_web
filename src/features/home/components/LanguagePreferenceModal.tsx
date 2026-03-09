@@ -1,6 +1,7 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { RiArrowRightLine, RiCloseLine, RiTranslate2 } from 'react-icons/ri'
+import { useLanguageStore } from '../../../stores/languageStore'
 
 type LanguagePreferenceModalProps = {
   onProceed: (language: 'en' | 'hi') => void
@@ -11,8 +12,11 @@ export function LanguagePreferenceModal({
   onProceed,
   onClose,
 }: LanguagePreferenceModalProps) {
+  const { language: currentLanguage, setLanguage } = useLanguageStore()
   const [isOpen, setIsOpen] = useState(true)
-  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'hi'>('en')
+  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'hi'>(
+    currentLanguage ?? 'en',
+  )
 
   const handleClose = () => {
     setIsOpen(false)
@@ -21,6 +25,7 @@ export function LanguagePreferenceModal({
 
   const handleProceed = () => {
     setIsOpen(false)
+    setLanguage(selectedLanguage)
     onProceed(selectedLanguage)
   }
 
