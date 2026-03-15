@@ -18,12 +18,14 @@ export function Navbar() {
   return (
     <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
       {/* Logo */}
-      <span
-        className="text-[#3F51B5] text-3xl lg:text-4xl font-extrabold tracking-tight select-none"
-        style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
-      >
-        {t('appName')}
-      </span>
+      <Link
+  to="/"
+  className="text-[#3F51B5] text-3xl lg:text-4xl font-extrabold tracking-tight select-none"
+  style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
+>
+  {t('appName')}
+</Link>
+
 
       {/* Desktop center links */}
       <div className="hidden sora-bold md:flex md:gap-6 lg:gap-10 mt-1 items-center text-[13px] lg:text-[15px]  absolute top-5 left-1/2 -translate-x-1/2 gap-8">

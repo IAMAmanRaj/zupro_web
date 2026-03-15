@@ -25,7 +25,7 @@
   "form": {
     "employerNamePlaceholder": "Your name / Company name",
     "jobTitlePlaceholder": "Job Title",
-    "jobTitleSubLabel": "e.g. Software Engineer, Sales Executive",
+    "jobTitleSubLabel": "e.g. Plumber, Builder, Electrician",
     "jobDescriptionPlaceholder": "Job description - responsibilities, requirements, perks...",
     "jobLocationPlaceholder": "Job location (e.g. Bangalore, Karnataka)",
     "payPlaceholder": "Tentative pay (optional)",

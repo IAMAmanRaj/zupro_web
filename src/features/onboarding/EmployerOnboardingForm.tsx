@@ -80,7 +80,7 @@ function FieldBox({
   return (
     <div className="flex items-start border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200">
       {icon && (
-        <div className={`flex items-center justify-center pl-4 text-[#3F51B5] shrink-0 ${noPadIcon ? 'pt-3' : 'pt-[13px]'}`}>
+        <div className={`flex items-center justify-center pl-4 text-[#3F51B5] shrink-0 ${noPadIcon ? 'mt-6' : 'pt-[13px]'}`}>
           {icon}
         </div>
       )}
@@ -293,7 +293,7 @@ function PayInput({
         value={amount}
         onChange={(e) => onAmountChange(e.target.value)}
         placeholder={placeholder}
-        className="flex-1 px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        className="flex-1 px-1 w-[140px] sm:w-auto sm:px-3 py-3 placeholder:text-[12px] text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
       <div className="flex items-center gap-1 mr-3 bg-slate-100 rounded-lg p-1">
         {(['monthly', 'yearly'] as const).map((type) => (
@@ -301,7 +301,7 @@ function PayInput({
             key={type}
             type="button"
             onClick={() => onTypeChange(type)}
-            className={`px-2.5 hover:cursor-pointer opacity-80 hover:opacity-100 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-2.5 hover:cursor-pointer opacity-80 hover:opacity-100 py-1 rounded-md text-[10px] sm:text-[11px] font-semibold transition-all duration-200 ${payType === type ? 'bg-[#3F51B5] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
           >
             {type === 'monthly' ? dayWiseLabel : perShiftLabel}
           </button>
@@ -447,7 +447,7 @@ export function EmployerOnboardingForm() {
                   onChange={(e) => set('jobDescription')(e.target.value)}
                   placeholder={t('form.jobDescriptionPlaceholder')}
                   rows={2}
-                  className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none resize-none"
+                  className="w-full px-3 py-3 text-[12px] sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none resize-none"
                 />
               </FieldBox>
 
