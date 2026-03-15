@@ -80,7 +80,7 @@ function FieldBox({
   return (
     <div className="flex items-start border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200">
       {icon && (
-        <div className={`flex items-center justify-center pl-4 text-[#3F51B5] shrink-0 ${noPadIcon ? 'mt-6' : 'pt-[13px]'}`}>
+        <div className={`flex items-center justify-center pl-4 text-[#3F51B5] shrink-0 ${noPadIcon ? 'pt-4' : 'pt-[13px]'}`}>
           {icon}
         </div>
       )}
@@ -457,7 +457,7 @@ export function EmployerOnboardingForm() {
                   value={form.jobLocation}
                   onChange={(e) => set('jobLocation')(e.target.value)}
                   placeholder={t('form.jobLocationPlaceholder')}
-                  className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
+                  className="w-full px-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
                 />
               </FieldBox>
 
