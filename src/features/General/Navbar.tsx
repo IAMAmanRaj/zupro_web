@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { RiMenuLine, RiCloseLine } from 'react-icons/ri'
 import { FaGlobe } from 'react-icons/fa'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -19,6 +19,8 @@ export function Navbar() {
   const isLoggedIn = isVerified && !!user
   const searchTo = user?.userType === 'seeker' ? '/search/jobs' : '/search/candidates'
   const searchLabel = user?.userType === 'seeker' ? 'Search Jobs' : 'Search Candidates'
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const isSearchActive = !!searchTo && (pathname === searchTo || pathname.startsWith(`${searchTo}/`))
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'hi' : 'en')
@@ -64,7 +66,9 @@ export function Navbar() {
         {isLoggedIn ? (
           <Link
             to={searchTo}
-            className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2 transition-all"
+            className={`flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 px-6 py-2 transition-all duration-300 ${
+              isSearchActive ? 'bg-[#3F51B5] text-white border-2 border-[#3F51B5] ' : 'bg-transparent text-[#3F51B5] hover:text-white hover:bg-[#3F51B5] border-[#3F51B5]/90 border-2 '
+            }`}
           >
             {searchLabel}
           </Link>
@@ -127,7 +131,9 @@ export function Navbar() {
                 <Link
                   to={searchTo}
                   onClick={() => setMenuOpen(false)}
-                  className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm"
+                  className={`flex-1 text-center py-2.5 rounded-xl font-bold text-sm border-2 border-[#3F51B5] ${
+                    isSearchActive ? 'bg-[#3F51B5] text-white' : 'bg-transparent text-[#3F51B5]'
+                  }`}
                 >
                   {searchLabel}
                 </Link>

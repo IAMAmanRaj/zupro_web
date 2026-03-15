@@ -34,9 +34,13 @@ type OnboardingFlowState = {
   pending: PendingOnboarding | null
   user: VerifiedUser | null
   isVerified: boolean
+  hasDismissedLanguageModal: boolean
+  hasDismissedOnboardingModal: boolean
   setPendingSeeker: (data: SeekerOnboardingData) => void
   setPendingEmployer: (data: EmployerOnboardingData) => void
   completeOtpVerification: () => VerifiedUser['userType'] | null
+  dismissLanguageModal: () => void
+  dismissOnboardingModal: () => void
   reset: () => void
 }
 
@@ -46,6 +50,8 @@ export const useOnboardingFlowStore = create<OnboardingFlowState>()(
       pending: null,
       user: null,
       isVerified: false,
+      hasDismissedLanguageModal: false,
+      hasDismissedOnboardingModal: false,
 
       setPendingSeeker: (data) => {
         set({
@@ -84,23 +90,37 @@ export const useOnboardingFlowStore = create<OnboardingFlowState>()(
         return 'employer'
       },
 
+      dismissLanguageModal: () => set({ hasDismissedLanguageModal: true }),
+      dismissOnboardingModal: () => set({ hasDismissedOnboardingModal: true }),
+
       reset: () => set({ pending: null, user: null, isVerified: false }),
     }),
     {
       name: 'onboarding-flow',
-      version: 1,
+      version: 2,
       migrate: (persistedState) => {
         const s = persistedState as Partial<OnboardingFlowState> | undefined
-        const userType = (s?.user as { userType?: unknown } | null | undefined)?.userType
-
-        if (s?.isVerified && !s.user) {
-          return { ...s, isVerified: false }
+        const merged: Partial<OnboardingFlowState> = {
+          pending: null,
+          user: null,
+          isVerified: false,
+          hasDismissedLanguageModal: false,
+          hasDismissedOnboardingModal: false,
+          ...(s ?? {}),
         }
 
-        if (s?.user && userType !== 'seeker' && userType !== 'employer') {
-          return { ...s, user: null, isVerified: false }
+        const userType = (merged.user as { userType?: unknown } | null | undefined)?.userType
+
+        if (merged.isVerified && !merged.user) {
+          merged.isVerified = false
         }
-        return (s ?? {}) as OnboardingFlowState
+
+        if (merged.user && userType !== 'seeker' && userType !== 'employer') {
+          merged.user = null
+          merged.isVerified = false
+        }
+
+        return merged as OnboardingFlowState
       },
     },
   ),

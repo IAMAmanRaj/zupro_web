@@ -163,7 +163,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
       </AnimatePresence>
 
       {/* Top row */}
-      <div className="flex items-start gap-2.5 mb-3">
+      <div className="flex items-center gap-2.5 mb-3">
         <div className="shrink-0 w-8 h-8 rounded-lg bg-[#3F51B5]/8 flex items-center justify-center mt-0.5">
           <FiBriefcase size={14} className="text-[#3F51B5]" />
         </div>
@@ -177,7 +177,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
                 className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full border ${
                   isPerDay
                     ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
-                    : 'bg-amber-50 text-amber-700 border-amber-100'
+                    : 'bg-white text-[#3F51B5] border-[#1e1b4b]/10'
                 }`}
               >
                 {payType}
@@ -340,7 +340,10 @@ function JobsRoute() {
                 Available Jobs
               </p>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold tracking-tight leading-none">
-                Find your next shift
+                Find work{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400">
+                  nearby you
+                </span>
               </h1>
             </div>
             {!isLoading && !isError && (

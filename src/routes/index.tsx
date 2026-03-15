@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { FeatureCards } from '../features/home/components/FeatureCards'
 import { HeroCarousel } from '../features/home/components/HeroCarousel'
 import { OnboardingModal } from '../features/home/components/OnboardingModal'
 import { LanguagePreferenceModal } from '../features/home/components/LanguagePreferenceModal'
+import { useOnboardingFlowStore } from '../stores/onboardingFlowStore'
 import {
   FEATURES,
   HIRER_PERKS,
@@ -16,13 +16,15 @@ export const Route = createFileRoute(`/`)({
 })
 
 function Index() {
-  const [showLanguageModal, setShowLanguageModal] = useState(true)
-  const [showOnboardingModal, setShowOnboardingModal] = useState(false)
+  const isVerified = useOnboardingFlowStore((s) => s.isVerified)
+  const user = useOnboardingFlowStore((s) => s.user)
+  const hasDismissedLanguageModal = useOnboardingFlowStore((s) => s.hasDismissedLanguageModal)
+  const hasDismissedOnboardingModal = useOnboardingFlowStore((s) => s.hasDismissedOnboardingModal)
+  const dismissLanguageModal = useOnboardingFlowStore((s) => s.dismissLanguageModal)
 
-  const openOnboarding = () => {
-    setShowLanguageModal(false)
-    setShowOnboardingModal(true)
-  }
+  const isLoggedIn = isVerified && !!user
+  const showLanguageModal = !isLoggedIn && !hasDismissedLanguageModal
+  const showOnboardingModal = !isLoggedIn && hasDismissedLanguageModal && !hasDismissedOnboardingModal
 
   return (
     <>
@@ -32,8 +34,8 @@ function Index() {
       </div>
       {showLanguageModal && (
         <LanguagePreferenceModal
-          onProceed={() => openOnboarding()}
-          onClose={openOnboarding}
+          onProceed={() => dismissLanguageModal()}
+          onClose={() => dismissLanguageModal()}
         />
       )}
       {showOnboardingModal && (

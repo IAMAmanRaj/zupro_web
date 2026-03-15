@@ -9,6 +9,7 @@ import {
   RiCloseLine,
 } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
+import { useOnboardingFlowStore } from '../../../stores/onboardingFlowStore'
 
 type OnboardingModalProps = {
   seekerPerks: string[]
@@ -18,16 +19,20 @@ type OnboardingModalProps = {
 export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProps) {
   const navigate = useNavigate()
   const { t } = useTranslation('home')
+  const dismissOnboardingModal = useOnboardingFlowStore((s) => s.dismissOnboardingModal)
   const [isModalOpen, setIsModalOpen] = useState(true)
   const [hoveredCard, setHoveredCard] = useState<'seeker' | 'hirer' | null>(null)
-  const closeModal = () => setIsModalOpen(false)
+  const closeModal = () => {
+    dismissOnboardingModal()
+    setIsModalOpen(false)
+  }
 
   useEffect(() => {
     if (!isModalOpen) return
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setIsModalOpen(false)
+        closeModal()
       }
     }
 
@@ -39,6 +44,7 @@ export function OnboardingModal({ seekerPerks, hirerPerks }: OnboardingModalProp
   }, [isModalOpen])
 
   const handleRoleSelect = (to: '/onboarding/seeker' | '/onboarding/employer') => {
+    dismissOnboardingModal()
     setIsModalOpen(false)
     navigate({ to })
   } 
