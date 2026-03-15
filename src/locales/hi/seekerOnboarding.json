@@ -8,6 +8,9 @@
     "signIn": "साइन इन",
     "needHelp": "कोई सवाल है? कृपया हमें इस ईमेल पर लिखें:"
   },
+  "header": {
+    "stepLabel": "स्टेप {{current}} / {{total}}"
+  },
   "form": {
     "title": "आपकी जानकारी",
     "namePlaceholder": "नाम",

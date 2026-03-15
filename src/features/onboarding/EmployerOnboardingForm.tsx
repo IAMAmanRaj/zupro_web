@@ -358,7 +358,7 @@ export function EmployerOnboardingForm() {
     >
       <div
         className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex"
-      
+
       >
         <div className="hidden md:flex flex-col justify-between w-[42%] bg-[#1e1b4b] p-8 relative overflow-hidden shrink-0">
           <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
@@ -405,7 +405,7 @@ export function EmployerOnboardingForm() {
 
           <div>
             <p className="text-indigo-300 text-xs">{t('leftPanel.needHelp')}</p>
-            <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.in</p>
+            <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.work</p>
           </div>
         </div>
 
@@ -494,11 +494,10 @@ export function EmployerOnboardingForm() {
               disabled={!allFilled}
               whileHover={allFilled ? { scale: 1.015 } : {}}
               whileTap={allFilled ? { scale: 0.985 } : {}}
-              className={`w-full py-3.5 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${
-                allFilled
+              className={`w-full py-3.5 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${allFilled
                   ? 'bg-[#3F51B5] shadow-[0_4px_20px_rgba(63,81,181,0.35)] cursor-pointer'
                   : 'bg-slate-300 cursor-not-allowed'
-              }`}
+                }`}
             >
               {t('form.continue')}
               <FiArrowRight size={18} />

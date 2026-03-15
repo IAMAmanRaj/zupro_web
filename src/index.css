@@ -223,6 +223,16 @@ body {
   scrollbar-color: #3F51B5 #e8eaf6;
 }
 
+/* Hide scrollbar but keep scrolling */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/old Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
 /* Chrome / Edge / Safari */
 .zupro-scroll::-webkit-scrollbar {
   width: 5px;

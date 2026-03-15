@@ -8,6 +8,9 @@
                       "signIn":  "Sign in",
                       "needHelp":  "Have a query? Please email us at"
                   },
+                  "header": {
+    "stepLabel": "Step {{current}} of {{total}}"
+  },
     "form":  {
                  "title":  "Your Information",
                  "namePlaceholder":  "Name",

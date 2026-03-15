@@ -291,16 +291,16 @@ export function SeekerOnboardingForm() {
 
   return (
     <div
-      className="min-h-screen bg-[#f0f0f5] flex items-center scale-95 justify-center pt-4  sm:p-4 pb-2 -mt-8"
+      className="overflow-y-scroll no-scrollbar md:overflow-hidden md:min-h-screen bg-transparent md:bg-[#f0f0f5] flex items-start md:items-center scale-95 md:justify-center  md:p-4 pb-2 md:-mt-8"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex min-h-[600px]">
+      <div className="w-full  max-w-4xl bg-white rounded-2xl overflow-y-scroll no-scrollbar md:overflow-hidden flex flex-col md:flex-row md:min-h-[600px]">
         <div className="hidden md:flex flex-col justify-between w-[42%] bg-[#1e1b4b] p-9">
           <div>
             <div className="mb-1">
               <span
                 className="text-white sora-bold text-3xl font-extrabold tracking-tight select-none"
-               
+
               >
                 {t('leftPanel.brand')}
               </span>
@@ -327,13 +327,38 @@ export function SeekerOnboardingForm() {
 
           <div>
             <p className="text-indigo-300 text-xs">{t('leftPanel.needHelp')}</p>
-            <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.in</p>
+            <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.work</p>
+          </div>
+        </div>
+        {/* ─── MOBILE LAYOUT (< md) ─────────────────────────────────────────── */}
+        <div className="relative h-[170px] border-2 rounded-t-xl flex justify-start items-start md:hidden w-full bg-[#1e1b4b]">
+          {/* Top hero strip */}
+          <div className='bg-[#1e1b4b] absolute top-8 right-4'>
+            <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.work</p>
+          </div>
+          <div className="px-6 bottom-0 w-full pt-7 pb-4  overflow-hidden shrink-0">
+
+
+            {/* Heading */}
+            <h2 className="text-white text-2xl font-bold leading-snug mb-2">
+              {t('leftPanel.titleLine1')}<br />
+              {t('leftPanel.titleLine2')}
+            </h2>
+            <p className="text-indigo-300 text-[13px] leading-relaxed">
+              {t('leftPanel.description')}
+            </p>
           </div>
         </div>
 
         <div className="flex-1 flex flex-col px-8 pt-8 pb-12 overflow-y-auto zupro-scroll">
-          <div className="flex justify-end mb-6">
-            <ProgressDots progress={progress} />
+          <div className="shrink-0 mb-3">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs text-slate-400 font-medium">
+                {t('header.stepLabel', { current: 1, total: 2 })}
+              </p>
+              <ProgressDots progress={progress} />
+            </div>
+
           </div>
 
           <h3 className="text-xl font-bold text-slate-800 mb-5">{t('form.title')}</h3>
@@ -407,17 +432,20 @@ export function SeekerOnboardingForm() {
             disabled={!allFilled}
             whileHover={allFilled ? { scale: 1.015 } : {}}
             whileTap={allFilled ? { scale: 0.985 } : {}}
-            className={`mt-6 w-full py-4 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${
-              allFilled
-                ? 'bg-[#3F51B5] shadow-[0_4px_20px_rgba(63,81,181,0.35)] cursor-pointer'
-                : 'bg-slate-300 cursor-not-allowed'
-            }`}
+            className={`mt-6 w-full py-4 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${allFilled
+              ? 'bg-[#3F51B5] shadow-[0_4px_20px_rgba(63,81,181,0.35)] cursor-pointer'
+              : 'bg-slate-300 cursor-not-allowed'
+              }`}
           >
             {t('form.continue')}
             <FiArrowRight size={18} />
           </motion.button>
+
+
         </div>
+
       </div>
+
     </div>
   )
 }
