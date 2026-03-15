@@ -336,7 +336,7 @@ export function SeekerOnboardingForm() {
            {/* Decorative circles */}
            <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
-          <div className='absolute top-16 right-4'>
+          <div className='absolute top-4 sm:top-16 right-4'>
             <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.work</p>
           </div>
           <div className="px-4 md:px-6 bottom-0 w-full pt-7 pb-4  overflow-hidden shrink-0">
