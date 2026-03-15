@@ -11,7 +11,6 @@ import {
   FiX,
   FiBriefcase,
   FiCheckCircle,
-  FiSkipForward,
 } from 'react-icons/fi'
 import { LuLoaderCircle } from 'react-icons/lu'
 import { motion, AnimatePresence } from 'framer-motion'
