@@ -8,15 +8,11 @@ import { useLanguageStore } from '../../stores/languageStore'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [showLangMenu, setShowLangMenu] = useState(false)
-  const [showMobileLangMenu, setShowMobileLangMenu] = useState(false)
   const { t } = useTranslation('common')
   const { language, setLanguage } = useLanguageStore()
 
-  const handleLanguageChange = (lang: 'en' | 'hi') => {
-    setLanguage(lang)
-    setShowLangMenu(false)
-    setShowMobileLangMenu(false)
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'hi' : 'en')
   }
 
   return (
@@ -44,49 +40,16 @@ export function Navbar() {
 
       {/* Desktop right actions */}
       <div className="hidden md:flex gap-[10px] lg:gap-[24px] text-[12px] lg:text-[15px] items-center">
-        {/* Language switcher (desktop) */}
-        <div className="relative">
-          <button
-            type="button"
-            className="flex hover:cursor-pointer items-center gap-1 px-3 py-1.5 text-[11px] rounded-full border border-slate-200 bg-white font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] hover:shadow-sm transition-all"
-            onClick={() => setShowLangMenu((o) => !o)}
-          >
-            <FaGlobe size={14} />
-            <span className="uppercase">{language === "hi" ? "हिंदी" : "en"}</span>
-          </button>
-          <AnimatePresence>
-            {showLangMenu && (
-              <motion.div
-                key="desktop-lang-menu"
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 4 }}
-                transition={{ duration: 0.15 }}
-                className="absolute hover:cursor-pointer right-0 mt-2 w-40 rounded-xl bg-white shadow-lg border border-slate-100 py-2 z-50"
-              >
-                <div className="px-3 pb-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wide">
-                  {t('navbar.language')}
-                </div>
-                <div className="flex items-center gap-1 mx-3 bg-slate-100 rounded-lg p-1">
-                  {(['en', 'hi'] as const).map((lang) => (
-                    <button
-                      key={lang}
-                      type="button"
-                      onClick={() => handleLanguageChange(lang)}
-                      className={`flex-1 hover:cursor-pointer opacity-80 hover:opacity-100 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${
-                        language === lang
-                          ? 'bg-[#3F51B5] text-white shadow-sm'
-                          : 'text-slate-500 hover:text-slate-700'
-                      }`}
-                    >
-                      {lang === 'en' ? 'English' : 'हिन्दी'}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        {/* Language toggle (desktop) */}
+        <button
+          type="button"
+          className="flex hover:cursor-pointer items-center gap-1 px-3 py-1.5 text-[11px] rounded-full border border-slate-200 bg-white font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] hover:shadow-sm transition-all"
+          onClick={toggleLanguage}
+          aria-label={language === 'en' ? 'Switch to Hindi' : 'Switch to English'}
+        >
+          <FaGlobe size={14} />
+          <span className="uppercase">{language === 'hi' ? 'हिंदी' : 'en'}</span>
+        </button>
 
         <Link to="/auth" className="hidden lg:block hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
           {t('navbar.signIn')}
@@ -98,51 +61,15 @@ export function Navbar() {
 
       {/* Mobile right side: globe + hamburger */}
       <div className="flex items-center gap-2 md:hidden">
-        <div className="relative">
-          <button
-            type="button"
-            className="flex hover:cusror-pointer  items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 bg-white text-[11px] font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] transition-all"
-            onClick={() => setShowMobileLangMenu((o) => !o)}
-            aria-label="Change language"
-          >
-           <FaGlobe size={14} />
-<span className="uppercase">
-  {language === "hi" ? "हिंदी" : "en"}
-</span>
-          </button>
-          <AnimatePresence>
-            {showMobileLangMenu && (
-              <motion.div
-                key="mobile-lang-menu"
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 4 }}
-                transition={{ duration: 0.15 }}
-                className="absolute right-0 mt-2 w-40 rounded-xl bg-white shadow-lg border border-slate-100 py-2 z-50"
-              >
-                <div className="px-3 pb-2 text-[11px] font-semibold text-slate-400 tracking-wide">
-                  {t('navbar.language')}
-                </div>
-                <div className="flex items-center gap-1 mx-3 bg-slate-100 rounded-lg p-1">
-                  {(['en', 'hi'] as const).map((lang) => (
-                    <button
-                      key={lang}
-                      type="button"
-                      onClick={() => handleLanguageChange(lang)}
-                      className={`flex-1 hover:cursor-pointer opacity-80 hover:opacity-100 py-1 rounded-md text-[11px] font-semibold transition-all duration-200 ${
-                        language === lang
-                          ? 'bg-[#3F51B5] text-white shadow-sm'
-                          : 'text-slate-500 hover:text-slate-700'
-                      }`}
-                    >
-                      {lang === 'en' ? 'English' : 'हिन्दी'}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <button
+          type="button"
+          className="flex hover:cusror-pointer  items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 bg-white text-[11px] font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] transition-all"
+          onClick={toggleLanguage}
+          aria-label={language === 'en' ? 'Switch to Hindi' : 'Switch to English'}
+        >
+          <FaGlobe size={14} />
+          <span className="uppercase">{language === 'hi' ? 'हिंदी' : 'en'}</span>
+        </button>
 
         {/* Mobile hamburger */}
         <button

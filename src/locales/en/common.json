@@ -9,7 +9,6 @@
     "faqs": "FAQs",
     "contact": "Contact Us",
     "about": "About Us",
-    "language": "Language",
     "signIn": "Sign in",
     "signUp": "Sign up"
   },
@@ -63,4 +62,3 @@
     }
   }
 }
-
