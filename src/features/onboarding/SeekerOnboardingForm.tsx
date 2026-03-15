@@ -12,6 +12,7 @@ import {
 import { PiGenderIntersexBold } from 'react-icons/pi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
 
 interface FormData {
   name: string
@@ -261,6 +262,7 @@ function SimpleDropdown({
 export function SeekerOnboardingForm() {
   const navigate = useNavigate()
   const { t } = useTranslation('seekerOnboarding')
+  const setPendingSeeker = useOnboardingFlowStore((s) => s.setPendingSeeker)
 
   const genders = t('options.genders', { returnObjects: true }) as string[]
   const professions = t('options.professions', { returnObjects: true }) as string[]
@@ -283,12 +285,13 @@ export function SeekerOnboardingForm() {
 
   const handleNext = () => {
     if (!allFilled) return
+    setPendingSeeker(form)
     navigate({ to: '/auth' })
   }
 
   return (
     <div
-      className="min-h-screen bg-[#f0f0f5] flex items-center scale-95 justify-center pt-4 p-4 pb-2 -mt-8"
+      className="min-h-screen bg-[#f0f0f5] flex items-center scale-95 justify-center pt-4  sm:p-4 pb-2 -mt-8"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex min-h-[600px]">

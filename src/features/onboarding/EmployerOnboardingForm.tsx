@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
 
 interface FormData {
   employerName: string
@@ -80,7 +81,7 @@ function FieldBox({
   return (
     <div className="flex items-start border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200">
       {icon && (
-        <div className={`flex items-center justify-center pl-4 text-[#3F51B5] shrink-0 ${noPadIcon ? 'pt-4' : 'pt-[13px]'}`}>
+        <div className={`flex items-center justify-center pl-4 text-[#3F51B5] shrink-0 ${noPadIcon ? 'pt-3' : 'pt-[13px]'}`}>
           {icon}
         </div>
       )}
@@ -285,7 +286,7 @@ function PayInput({
   return (
     <div className="flex items-center border border-gray-200 rounded-xl bg-white hover:border-[#3F51B5]/40 focus-within:border-[#3F51B5] focus-within:shadow-[0_0_0_3px_rgba(63,81,181,0.1)] transition-all duration-200 overflow-hidden">
       <div className="flex items-center gap-1 pl-4 text-[#3F51B5] shrink-0">
-        <span className="text-xs font-semibold text-slate-500 ml-0.5">{currencyLabel}</span>
+        <span className="text-xs sm:text-[15px] font-semibold text-slate-500 ml-0.5">{currencyLabel}</span>
       </div>
       <input
         type="number"
@@ -293,7 +294,7 @@ function PayInput({
         value={amount}
         onChange={(e) => onAmountChange(e.target.value)}
         placeholder={placeholder}
-        className="flex-1 px-1 w-[140px] sm:w-auto sm:px-3 py-3 placeholder:text-[12px] text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        className="flex-1 px-1 w-[140px] sm:w-auto sm:px-3 py-3 placeholder:text-[12px] xs:placeholder:text-sm text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
       <div className="flex items-center gap-1 mr-3 bg-slate-100 rounded-lg p-1">
         {(['monthly', 'yearly'] as const).map((type) => (
@@ -323,6 +324,7 @@ function Stat({ value, label }: { value: string; label: string }) {
 export function EmployerOnboardingForm() {
   const navigate = useNavigate()
   const { t } = useTranslation('employerOnboarding')
+  const setPendingEmployer = useOnboardingFlowStore((s) => s.setPendingEmployer)
 
   const jobTitles = t('options.jobTitles', { returnObjects: true }) as string[]
   const educationLevels = t('options.education', { returnObjects: true }) as string[]
@@ -345,6 +347,7 @@ export function EmployerOnboardingForm() {
 
   const handleNext = () => {
     if (!allFilled) return
+    setPendingEmployer(form)
     navigate({ to: '/auth' })
   }
 
@@ -406,7 +409,7 @@ export function EmployerOnboardingForm() {
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col min-h-0 px-7 pt-6 pb-5 overflow-hidden">
+        <div className="flex-1 flex flex-col min-h-0 px-3 sm:px-6 pt-3 sm:pt-6 pb-3 sm:pb-6 overflow-hidden">
           <div className="shrink-0 mb-3">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs text-slate-400 font-medium">
@@ -447,7 +450,7 @@ export function EmployerOnboardingForm() {
                   onChange={(e) => set('jobDescription')(e.target.value)}
                   placeholder={t('form.jobDescriptionPlaceholder')}
                   rows={2}
-                  className="w-full px-3 py-3 text-[12px] sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none resize-none"
+                  className="w-full px-3 py-3 placeholder:text-sm sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none resize-none"
                 />
               </FieldBox>
 
@@ -457,7 +460,7 @@ export function EmployerOnboardingForm() {
                   value={form.jobLocation}
                   onChange={(e) => set('jobLocation')(e.target.value)}
                   placeholder={t('form.jobLocationPlaceholder')}
-                  className="w-full px-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
+                  className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
                 />
               </FieldBox>
 

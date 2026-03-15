@@ -1,9 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { OtpSection } from '../../features/auth/components/OtpSection'
 import { PhoneStep } from '../../features/auth/components/PhoneStep'
 import { RiShieldCheckLine } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
+import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
 
 export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
@@ -27,10 +28,31 @@ function RouteComponent() {
 
   const phoneRef = useRef<HTMLInputElement>(null)
   const { t } = useTranslation('common')
+  const navigate = useNavigate()
+  const completeOtpVerification = useOnboardingFlowStore((s) => s.completeOtpVerification)
 
   useEffect(() => {
     phoneRef.current?.focus()
   }, [])
+
+  useEffect(() => {
+    if (!isVerified) return
+
+    const timer = setTimeout(() => {
+      const userType = useOnboardingFlowStore.getState().user?.userType
+      if (userType === 'seeker') {
+        navigate({ to: '/search/jobs' })
+        return
+      }
+      if (userType === 'employer') {
+        navigate({ to: '/search/candidates' })
+        return
+      }
+      navigate({ to: '/' })
+    }, 900)
+
+    return () => clearTimeout(timer)
+  }, [isVerified, navigate])
 
   const handleSendOtp = async () => {
     if (phone.length < 10) return
@@ -164,7 +186,10 @@ function RouteComponent() {
                 <OtpSection
                   phone={phone}
                   onBack={() => setStep('phone')}
-                  onVerified={() => setIsVerified(true)}
+                  onVerified={() => {
+                    completeOtpVerification()
+                    setIsVerified(true)
+                  }}
                 />
               )}
             </>

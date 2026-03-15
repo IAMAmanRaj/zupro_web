@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
+import { Route as SearchJobsRouteImport } from './routes/search/jobs'
+import { Route as SearchCandidatesRouteImport } from './routes/search/candidates'
 import { Route as OnboardingSeekerRouteImport } from './routes/onboarding/seeker'
 import { Route as OnboardingEmployerRouteImport } from './routes/onboarding/employer'
 
@@ -22,6 +24,16 @@ const IndexRoute = IndexRouteImport.update({
 const AuthIndexRoute = AuthIndexRouteImport.update({
   id: '/auth/',
   path: '/auth/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchJobsRoute = SearchJobsRouteImport.update({
+  id: '/search/jobs',
+  path: '/search/jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchCandidatesRoute = SearchCandidatesRouteImport.update({
+  id: '/search/candidates',
+  path: '/search/candidates',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingSeekerRoute = OnboardingSeekerRouteImport.update({
@@ -39,12 +51,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/onboarding/employer': typeof OnboardingEmployerRoute
   '/onboarding/seeker': typeof OnboardingSeekerRoute
+  '/search/candidates': typeof SearchCandidatesRoute
+  '/search/jobs': typeof SearchJobsRoute
   '/auth/': typeof AuthIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/onboarding/employer': typeof OnboardingEmployerRoute
   '/onboarding/seeker': typeof OnboardingSeekerRoute
+  '/search/candidates': typeof SearchCandidatesRoute
+  '/search/jobs': typeof SearchJobsRoute
   '/auth': typeof AuthIndexRoute
 }
 export interface FileRoutesById {
@@ -52,18 +68,34 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/onboarding/employer': typeof OnboardingEmployerRoute
   '/onboarding/seeker': typeof OnboardingSeekerRoute
+  '/search/candidates': typeof SearchCandidatesRoute
+  '/search/jobs': typeof SearchJobsRoute
   '/auth/': typeof AuthIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/onboarding/employer' | '/onboarding/seeker' | '/auth/'
+  fullPaths:
+    | '/'
+    | '/onboarding/employer'
+    | '/onboarding/seeker'
+    | '/search/candidates'
+    | '/search/jobs'
+    | '/auth/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/onboarding/employer' | '/onboarding/seeker' | '/auth'
+  to:
+    | '/'
+    | '/onboarding/employer'
+    | '/onboarding/seeker'
+    | '/search/candidates'
+    | '/search/jobs'
+    | '/auth'
   id:
     | '__root__'
     | '/'
     | '/onboarding/employer'
     | '/onboarding/seeker'
+    | '/search/candidates'
+    | '/search/jobs'
     | '/auth/'
   fileRoutesById: FileRoutesById
 }
@@ -71,6 +103,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   OnboardingEmployerRoute: typeof OnboardingEmployerRoute
   OnboardingSeekerRoute: typeof OnboardingSeekerRoute
+  SearchCandidatesRoute: typeof SearchCandidatesRoute
+  SearchJobsRoute: typeof SearchJobsRoute
   AuthIndexRoute: typeof AuthIndexRoute
 }
 
@@ -88,6 +122,20 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth/'
       preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search/jobs': {
+      id: '/search/jobs'
+      path: '/search/jobs'
+      fullPath: '/search/jobs'
+      preLoaderRoute: typeof SearchJobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search/candidates': {
+      id: '/search/candidates'
+      path: '/search/candidates'
+      fullPath: '/search/candidates'
+      preLoaderRoute: typeof SearchCandidatesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding/seeker': {
@@ -111,6 +159,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   OnboardingEmployerRoute: OnboardingEmployerRoute,
   OnboardingSeekerRoute: OnboardingSeekerRoute,
+  SearchCandidatesRoute: SearchCandidatesRoute,
+  SearchJobsRoute: SearchJobsRoute,
   AuthIndexRoute: AuthIndexRoute,
 }
 export const routeTree = rootRouteImport
