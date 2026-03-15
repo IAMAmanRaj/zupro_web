@@ -331,12 +331,15 @@ export function SeekerOnboardingForm() {
           </div>
         </div>
         {/* ─── MOBILE LAYOUT (< md) ─────────────────────────────────────────── */}
-        <div className="relative h-[170px] border-2 rounded-t-xl flex justify-start items-start md:hidden w-full bg-[#1e1b4b]">
+        <div className="relative h-[170px] border-2 rounded-t-xl flex justify-start items-end md:hidden w-full bg-[#1e1b4b]">
           {/* Top hero strip */}
-          <div className='bg-[#1e1b4b] absolute top-8 right-4'>
+           {/* Decorative circles */}
+           <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
+          <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
+          <div className='absolute top-16 right-4'>
             <p className="text-amber-400 text-sm font-semibold mt-0.5">help@zupro.work</p>
           </div>
-          <div className="px-6 bottom-0 w-full pt-7 pb-4  overflow-hidden shrink-0">
+          <div className="px-4 md:px-6 bottom-0 w-full pt-7 pb-4  overflow-hidden shrink-0">
 
 
             {/* Heading */}
@@ -350,7 +353,7 @@ export function SeekerOnboardingForm() {
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col px-8 pt-8 pb-12 overflow-y-auto zupro-scroll">
+        <div className="flex-1 flex flex-col px-4 md:px-8 pt-8 pb-12 overflow-y-auto zupro-scroll">
           <div className="shrink-0 mb-3">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs text-slate-400 font-medium">

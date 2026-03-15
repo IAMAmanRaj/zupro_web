@@ -353,21 +353,148 @@ export function EmployerOnboardingForm() {
 
   return (
     <div
-      className="h-screen w-screen overflow-hidden bg-[#f0f0f5] flex items-center justify-center p-4"
+      className="h-screen  w-screen overflow-hidden bg-[#f0f0f5] flex items-center justify-center md:p-4"
       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
     >
-      <div
-        className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex"
+      {/* ─── MOBILE LAYOUT (< md) ─────────────────────────────────────────── */}
+      <div className="md:hidden h-full flex flex-col w-[95%]">
 
+        {/* Fixed-height dark header */}
+        <div className="relative h-[170px] rounded-t-3xl flex flex-col justify-end bg-[#1e1b4b] shrink-0 overflow-hidden">
+          {/* Decorative circles */}
+          <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
+          <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
+
+          {/* Help email — top right */}
+          <div className="absolute top-10 right-4">
+            <p className="text-amber-400 text-sm font-semibold">help@zupro.work</p>
+          </div>
+
+          {/* Heading anchored to bottom of strip */}
+          <div className="px-4  pb-5">
+            <h2 className="text-white text-2xl font-bold leading-snug mb-1">
+              {t('leftPanel.titleLine1')}<br />
+              {t('leftPanel.titleLine2')}
+            </h2>
+            <p className="text-indigo-300 text-[13px] leading-relaxed">
+              {t('leftPanel.description')}
+            </p>
+          </div>
+        </div>
+
+        {/* Scrollable white form panel */}
+        <div className="flex-1 min-h-0 bg-white rounded-0 md:rounded-t-3xl flex flex-col shadow-[0_-4px_30px_rgba(0,0,0,0.15)]">
+
+          {/* Sticky header row inside white card */}
+          <div className="shrink-0 px-4 pt-5 pb-3">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs text-slate-400 font-medium">
+                {t('header.stepLabel', { current: 1, total: 2 })}
+              </p>
+              <ProgressDots progress={progress} />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 leading-tight">{t('header.title')}</h3>
+            <p className="text-sm text-slate-400 mt-0.5">{t('header.subtitle')}</p>
+          </div>
+
+          {/* Scrollable fields */}
+          <div className="flex-1 overflow-y-auto zupro-scroll min-h-0 px-4 pb-4">
+            <div className="flex flex-col gap-2.5 py-1">
+              <FieldBox icon={<FiUser size={15} />}>
+                <input
+                  type="text"
+                  value={form.employerName}
+                  onChange={(e) => set('employerName')(e.target.value)}
+                  placeholder={t('form.employerNamePlaceholder')}
+                  className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
+                />
+              </FieldBox>
+
+              <SearchDropdown
+                options={jobTitles}
+                value={form.jobTitle}
+                onChange={set('jobTitle')}
+                placeholder={t('form.jobTitlePlaceholder')}
+                subLabel={t('form.jobTitleSubLabel')}
+                searchPlaceholder={t('form.searchPlaceholder')}
+                noResultsLabel={t('form.noResults')}
+                icon={<FiBriefcase size={15} />}
+              />
+
+              <FieldBox icon={<FiFileText size={15} />} noPadIcon>
+                <textarea
+                  value={form.jobDescription}
+                  onChange={(e) => set('jobDescription')(e.target.value)}
+                  placeholder={t('form.jobDescriptionPlaceholder')}
+                  rows={2}
+                  className="w-full px-3 py-3 placeholder:text-sm sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none resize-none"
+                />
+              </FieldBox>
+
+              <FieldBox icon={<FiMapPin size={15} />}>
+                <input
+                  type="text"
+                  value={form.jobLocation}
+                  onChange={(e) => set('jobLocation')(e.target.value)}
+                  placeholder={t('form.jobLocationPlaceholder')}
+                  className="w-full px-3 py-3 text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none"
+                />
+              </FieldBox>
+
+              <div>
+                <PayInput
+                  amount={form.payAmount}
+                  payType={form.payType}
+                  onAmountChange={set('payAmount')}
+                  onTypeChange={(v) => setForm((p) => ({ ...p, payType: v }))}
+                  placeholder={t('form.payPlaceholder')}
+                  dayWiseLabel={t('form.payTypeDayWise')}
+                  perShiftLabel={t('form.payTypePerShift')}
+                  currencyLabel={t('form.currencyLabel')}
+                />
+                <p className="text-[11px] text-slate-400 mt-1 ml-1">{t('form.payHint')}</p>
+              </div>
+
+              <SimpleDropdown
+                options={educationLevels}
+                value={form.educationLevel}
+                onChange={set('educationLevel')}
+                placeholder={t('form.educationPlaceholder')}
+                icon={<FiBookOpen size={15} />}
+              />
+            </div>
+
+            {/* CTA inside scroll area */}
+            <div className="pt-4">
+              <motion.button
+                onClick={handleNext}
+                disabled={!allFilled}
+                whileHover={allFilled ? { scale: 1.015 } : {}}
+                whileTap={allFilled ? { scale: 0.985 } : {}}
+                className={`w-full py-3.5 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${
+                  allFilled
+                    ? 'bg-[#3F51B5] shadow-[0_4px_20px_rgba(63,81,181,0.35)] cursor-pointer'
+                    : 'bg-slate-300 cursor-not-allowed'
+                }`}
+              >
+                {t('form.continue')}
+                <FiArrowRight size={18} />
+              </motion.button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── DESKTOP LAYOUT (≥ md) — unchanged ───────────────────────────── */}
+      <div
+        className="hidden md:flex w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden"
       >
-        <div className="hidden md:flex flex-col justify-between w-[42%] bg-[#1e1b4b] p-8 relative overflow-hidden shrink-0">
+        <div className="flex flex-col justify-between w-[42%] bg-[#1e1b4b] p-8 relative overflow-hidden shrink-0">
           <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
 
           <div>
-            <span
-              className="text-white sora-bold text-3xl font-extrabold tracking-tight select-none"
-            >
+            <span className="text-white sora-bold text-3xl font-extrabold tracking-tight select-none">
               {t('leftPanel.brand')}
             </span>
             <div className="mt-0.5 w-10 h-1 rounded-full bg-amber-400" />
@@ -384,22 +511,10 @@ export function EmployerOnboardingForm() {
             </h2>
             <p className="text-indigo-200 text-sm leading-relaxed">{t('leftPanel.description')}</p>
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <Stat
-                value={t('leftPanel.stats.activeSeekersValue')}
-                label={t('leftPanel.stats.activeSeekers')}
-              />
-              <Stat
-                value={t('leftPanel.stats.avgMatchValue')}
-                label={t('leftPanel.stats.avgMatch')}
-              />
-              <Stat
-                value={t('leftPanel.stats.firstJobFreeValue')}
-                label={t('leftPanel.stats.firstJobFree')}
-              />
-              <Stat
-                value={t('leftPanel.stats.buildTrustValue')}
-                label={t('leftPanel.stats.buildTrust')}
-              />
+              <Stat value={t('leftPanel.stats.activeSeekersValue')} label={t('leftPanel.stats.activeSeekers')} />
+              <Stat value={t('leftPanel.stats.avgMatchValue')} label={t('leftPanel.stats.avgMatch')} />
+              <Stat value={t('leftPanel.stats.firstJobFreeValue')} label={t('leftPanel.stats.firstJobFree')} />
+              <Stat value={t('leftPanel.stats.buildTrustValue')} label={t('leftPanel.stats.buildTrust')} />
             </div>
           </div>
 
@@ -494,10 +609,11 @@ export function EmployerOnboardingForm() {
               disabled={!allFilled}
               whileHover={allFilled ? { scale: 1.015 } : {}}
               whileTap={allFilled ? { scale: 0.985 } : {}}
-              className={`w-full py-3.5 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${allFilled
+              className={`w-full py-3.5 rounded-xl text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${
+                allFilled
                   ? 'bg-[#3F51B5] shadow-[0_4px_20px_rgba(63,81,181,0.35)] cursor-pointer'
                   : 'bg-slate-300 cursor-not-allowed'
-                }`}
+              }`}
             >
               {t('form.continue')}
               <FiArrowRight size={18} />
