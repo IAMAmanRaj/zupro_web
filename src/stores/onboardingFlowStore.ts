@@ -86,6 +86,22 @@ export const useOnboardingFlowStore = create<OnboardingFlowState>()(
 
       reset: () => set({ pending: null, user: null, isVerified: false }),
     }),
-    { name: 'onboarding-flow' },
+    {
+      name: 'onboarding-flow',
+      version: 1,
+      migrate: (persistedState) => {
+        const s = persistedState as Partial<OnboardingFlowState> | undefined
+        const userType = (s?.user as { userType?: unknown } | null | undefined)?.userType
+
+        if (s?.isVerified && !s.user) {
+          return { ...s, isVerified: false }
+        }
+
+        if (s?.user && userType !== 'seeker' && userType !== 'employer') {
+          return { ...s, user: null, isVerified: false }
+        }
+        return (s ?? {}) as OnboardingFlowState
+      },
+    },
   ),
 )

@@ -11,7 +11,6 @@ import {
   FiX,
   FiUser,
   FiCheckCircle,
-  FiSkipForward,
   FiBriefcase,
 } from 'react-icons/fi'
 import { LuLoaderCircle } from 'react-icons/lu'
@@ -153,9 +152,9 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.28, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.1, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
       whileHover={!isDone ? { y: -3, boxShadow: '0 12px 40px rgba(63,81,181,0.10)' } : {}}
-      className={`group bg-white rounded-2xl border flex flex-col p-5 relative overflow-hidden transition-all duration-200 ${
+      className={`group hover:cursor-pointer opacity-85 hover:opacity-100 bg-white rounded-2xl border flex flex-col p-5 relative overflow-hidden transition-all duration-200 ${
         hired
           ? 'border-[#3F51B5]/25 bg-indigo-50/20'
           : skipped
@@ -232,7 +231,6 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
           disabled={isDone}
           className="flex-1 hover:cursor-pointer flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-semibold border border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <FiSkipForward size={12} />
           Skip
         </motion.button>
         <motion.button
@@ -245,7 +243,6 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
               : 'bg-[#3F51B5] text-white shadow-[0_2px_10px_rgba(63,81,181,0.22)] hover:bg-[#3549a0] hover:shadow-[0_4px_18px_rgba(63,81,181,0.32)] disabled:opacity-40'
           }`}
         >
-          <FiCheckCircle size={12} />
           {hired ? 'Hired' : 'Hire'}
         </motion.button>
       </div>
@@ -367,7 +364,7 @@ function CandidatesRoute() {
               animate={{ opacity: 1, y: 0 }}
               className="text-indigo-300 text-xs font-medium hidden sm:block pb-0.5"
             >
-              {filtered.length} candidate{filtered.length !== 1 ? 's' : ''}
+              {filtered.length} candidate{filtered.length !== 1 ? 's' : ''} found
             </motion.span>
           </div>
 

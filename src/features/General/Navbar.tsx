@@ -5,11 +5,20 @@ import { FaGlobe } from 'react-icons/fa'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useLanguageStore } from '../../stores/languageStore'
+import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { t } = useTranslation('common')
   const { language, setLanguage } = useLanguageStore()
+
+  // ✅ Separate selectors — each returns a stable primitive or reference
+  const isVerified = useOnboardingFlowStore((s) => s.isVerified)
+  const user = useOnboardingFlowStore((s) => s.user)
+
+  const isLoggedIn = isVerified && !!user
+  const searchTo = user?.userType === 'seeker' ? '/search/jobs' : '/search/candidates'
+  const searchLabel = user?.userType === 'seeker' ? 'Search Jobs' : 'Search Candidates'
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'hi' : 'en')
@@ -19,16 +28,15 @@ export function Navbar() {
     <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
       {/* Logo */}
       <Link
-  to="/"
-  className="text-[#3F51B5] text-3xl lg:text-4xl font-extrabold tracking-tight select-none"
-  style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
->
-  {t('appName')}
-</Link>
-
+        to="/"
+        className="text-[#3F51B5] text-3xl lg:text-4xl font-extrabold tracking-tight select-none"
+        style={{ fontFamily: '"Trebuchet MS", "Gill Sans", sans-serif' }}
+      >
+        {t('appName')}
+      </Link>
 
       {/* Desktop center links */}
-      <div className="hidden sora-bold md:flex md:gap-6 lg:gap-10 mt-1 items-center text-[13px] lg:text-[15px]  absolute top-5 left-1/2 -translate-x-1/2 gap-8">
+      <div className="hidden sora-bold md:flex md:gap-6 lg:gap-10 mt-1 items-center text-[13px] lg:text-[15px] absolute top-5 left-1/2 -translate-x-1/2 gap-8">
         <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.faqs')}
         </Link>
@@ -53,19 +61,30 @@ export function Navbar() {
           <span className="uppercase">{language === 'hi' ? 'हिंदी' : 'en'}</span>
         </button>
 
-        <Link to="/auth" className="hidden lg:block hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
-          {t('navbar.signIn')}
-        </Link>
-        <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2  transition-all">
-          {t('navbar.signUp')}
-        </Link>
+        {isLoggedIn ? (
+          <Link
+            to={searchTo}
+            className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2 transition-all"
+          >
+            {searchLabel}
+          </Link>
+        ) : (
+          <>
+            <Link to="/auth" className="hidden lg:block hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
+              {t('navbar.signIn')}
+            </Link>
+            <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2 transition-all">
+              {t('navbar.signUp')}
+            </Link>
+          </>
+        )}
       </div>
 
       {/* Mobile right side: globe + hamburger */}
       <div className="flex items-center gap-2 md:hidden">
         <button
           type="button"
-          className="flex hover:cusror-pointer  items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 bg-white text-[11px] font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] transition-all"
+          className="flex hover:cursor-pointer items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 bg-white text-[11px] font-semibold text-slate-600 hover:border-[#3F51B5] hover:text-[#3F51B5] transition-all"
           onClick={toggleLanguage}
           aria-label={language === 'en' ? 'Switch to Hindi' : 'Switch to English'}
         >
@@ -104,20 +123,32 @@ export function Navbar() {
               {t('navbar.about')}
             </Link>
             <div className="flex gap-3 pt-2 border-t border-slate-100">
-              <Link
-                to="/auth"
-                onClick={() => setMenuOpen(false)}
-                className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm"
-              >
-                {t('navbar.signIn')}
-              </Link>
-              <Link
-                to="/auth"
-                onClick={() => setMenuOpen(false)}
-                className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm"
-              >
-                {t('navbar.signUp')}
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  to={searchTo}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm"
+                >
+                  {searchLabel}
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    to="/auth"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm"
+                  >
+                    {t('navbar.signIn')}
+                  </Link>
+                  <Link
+                    to="/auth"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm"
+                  >
+                    {t('navbar.signUp')}
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
