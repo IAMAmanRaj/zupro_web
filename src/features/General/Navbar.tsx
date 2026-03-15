@@ -102,10 +102,18 @@ export function Navbar() {
               {t('navbar.about')}
             </Link>
             <div className="flex gap-3 pt-2 border-t border-slate-100">
-              <Link to="/auth" className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm">
+              <Link
+                to="/auth"
+                onClick={() => setMenuOpen(false)}
+                className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm"
+              >
                 {t('navbar.signIn')}
               </Link>
-              <Link to="/auth" className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm">
+              <Link
+                to="/auth"
+                onClick={() => setMenuOpen(false)}
+                className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm"
+              >
                 {t('navbar.signUp')}
               </Link>
             </div>
