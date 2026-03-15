@@ -378,7 +378,7 @@ function JobsRoute() {
                 value={search}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Search by title or location…"
-                className="flex-1 bg-transparent text-white placeholder-indigo-400 text-[13px] outline-none"
+                className="flex-1 bg-transparent  text-white text-[13px] outline-none"
               />
 
               <AnimatePresence>
@@ -409,7 +409,7 @@ function JobsRoute() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowFilters((v) => !v)}
-              className={`relative flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 border ${
+              className={`relative hover:cursor-pointer flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 border ${
                 showFilters
                   ? 'bg-white text-[#3F51B5] border-white shadow-md'
                   : 'bg-white/10 text-white border-white/10 hover:bg-white/15'

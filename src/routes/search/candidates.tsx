@@ -355,7 +355,10 @@ function CandidatesRoute() {
                 Candidate Pool
               </p>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold tracking-tight leading-none">
-                Find your next hire
+                Find your{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#948dff] to-[#3F51B5]">
+                  next hire !
+                </span>
               </h1>
             </div>
             <motion.span
@@ -388,7 +391,7 @@ function CandidatesRoute() {
                 value={search}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Search by name, role or location…"
-                className="flex-1 bg-transparent text-white placeholder-indigo-400 text-[13px] outline-none"
+                className="flex-1 bg-transparent text-white text-[13px] outline-none"
               />
 
               <AnimatePresence>
@@ -419,7 +422,7 @@ function CandidatesRoute() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowFilters((v) => !v)}
-              className={`relative flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 border ${
+              className={`relative hover:cursor-pointer flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 border ${
                 showFilters
                   ? 'bg-white text-[#3F51B5] border-white shadow-md'
                   : 'bg-white/10 text-white border-white/10 hover:bg-white/15'

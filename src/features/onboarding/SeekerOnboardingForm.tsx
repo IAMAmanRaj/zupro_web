@@ -291,7 +291,7 @@ export function SeekerOnboardingForm() {
 
   return (
     <div
-      className="overflow-y-scroll no-scrollbar md:overflow-hidden md:min-h-screen bg-transparent md:bg-[#f0f0f5] flex items-start md:items-center scale-95 md:justify-center -mt-5  md:p-4 pb-2 md:-mt-8"
+      className="overflow-y-scroll no-scrollbar md:overflow-hidden md:min-h-screen bg-transparent md:bg-[#f0f0f5] flex items-start md:items-center scale-95 md:justify-center -mt-3  md:p-4 pb-2 md:-mt-8"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
       <div className="w-full  max-w-4xl bg-white rounded-2xl overflow-y-scroll no-scrollbar md:overflow-hidden flex flex-col md:flex-row md:min-h-[600px]">
