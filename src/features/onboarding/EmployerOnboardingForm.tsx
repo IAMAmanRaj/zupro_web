@@ -366,17 +366,17 @@ export function EmployerOnboardingForm() {
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
 
           {/* Help email — top right */}
-          <div className="absolute top-6 sm:top-16 right-4">
+          <div className="absolute top-10 sm:top-16 right-4">
             <p className="text-amber-400 text-sm font-semibold">help@zupro.work</p>
           </div>
 
           {/* Heading anchored to bottom of strip */}
           <div className="px-4  pb-5">
-            <h2 className="text-white text-2xl font-bold leading-snug mb-1">
+            <h2 className="text-white text-xl sm:text-2xl font-bold leading-snug mb-1">
               {t('leftPanel.titleLine1')}<br />
               {t('leftPanel.titleLine2')}
             </h2>
-            <p className="text-indigo-300 text-[13px] leading-relaxed">
+            <p className="text-indigo-300 text-[11px] sm:text-[13px] leading-relaxed">
               {t('leftPanel.description')}
             </p>
           </div>
