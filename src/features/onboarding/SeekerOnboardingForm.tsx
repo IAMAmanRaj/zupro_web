@@ -291,7 +291,7 @@ export function SeekerOnboardingForm() {
 
   return (
     <div
-      className="overflow-y-scroll no-scrollbar md:overflow-hidden md:min-h-screen bg-transparent md:bg-[#f0f0f5] flex items-start md:items-center scale-95 md:justify-center  md:p-4 pb-2 md:-mt-8"
+      className="overflow-y-scroll no-scrollbar md:overflow-hidden md:min-h-screen bg-transparent md:bg-[#f0f0f5] flex items-start md:items-center scale-95 md:justify-center -mt-5  md:p-4 pb-2 md:-mt-8"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
       <div className="w-full  max-w-4xl bg-white rounded-2xl overflow-y-scroll no-scrollbar md:overflow-hidden flex flex-col md:flex-row md:min-h-[600px]">
@@ -331,7 +331,7 @@ export function SeekerOnboardingForm() {
           </div>
         </div>
         {/* ─── MOBILE LAYOUT (< md) ─────────────────────────────────────────── */}
-        <div className="relative h-[170px] border-2 rounded-t-xl flex justify-start items-end md:hidden w-full bg-[#1e1b4b]">
+        <div className="relative h-[150px]  border-2 rounded-t-3xl flex justify-start items-end md:hidden w-full bg-[#1e1b4b]">
           {/* Top hero strip */}
            {/* Decorative circles */}
            <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />

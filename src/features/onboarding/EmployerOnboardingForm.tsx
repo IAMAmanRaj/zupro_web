@@ -360,13 +360,13 @@ export function EmployerOnboardingForm() {
       <div className="md:hidden h-full flex flex-col w-[95%]">
 
         {/* Fixed-height dark header */}
-        <div className="relative h-[170px] rounded-t-3xl flex flex-col justify-end bg-[#1e1b4b] shrink-0 overflow-hidden">
+        <div className="relative h-[150px] rounded-t-3xl flex flex-col justify-end bg-[#1e1b4b] shrink-0 overflow-hidden">
           {/* Decorative circles */}
           <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
 
           {/* Help email — top right */}
-          <div className="absolute top-10 right-4">
+          <div className="absolute top-16 right-4">
             <p className="text-amber-400 text-sm font-semibold">help@zupro.work</p>
           </div>
 
