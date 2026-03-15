@@ -60,7 +60,7 @@ export function Navbar() {
           aria-label={language === 'en' ? 'Switch to Hindi' : 'Switch to English'}
         >
           <FaGlobe size={14} />
-          <span className="uppercase">{language === 'hi' ? 'हिंदी' : 'en'}</span>
+          <span className="uppercase">{language === 'hi' ? 'en' : 'हिंदी'}</span>
         </button>
 
         {isLoggedIn ? (
@@ -93,7 +93,7 @@ export function Navbar() {
           aria-label={language === 'en' ? 'Switch to Hindi' : 'Switch to English'}
         >
           <FaGlobe size={14} />
-          <span className="uppercase">{language === 'hi' ? 'हिंदी' : 'en'}</span>
+          <span className="uppercase">{language === 'hi' ? 'en' : 'हिंदी'}</span>
         </button>
 
         {/* Mobile hamburger */}
