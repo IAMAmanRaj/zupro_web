@@ -1,8 +1,15 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+﻿import { createFileRoute, redirect } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useState, useMemo } from 'react'
 import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
 import { useTranslation } from 'react-i18next'
+import type { Candidate } from '../../features/search/candidates/types'
+import {
+  CANDIDATES_SEARCH_DEBOUNCE_MS,
+  EXPERIENCE_FILTER_KEYS,
+  type ExpFilterKey,
+} from '../../features/search/candidates/constants'
+
 import {
   FiSearch,
   FiMapPin,
@@ -18,7 +25,7 @@ import { LuLoaderCircle } from 'react-icons/lu'
 import { motion, AnimatePresence } from 'framer-motion'
 import toast from 'react-hot-toast'
 
-// ─── Route ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Route â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const Route = createFileRoute('/search/candidates')({
   beforeLoad: () => {
@@ -29,22 +36,7 @@ export const Route = createFileRoute('/search/candidates')({
   component: CandidatesRoute,
 })
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-interface Candidate {
-  id: string
-  name: string
-  role: string
-  location: string
-  experience: string
-  availableFrom: string
-  phone: string
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-const EXPERIENCE_FILTER_KEYS = ['all', '0_2', '2_4', '4_plus'] as const
-type ExpFilterKey = (typeof EXPERIENCE_FILTER_KEYS)[number]
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function getExpBucket(experience: string): Exclude<ExpFilterKey, 'all'> {
   const num = parseFloat(experience)
@@ -57,7 +49,7 @@ function parseExpYears(experience: string): number {
   return parseFloat(experience) || 0
 }
 
-// ─── Avatar initials ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Avatar initials â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function Avatar({ name }: { name: string }) {
   const initials = name
@@ -82,7 +74,7 @@ function Avatar({ name }: { name: string }) {
   )
 }
 
-// ─── Shimmer ──────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Shimmer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function ShimmerCard() {
   return (
@@ -110,7 +102,7 @@ function ShimmerCard() {
   )
 }
 
-// ─── Candidate Card ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Candidate Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function CandidateCard({ candidate, index }: { candidate: Candidate; index: number }) {
   const { t } = useTranslation('searchCandidates')
@@ -146,7 +138,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
         color: '#94a3b8',
         padding: '10px 14px',
       },
-      icon: '↩',
+      icon: 'â†©',
     })
   }
 
@@ -252,7 +244,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
   )
 }
 
-// ─── Empty State ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function EmptyState({ query }: { query: string }) {
   const { t } = useTranslation('searchCandidates')
@@ -275,7 +267,7 @@ function EmptyState({ query }: { query: string }) {
   )
 }
 
-// ─── Main Route ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Main Route â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 let searchTimer: ReturnType<typeof setTimeout>
 
@@ -295,7 +287,7 @@ function CandidatesRoute() {
     searchTimer = setTimeout(() => {
       setDebouncedSearch(val)
       setIsTyping(false)
-    }, 380)
+    }, CANDIDATES_SEARCH_DEBOUNCE_MS)
   }
 
   const clearSearch = () => {
@@ -350,7 +342,7 @@ function CandidatesRoute() {
       className="h-screen w-screen flex flex-col overflow-hidden bg-[#f0f0f5]"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
-      {/* ── Fixed header ── */}
+      {/* â”€â”€ Fixed header â”€â”€ */}
       <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 shrink-0">
         <div className="max-w-5xl mx-auto">
 
@@ -529,7 +521,7 @@ function CandidatesRoute() {
         </div>
       </div>
 
-      {/* ── Scrollable content ── */}
+      {/* â”€â”€ Scrollable content â”€â”€ */}
       <div className="flex-1 overflow-y-auto no-scrollbar min-h-0">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5">
 
@@ -573,3 +565,5 @@ function CandidatesRoute() {
     </div>
   )
 }
+
+
