@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useState, useMemo } from 'react'
 import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
+import { useTranslation } from 'react-i18next'
 import {
   FiSearch,
   FiMapPin,
@@ -42,14 +43,14 @@ interface Candidate {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const EXPERIENCE_FILTERS = ['All', '0–2 yrs', '2–4 yrs', '4+ yrs'] as const
-type ExpFilter = (typeof EXPERIENCE_FILTERS)[number]
+const EXPERIENCE_FILTER_KEYS = ['all', '0_2', '2_4', '4_plus'] as const
+type ExpFilterKey = (typeof EXPERIENCE_FILTER_KEYS)[number]
 
-function getExpBucket(experience: string): '0–2 yrs' | '2–4 yrs' | '4+ yrs' {
+function getExpBucket(experience: string): Exclude<ExpFilterKey, 'all'> {
   const num = parseFloat(experience)
-  if (num < 2) return '0–2 yrs'
-  if (num < 4) return '2–4 yrs'
-  return '4+ yrs'
+  if (num < 2) return '0_2'
+  if (num < 4) return '2_4'
+  return '4_plus'
 }
 
 function parseExpYears(experience: string): number {
@@ -112,13 +113,14 @@ function ShimmerCard() {
 // ─── Candidate Card ───────────────────────────────────────────────────────────
 
 function CandidateCard({ candidate, index }: { candidate: Candidate; index: number }) {
+  const { t } = useTranslation('searchCandidates')
   const [hired, setHired] = useState(false)
   const [skipped, setSkipped] = useState(false)
   const isDone = hired || skipped
 
   const handleHire = () => {
     setHired(true)
-    toast.success(`${candidate.name} hired!`, {
+    toast.success(t('toast.hired', { name: candidate.name }), {
       style: {
         fontFamily: '"Plus Jakarta Sans", sans-serif',
         fontWeight: 600,
@@ -134,7 +136,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
 
   const handleSkip = () => {
     setSkipped(true)
-    toast('Candidate skipped', {
+    toast(t('toast.skipped'), {
       style: {
         fontFamily: '"Plus Jakarta Sans", sans-serif',
         fontWeight: 600,
@@ -180,7 +182,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
             className="absolute top-3 right-3 flex items-center gap-1 bg-[#3F51B5] text-white text-[10px] font-bold px-2 py-1 rounded-full"
           >
             <FiCheckCircle size={9} />
-            Hired
+            {t('card.badges.hired')}
           </motion.div>
         )}
       </AnimatePresence>
@@ -212,7 +214,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
         </div>
         <div className="flex items-center gap-2 text-slate-500 text-[12px]">
           <FiClock size={12} className="shrink-0 text-[#3F51B5]/50" />
-          <span>Available from {candidate.availableFrom}</span>
+          <span>{t('card.meta.availableFrom', { date: candidate.availableFrom })}</span>
         </div>
         <div className="flex items-center gap-2 text-slate-500 text-[12px]">
           <FiPhone size={12} className="shrink-0 text-[#3F51B5]/50" />
@@ -231,7 +233,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
           disabled={isDone}
           className="flex-1 hover:cursor-pointer flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-semibold border border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Skip
+          {t('card.actions.skip')}
         </motion.button>
         <motion.button
           whileTap={!isDone ? { scale: 0.95 } : {}}
@@ -243,7 +245,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
               : 'bg-[#3F51B5] text-white shadow-[0_2px_10px_rgba(63,81,181,0.22)] hover:bg-[#3549a0] hover:shadow-[0_4px_18px_rgba(63,81,181,0.32)] disabled:opacity-40'
           }`}
         >
-          {hired ? 'Hired' : 'Hire'}
+          {hired ? t('card.actions.hired') : t('card.actions.hire')}
         </motion.button>
       </div>
     </motion.div>
@@ -253,6 +255,7 @@ function CandidateCard({ candidate, index }: { candidate: Candidate; index: numb
 // ─── Empty State ──────────────────────────────────────────────────────────────
 
 function EmptyState({ query }: { query: string }) {
+  const { t } = useTranslation('searchCandidates')
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.97 }}
@@ -262,9 +265,11 @@ function EmptyState({ query }: { query: string }) {
       <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
         <FiUser size={22} className="text-slate-300" />
       </div>
-      <p className="text-slate-600 font-semibold text-[15px]">No candidates found</p>
+      <p className="text-slate-600 font-semibold text-[15px]">{t('empty.title')}</p>
       <p className="text-slate-400 text-sm mt-1">
-        {query ? `No results for "${query}"` : 'Try adjusting your filters'}
+        {query
+          ? t('empty.subtitle.withQuery', { query })
+          : t('empty.subtitle.noQuery')}
       </p>
     </motion.div>
   )
@@ -275,10 +280,11 @@ function EmptyState({ query }: { query: string }) {
 let searchTimer: ReturnType<typeof setTimeout>
 
 function CandidatesRoute() {
+  const { t } = useTranslation('searchCandidates')
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-  const [expFilter, setExpFilter] = useState<ExpFilter>('All')
+  const [expFilter, setExpFilter] = useState<ExpFilterKey>('all')
   const [sortBy, setSortBy] = useState<'default' | 'exp-high' | 'exp-low'>('default')
   const [showFilters, setShowFilters] = useState(false)
 
@@ -324,7 +330,7 @@ function CandidatesRoute() {
       )
     }
 
-    if (expFilter !== 'All') {
+    if (expFilter !== 'all') {
       result = result.filter((c) => getExpBucket(c.experience) === expFilter)
     }
 
@@ -337,7 +343,7 @@ function CandidatesRoute() {
     return result
   }, [candidates, debouncedSearch, expFilter, sortBy])
 
-  const activeFilterCount = (expFilter !== 'All' ? 1 : 0) + (sortBy !== 'default' ? 1 : 0)
+  const activeFilterCount = (expFilter !== 'all' ? 1 : 0) + (sortBy !== 'default' ? 1 : 0)
 
   return (
     <div
@@ -352,12 +358,12 @@ function CandidatesRoute() {
           <div className="flex items-end justify-between mb-3">
             <div>
               <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-[0.15em] mb-0.5">
-                Candidate Pool
+                {t('header.badge')}
               </p>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold tracking-tight leading-none">
-                Find your{' '}
+                {t('header.title.before')}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#948dff] to-[#3F51B5]">
-                  next hire !
+                  {t('header.title.highlight')}
                 </span>
               </h1>
             </div>
@@ -367,7 +373,7 @@ function CandidatesRoute() {
               animate={{ opacity: 1, y: 0 }}
               className="text-indigo-300 text-xs font-medium hidden sm:block pb-0.5"
             >
-              {filtered.length} candidate{filtered.length !== 1 ? 's' : ''} found
+              {t('resultsFound', { count: filtered.length })}
             </motion.span>
           </div>
 
@@ -390,7 +396,7 @@ function CandidatesRoute() {
                 type="text"
                 value={search}
                 onChange={(e) => handleSearchChange(e.target.value)}
-                placeholder="Search by name, role or location…"
+                placeholder={t('search.placeholder')}
                 className="flex-1 bg-transparent text-white text-[13px] outline-none"
               />
 
@@ -402,7 +408,7 @@ function CandidatesRoute() {
                     exit={{ opacity: 0, x: 6 }}
                     className="text-amber-300 text-[11px] font-semibold shrink-0 hidden sm:block"
                   >
-                    Searching…
+                  {t('search.searching')}
                   </motion.span>
                 )}
                 {search && !isTyping && (
@@ -429,7 +435,7 @@ function CandidatesRoute() {
               }`}
             >
               <FiSliders size={15} />
-              <span className="hidden sm:inline">Filters</span>
+              <span className="hidden sm:inline">{t('filters.button')}</span>
               <AnimatePresence>
                 {activeFilterCount > 0 && (
                   <motion.span
@@ -459,10 +465,10 @@ function CandidatesRoute() {
                   {/* Experience bucket */}
                   <div className="flex-1">
                     <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-wider mb-2">
-                      Experience
+                      {t('filters.experience.label')}
                     </p>
                     <div className="flex gap-1.5 flex-wrap">
-                      {EXPERIENCE_FILTERS.map((f) => (
+                      {EXPERIENCE_FILTER_KEYS.map((f) => (
                         <motion.button
                           key={f}
                           whileTap={{ scale: 0.94 }}
@@ -473,7 +479,7 @@ function CandidatesRoute() {
                               : 'bg-white/10 text-indigo-200 hover:bg-white/20'
                           }`}
                         >
-                          {f}
+                          {t(`filters.experience.options.${f}`)}
                         </motion.button>
                       ))}
                     </div>
@@ -482,16 +488,16 @@ function CandidatesRoute() {
                   {/* Sort */}
                   <div className="flex-1">
                     <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-wider mb-2">
-                      Sort By Experience
+                      {t('filters.sort.label')}
                     </p>
                     <div className="flex gap-1.5 flex-wrap">
                       {(
                         [
-                          { key: 'default',  label: 'Default'     },
-                          { key: 'exp-high', label: 'Most first'   },
-                          { key: 'exp-low',  label: 'Least first'  },
+                          { key: 'default',  labelKey: 'filters.sort.options.default' },
+                          { key: 'exp-high', labelKey: 'filters.sort.options.mostFirst' },
+                          { key: 'exp-low',  labelKey: 'filters.sort.options.leastFirst' },
                         ] as const
-                      ).map(({ key, label }) => (
+                      ).map(({ key, labelKey }) => (
                         <motion.button
                           key={key}
                           whileTap={{ scale: 0.94 }}
@@ -502,7 +508,7 @@ function CandidatesRoute() {
                               : 'bg-white/10 text-indigo-200 hover:bg-white/20'
                           }`}
                         >
-                          {label}
+                          {t(labelKey)}
                         </motion.button>
                       ))}
                     </div>
@@ -510,10 +516,10 @@ function CandidatesRoute() {
 
                   {activeFilterCount > 0 && (
                     <button
-                      onClick={() => { setExpFilter('All'); setSortBy('default') }}
+                      onClick={() => { setExpFilter('all'); setSortBy('default') }}
                       className="self-end sm:self-center text-[11px] text-indigo-300 hover:text-white underline underline-offset-2 transition-colors shrink-0"
                     >
-                      Clear all
+                      {t('filters.clearAll')}
                     </button>
                   )}
                 </div>
@@ -535,15 +541,15 @@ function CandidatesRoute() {
             animate={{ opacity: 1 }}
             className="text-slate-400 text-[12px] font-medium mb-4 sm:hidden"
           >
-            {filtered.length} candidate{filtered.length !== 1 ? 's' : ''} found
+            {t('resultsFound', { count: filtered.length })}
           </motion.p>
           )}
 
           {/* Error */}
           {isError && (
             <div className="bg-red-50 border border-red-100 rounded-2xl p-6 text-center mb-4">
-              <p className="text-red-600 font-semibold text-sm">Failed to load candidates</p>
-              <p className="text-red-400 text-xs mt-1">Check your connection and try again.</p>
+              <p className="text-red-600 font-semibold text-sm">{t('errors.loadFailedTitle')}</p>
+              <p className="text-red-400 text-xs mt-1">{t('errors.loadFailedSubtitle')}</p>
             </div>
           )}
 

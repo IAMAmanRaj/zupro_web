@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useState, useMemo } from 'react'
 import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
+import { useTranslation } from 'react-i18next'
 import {
   FiSearch,
   FiMapPin,
@@ -40,11 +41,11 @@ interface Job {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const PAY_TYPES = ['All', 'Per Day', 'Per Shift'] as const
-type PayFilter = (typeof PAY_TYPES)[number]
+const PAY_TYPE_KEYS = ['all', 'perDay', 'perShift'] as const
+type PayFilterKey = (typeof PAY_TYPE_KEYS)[number]
 
-function getPayType(payLabel: string): 'Per Day' | 'Per Shift' {
-  return payLabel.toLowerCase().includes('day') ? 'Per Day' : 'Per Shift'
+function getPayType(payLabel: string): Exclude<PayFilterKey, 'all'> {
+  return payLabel.toLowerCase().includes('day') ? 'perDay' : 'perShift'
 }
 
 function parsePayAmount(payLabel: string): number {
@@ -85,15 +86,16 @@ function ShimmerCard() {
 // ─── Job Card ─────────────────────────────────────────────────────────────────
 
 function JobCard({ job, index }: { job: Job; index: number }) {
+  const { t } = useTranslation('searchJobs')
   const [applied, setApplied] = useState(false)
   const [skipped, setSkipped] = useState(false)
 
   const payType = getPayType(job.payLabel)
-  const isPerDay = payType === 'Per Day'
+  const isPerDay = payType === 'perDay'
 
   const handleApply = () => {
     setApplied(true)
-    toast.success('Application successful!', {
+    toast.success(t('toast.applied'), {
       style: {
         fontFamily: '"Plus Jakarta Sans", sans-serif',
         fontWeight: 600,
@@ -109,7 +111,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
 
   const handleSkip = () => {
     setSkipped(true)
-    toast('Skipped', {
+    toast(t('toast.skipped'), {
       style: {
         fontFamily: '"Plus Jakarta Sans", sans-serif',
         fontWeight: 600,
@@ -157,7 +159,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
             className="absolute top-3 right-3 flex items-center gap-1 bg-[#3F51B5] text-white text-[10px] font-bold px-2 py-1 rounded-full"
           >
             <FiCheckCircle size={9} />
-            Applied
+            {t('card.badges.applied')}
           </motion.div>
         )}
       </AnimatePresence>
@@ -180,7 +182,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
                     : 'bg-white text-[#3F51B5] border-[#1e1b4b]/10'
                 }`}
               >
-                {payType}
+                {t(`filters.payType.options.${payType}`)}
               </span>
             )}
           </div>
@@ -213,7 +215,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
           className="flex items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-[#3F51B5] transition-colors duration-150 px-2 py-1 rounded-lg hover:bg-[#3F51B5]/5"
         >
           <FiExternalLink size={11} />
-          View map
+          {t('card.links.viewMap')}
         </a>
       </div>
 
@@ -225,8 +227,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
           disabled={isDone}
           className="flex-1 hover:cursor-pointer flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-semibold border border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          
-          Skip
+          {t('card.actions.skip')}
         </motion.button>
         <motion.button
           whileTap={!isDone ? { scale: 0.95 } : {}}
@@ -238,8 +239,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
               : 'bg-[#3F51B5] text-white shadow-[0_2px_10px_rgba(63,81,181,0.22)] hover:bg-[#3549a0] hover:shadow-[0_4px_18px_rgba(63,81,181,0.32)] disabled:opacity-40'
           }`}
         >
-          
-          {applied ? 'Applied' : 'Apply'}
+          {applied ? t('card.actions.applied') : t('card.actions.apply')}
         </motion.button>
       </div>
     </motion.div>
@@ -249,6 +249,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
 // ─── Empty State ──────────────────────────────────────────────────────────────
 
 function EmptyState({ query }: { query: string }) {
+  const { t } = useTranslation('searchJobs')
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.97 }}
@@ -258,9 +259,11 @@ function EmptyState({ query }: { query: string }) {
       <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
         <FiBriefcase size={22} className="text-slate-300" />
       </div>
-      <p className="text-slate-600 font-semibold text-[15px]">No jobs found</p>
+      <p className="text-slate-600 font-semibold text-[15px]">{t('empty.title')}</p>
       <p className="text-slate-400 text-sm mt-1">
-        {query ? `No results for "${query}"` : 'Try adjusting your filters'}
+        {query
+          ? t('empty.subtitle.withQuery', { query })
+          : t('empty.subtitle.noQuery')}
       </p>
     </motion.div>
   )
@@ -272,10 +275,11 @@ function EmptyState({ query }: { query: string }) {
 let searchTimer: ReturnType<typeof setTimeout>
 
 function JobsRoute() {
+  const { t } = useTranslation('searchJobs')
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-  const [payFilter, setPayFilter] = useState<PayFilter>('All')
+  const [payFilter, setPayFilter] = useState<PayFilterKey>('all')
   const [sortBy, setSortBy] = useState<'default' | 'pay-high' | 'pay-low'>('default')
   const [showFilters, setShowFilters] = useState(false)
 
@@ -316,13 +320,13 @@ function JobsRoute() {
         (j) => j.title.toLowerCase().includes(q) || j.location.toLowerCase().includes(q),
       )
     }
-    if (payFilter !== 'All') result = result.filter((j) => getPayType(j.payLabel) === payFilter)
+    if (payFilter !== 'all') result = result.filter((j) => getPayType(j.payLabel) === payFilter)
     if (sortBy === 'pay-high') result.sort((a, b) => parsePayAmount(b.payLabel) - parsePayAmount(a.payLabel))
     else if (sortBy === 'pay-low') result.sort((a, b) => parsePayAmount(a.payLabel) - parsePayAmount(b.payLabel))
     return result
   }, [jobs, debouncedSearch, payFilter, sortBy])
 
-  const activeFilterCount = (payFilter !== 'All' ? 1 : 0) + (sortBy !== 'default' ? 1 : 0)
+  const activeFilterCount = (payFilter !== 'all' ? 1 : 0) + (sortBy !== 'default' ? 1 : 0)
 
   return (
     <div
@@ -337,12 +341,12 @@ function JobsRoute() {
           <div className="flex items-end justify-between mb-3">
             <div>
               <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-[0.15em] mb-0.5">
-                Available Jobs
+                {t('header.badge')}
               </p>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold tracking-tight leading-none">
-                Find work{' '}
+                {t('header.title.before')}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400">
-                  nearby you
+                  {t('header.title.highlight')}
                 </span>
               </h1>
             </div>
@@ -353,7 +357,7 @@ function JobsRoute() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-indigo-300 text-xs font-medium hidden sm:block pb-0.5"
               >
-                {filtered.length} job{filtered.length !== 1 ? 's' : ''} found
+              {t('resultsFound', { count: filtered.length })}
               </motion.span>
             )}
           </div>
@@ -377,7 +381,7 @@ function JobsRoute() {
                 type="text"
                 value={search}
                 onChange={(e) => handleSearchChange(e.target.value)}
-                placeholder="Search by title or location…"
+                placeholder={t('search.placeholder')}
                 className="flex-1 bg-transparent  text-white text-[13px] outline-none"
               />
 
@@ -389,7 +393,7 @@ function JobsRoute() {
                     exit={{ opacity: 0, x: 6 }}
                     className="text-amber-300 text-[11px] font-semibold shrink-0 hidden sm:block"
                   >
-                    Searching…
+                    {t('search.searching')}
                   </motion.span>
                 )}
                 {search && !isTyping && (
@@ -416,7 +420,7 @@ function JobsRoute() {
               }`}
             >
               <FiSliders size={15} />
-              <span className="hidden sm:inline">Filters</span>
+              <span className="hidden sm:inline">{t('filters.button')}</span>
               <AnimatePresence>
                 {activeFilterCount > 0 && (
                   <motion.span
@@ -445,37 +449,37 @@ function JobsRoute() {
                 <div className="bg-white/10 border border-white/10 rounded-xl px-4 py-3.5 flex flex-col sm:flex-row gap-3 sm:gap-6">
                   <div className="flex-1">
                     <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-wider mb-2">
-                      Pay Type
+                      {t('filters.payType.label')}
                     </p>
                     <div className="flex gap-1.5 flex-wrap">
-                      {PAY_TYPES.map((t) => (
+                      {PAY_TYPE_KEYS.map((k) => (
                         <motion.button
-                          key={t}
+                          key={k}
                           whileTap={{ scale: 0.94 }}
-                          onClick={() => setPayFilter(t)}
+                          onClick={() => setPayFilter(k)}
                           className={`px-3 py-1.5 rounded-lg text-[12px] font-semibold transition-all duration-150 ${
-                            payFilter === t
+                            payFilter === k
                               ? 'bg-white text-[#3F51B5] shadow-sm'
                               : 'bg-white/10 text-indigo-200 hover:bg-white/20'
                           }`}
                         >
-                          {t}
+                          {t(`filters.payType.options.${k}`)}
                         </motion.button>
                       ))}
                     </div>
                   </div>
                   <div className="flex-1">
                     <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-wider mb-2">
-                      Sort By Pay
+                      {t('filters.sort.label')}
                     </p>
                     <div className="flex gap-1.5 flex-wrap">
                       {(
                         [
-                          { key: 'default', label: 'Default' },
-                          { key: 'pay-high', label: 'High → Low' },
-                          { key: 'pay-low', label: 'Low → High' },
+                          { key: 'default', labelKey: 'filters.sort.options.default' },
+                          { key: 'pay-high', labelKey: 'filters.sort.options.highLow' },
+                          { key: 'pay-low', labelKey: 'filters.sort.options.lowHigh' },
                         ] as const
-                      ).map(({ key, label }) => (
+                      ).map(({ key, labelKey }) => (
                         <motion.button
                           key={key}
                           whileTap={{ scale: 0.94 }}
@@ -486,17 +490,17 @@ function JobsRoute() {
                               : 'bg-white/10 text-indigo-200 hover:bg-white/20'
                           }`}
                         >
-                          {label}
+                          {t(labelKey)}
                         </motion.button>
                       ))}
                     </div>
                   </div>
                   {activeFilterCount > 0 && (
                     <button
-                      onClick={() => { setPayFilter('All'); setSortBy('default') }}
+                      onClick={() => { setPayFilter('all'); setSortBy('default') }}
                       className="self-end sm:self-center text-[11px] text-indigo-300 hover:text-white underline underline-offset-2 transition-colors shrink-0"
                     >
-                      Clear all
+                      {t('filters.clearAll')}
                     </button>
                   )}
                 </div>
@@ -518,15 +522,15 @@ function JobsRoute() {
               animate={{ opacity: 1 }}
               className="text-slate-400 text-[12px] font-medium mb-4 sm:hidden"
             >
-              {filtered.length} job{filtered.length !== 1 ? 's' : ''} found
+              {t('resultsFound', { count: filtered.length })}
             </motion.p>
           )}
 
           {/* Error */}
           {isError && (
             <div className="bg-red-50 border border-red-100 rounded-2xl p-6 text-center">
-              <p className="text-red-600 font-semibold text-sm">Failed to load jobs</p>
-              <p className="text-red-400 text-xs mt-1">Check your connection and try again.</p>
+              <p className="text-red-600 font-semibold text-sm">{t('errors.loadFailedTitle')}</p>
+              <p className="text-red-400 text-xs mt-1">{t('errors.loadFailedSubtitle')}</p>
             </div>
           )}
 
