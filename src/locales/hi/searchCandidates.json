@@ -1,0 +1,65 @@
+{
+  "header": {
+    "badge": "उम्मीदवार पूल",
+    "title": {
+      "before": "अपनी",
+      "highlight": "अगली भर्ती खोजें!"
+    }
+  },
+  "resultsFound": "{{count}} उम्मीदवार मिला",
+  "resultsFound_plural": "{{count}} उम्मीदवार मिले",
+  "search": {
+    "placeholder": "नाम, भूमिका या स्थान से खोजें…",
+    "searching": "खोज रहे हैं…"
+  },
+  "filters": {
+    "button": "फ़िल्टर",
+    "experience": {
+      "label": "अनुभव",
+      "options": {
+        "all": "सभी",
+        "0_2": "0–2 वर्ष",
+        "2_4": "2–4 वर्ष",
+        "4_plus": "4+ वर्ष"
+      }
+    },
+    "sort": {
+      "label": "अनुभव के अनुसार क्रम",
+      "options": {
+        "default": "डिफ़ॉल्ट",
+        "mostFirst": "अधिक पहले",
+        "leastFirst": "कम पहले"
+      }
+    },
+    "clearAll": "सब साफ़ करें"
+  },
+  "card": {
+    "badges": {
+      "hired": "हायर किया गया"
+    },
+    "meta": {
+      "availableFrom": "{{date}} से उपलब्ध"
+    },
+    "actions": {
+      "skip": "छोड़ें",
+      "hire": "हायर करें",
+      "hired": "हायर किया गया"
+    }
+  },
+  "toast": {
+    "hired": "{{name}} हायर किया गया!",
+    "skipped": "उम्मीदवार छोड़ा गया"
+  },
+  "empty": {
+    "title": "कोई उम्मीदवार नहीं मिला",
+    "subtitle": {
+      "withQuery": "\"{{query}}\" के लिए कोई परिणाम नहीं",
+      "noQuery": "अपने फ़िल्टर बदलकर देखें"
+    }
+  },
+  "errors": {
+    "loadFailedTitle": "उम्मीदवार लोड नहीं हो पाए",
+    "loadFailedSubtitle": "कृपया अपना कनेक्शन जांचें और फिर से कोशिश करें।"
+  }
+}
+

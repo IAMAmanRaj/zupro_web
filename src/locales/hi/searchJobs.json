@@ -1,0 +1,64 @@
+{
+  "header": {
+    "badge": "उपलब्ध नौकरियाँ",
+    "title": {
+      "before": "काम खोजें",
+      "highlight": "अपने पास"
+    }
+  },
+  "resultsFound": "{{count}} नौकरी मिली",
+  "resultsFound_plural": "{{count}} नौकरियाँ मिलीं",
+  "search": {
+    "placeholder": "शीर्षक या स्थान से खोजें…",
+    "searching": "खोज रहे हैं…"
+  },
+  "filters": {
+    "button": "फ़िल्टर",
+    "payType": {
+      "label": "भुगतान प्रकार",
+      "options": {
+        "all": "सभी",
+        "perDay": "प्रति दिन",
+        "perShift": "प्रति शिफ्ट"
+      }
+    },
+    "sort": {
+      "label": "भुगतान के अनुसार क्रम",
+      "options": {
+        "default": "डिफ़ॉल्ट",
+        "highLow": "ज्यादा → कम",
+        "lowHigh": "कम → ज्यादा"
+      }
+    },
+    "clearAll": "सब साफ़ करें"
+  },
+  "card": {
+    "badges": {
+      "applied": "आवेदन किया"
+    },
+    "actions": {
+      "skip": "छोड़ें",
+      "apply": "आवेदन करें",
+      "applied": "आवेदन किया"
+    },
+    "links": {
+      "viewMap": "मानचित्र देखें"
+    }
+  },
+  "toast": {
+    "applied": "आवेदन सफल रहा!",
+    "skipped": "छोड़ा गया"
+  },
+  "empty": {
+    "title": "कोई नौकरी नहीं मिली",
+    "subtitle": {
+      "withQuery": "\"{{query}}\" के लिए कोई परिणाम नहीं",
+      "noQuery": "अपने फ़िल्टर बदलकर देखें"
+    }
+  },
+  "errors": {
+    "loadFailedTitle": "नौकरियाँ लोड नहीं हो पाईं",
+    "loadFailedSubtitle": "कृपया अपना कनेक्शन जांचें और फिर से कोशिश करें।"
+  }
+}
+

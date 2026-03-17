@@ -1,0 +1,65 @@
+{
+  "header": {
+    "badge": "Candidate Pool",
+    "title": {
+      "before": "Find your",
+      "highlight": "next hire!"
+    }
+  },
+  "resultsFound": "{{count}} candidate found",
+  "resultsFound_plural": "{{count}} candidates found",
+  "search": {
+    "placeholder": "Search by name, role or location…",
+    "searching": "Searching…"
+  },
+  "filters": {
+    "button": "Filters",
+    "experience": {
+      "label": "Experience",
+      "options": {
+        "all": "All",
+        "0_2": "0–2 yrs",
+        "2_4": "2–4 yrs",
+        "4_plus": "4+ yrs"
+      }
+    },
+    "sort": {
+      "label": "Sort by experience",
+      "options": {
+        "default": "Default",
+        "mostFirst": "Most first",
+        "leastFirst": "Least first"
+      }
+    },
+    "clearAll": "Clear all"
+  },
+  "card": {
+    "badges": {
+      "hired": "Hired"
+    },
+    "meta": {
+      "availableFrom": "Available from {{date}}"
+    },
+    "actions": {
+      "skip": "Skip",
+      "hire": "Hire",
+      "hired": "Hired"
+    }
+  },
+  "toast": {
+    "hired": "{{name}} hired!",
+    "skipped": "Candidate skipped"
+  },
+  "empty": {
+    "title": "No candidates found",
+    "subtitle": {
+      "withQuery": "No results for \"{{query}}\"",
+      "noQuery": "Try adjusting your filters"
+    }
+  },
+  "errors": {
+    "loadFailedTitle": "Failed to load candidates",
+    "loadFailedSubtitle": "Check your connection and try again."
+  }
+}
+

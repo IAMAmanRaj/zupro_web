@@ -1,0 +1,64 @@
+{
+  "header": {
+    "badge": "Available Jobs",
+    "title": {
+      "before": "Find work",
+      "highlight": "nearby you"
+    }
+  },
+  "resultsFound": "{{count}} job found",
+  "resultsFound_plural": "{{count}} jobs found",
+  "search": {
+    "placeholder": "Search by title or location…",
+    "searching": "Searching…"
+  },
+  "filters": {
+    "button": "Filters",
+    "payType": {
+      "label": "Pay type",
+      "options": {
+        "all": "All",
+        "perDay": "Per Day",
+        "perShift": "Per Shift"
+      }
+    },
+    "sort": {
+      "label": "Sort by pay",
+      "options": {
+        "default": "Default",
+        "highLow": "High → Low",
+        "lowHigh": "Low → High"
+      }
+    },
+    "clearAll": "Clear all"
+  },
+  "card": {
+    "badges": {
+      "applied": "Applied"
+    },
+    "actions": {
+      "skip": "Skip",
+      "apply": "Apply",
+      "applied": "Applied"
+    },
+    "links": {
+      "viewMap": "View map"
+    }
+  },
+  "toast": {
+    "applied": "Application successful!",
+    "skipped": "Skipped"
+  },
+  "empty": {
+    "title": "No jobs found",
+    "subtitle": {
+      "withQuery": "No results for \"{{query}}\"",
+      "noQuery": "Try adjusting your filters"
+    }
+  },
+  "errors": {
+    "loadFailedTitle": "Failed to load jobs",
+    "loadFailedSubtitle": "Check your connection and try again."
+  }
+}
+
