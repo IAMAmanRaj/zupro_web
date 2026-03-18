@@ -10,14 +10,7 @@ import {
   FiMapPin,
 } from 'react-icons/fi'
 
-type Job = {
-  id: string
-  title: string
-  location: string
-  joiningDate: string
-  mapUrl: string
-  payLabel: string
-}
+import type { Job } from '../../types'
 
 function getPayType(payLabel: string): 'perDay' | 'perShift' {
   return payLabel.toLowerCase().includes('day') ? 'perDay' : 'perShift'
@@ -176,4 +169,3 @@ export function JobCard({ job, index }: { job: Job; index: number }) {
     </motion.div>
   )
 }
-
