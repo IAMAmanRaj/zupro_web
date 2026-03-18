@@ -1,23 +1,13 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+﻿import { createFileRoute, redirect } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { useState, useMemo } from 'react'
-import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  FiSearch,
-  FiMapPin,
-  FiClock,
-  FiExternalLink,
-  FiSliders,
-  FiX,
-  FiBriefcase,
-  FiCheckCircle,
-} from 'react-icons/fi'
+import { useOnboardingFlowStore } from '../../stores/onboardingFlowStore'
+import { JobCard } from '../../features/search/jobs/components/card/JobCard'
+import { ShimmerCard } from '../../features/search/jobs/components/card/ShimmerCard'
+import { FiBriefcase, FiSearch, FiSliders, FiX } from 'react-icons/fi'
 import { LuLoaderCircle } from 'react-icons/lu'
-import { motion, AnimatePresence } from 'framer-motion'
-import toast from 'react-hot-toast'
-
-// ─── Route ────────────────────────────────────────────────────────────────────
+import { AnimatePresence, motion } from 'framer-motion'
 
 export const Route = createFileRoute('/search/jobs')({
   beforeLoad: () => {
@@ -28,7 +18,7 @@ export const Route = createFileRoute('/search/jobs')({
   component: JobsRoute,
 })
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Types Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 interface Job {
   id: string
@@ -39,7 +29,7 @@ interface Job {
   payLabel: string
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Helpers Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 const PAY_TYPE_KEYS = ['all', 'perDay', 'perShift'] as const
 type PayFilterKey = (typeof PAY_TYPE_KEYS)[number]
@@ -53,200 +43,8 @@ function parsePayAmount(payLabel: string): number {
   return match ? parseInt(match[0].replace(',', ''), 10) : 0
 }
 
-// ─── Shimmer ──────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Shimmer Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
-function ShimmerCard() {
-  return (
-    <div className="bg-white rounded-2xl border border-slate-100 p-5 space-y-3 overflow-hidden relative">
-      <div
-        className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-slate-100/80 to-transparent"
-        style={{ animation: 'shimmer 1.4s infinite' }}
-      />
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-slate-100 rounded-lg shrink-0" />
-          <div className="h-4 w-28 bg-slate-100 rounded-lg" />
-        </div>
-        <div className="h-5 w-14 bg-slate-100 rounded-full" />
-      </div>
-      <div className="h-3.5 w-3/5 bg-slate-100 rounded-lg" />
-      <div className="h-3.5 w-2/5 bg-slate-100 rounded-lg" />
-      <div className="pt-3 border-t border-slate-50 flex items-center justify-between">
-        <div className="h-4 w-1/3 bg-slate-100 rounded-lg" />
-        <div className="h-3.5 w-16 bg-slate-100 rounded-lg" />
-      </div>
-      <div className="flex gap-2 pt-1">
-        <div className="h-9 flex-1 bg-slate-100 rounded-xl" />
-        <div className="h-9 flex-1 bg-slate-100 rounded-xl" />
-      </div>
-    </div>
-  )
-}
-
-// ─── Job Card ─────────────────────────────────────────────────────────────────
-
-function JobCard({ job, index }: { job: Job; index: number }) {
-  const { t } = useTranslation('searchJobs')
-  const [applied, setApplied] = useState(false)
-  const [skipped, setSkipped] = useState(false)
-
-  const payType = getPayType(job.payLabel)
-  const isPerDay = payType === 'perDay'
-
-  const handleApply = () => {
-    setApplied(true)
-    toast.success(t('toast.applied'), {
-      style: {
-        fontFamily: '"Plus Jakarta Sans", sans-serif',
-        fontWeight: 600,
-        fontSize: '13px',
-        borderRadius: '12px',
-        border: '1px solid #e0e7ff',
-        color: '#1e1b4b',
-        padding: '10px 14px',
-      },
-      iconTheme: { primary: '#3F51B5', secondary: '#fff' },
-    })
-  }
-
-  const handleSkip = () => {
-    setSkipped(true)
-    toast(t('toast.skipped'), {
-      style: {
-        fontFamily: '"Plus Jakarta Sans", sans-serif',
-        fontWeight: 600,
-        fontSize: '13px',
-        borderRadius: '12px',
-        border: '1px solid #f1f5f9',
-        color: '#94a3b8',
-        padding: '10px 14px',
-      },
-      icon: '↩',
-    })
-  }
-
-  const isDone = applied || skipped
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.28, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={!isDone ? { y: -3, boxShadow: '0 12px 40px rgba(63,81,181,0.10)' } : {}}
-      className={`group hover:cursor-pointer bg-white rounded-2xl border flex flex-col p-5 relative overflow-hidden transition-all duration-200 ${
-        applied
-          ? 'border-[#3F51B5]/25 bg-indigo-50/20'
-          : skipped
-          ? 'border-slate-100 opacity-45 scale-[0.99]'
-          : 'border-slate-100 hover:border-[#3F51B5]/20'
-      }`}
-      style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-    >
-      {/* Left accent bar */}
-      <motion.div
-        className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-[#3F51B5]"
-        initial={{ opacity: 0, scaleY: 0 }}
-        whileHover={{ opacity: isDone ? 0 : 1, scaleY: 1 }}
-        transition={{ duration: 0.18 }}
-      />
-
-      {/* Applied badge */}
-      <AnimatePresence>
-        {applied && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7, x: 6 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            className="absolute top-3 right-3 flex items-center gap-1 bg-[#3F51B5] text-white text-[10px] font-bold px-2 py-1 rounded-full"
-          >
-            <FiCheckCircle size={9} />
-            {t('card.badges.applied')}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Top row */}
-      <div className="flex items-center gap-2.5 mb-3">
-        <div className="shrink-0 w-8 h-8 rounded-lg bg-[#3F51B5]/8 flex items-center justify-center mt-0.5">
-          <FiBriefcase size={14} className="text-[#3F51B5]" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="text-[14px] font-bold text-slate-800 leading-snug line-clamp-2 flex-1">
-              {job.title}
-            </h3>
-            {!applied && (
-              <span
-                className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full border ${
-                  isPerDay
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
-                    : 'bg-white text-[#3F51B5] border-[#1e1b4b]/10'
-                }`}
-              >
-                {t(`filters.payType.options.${payType}`)}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Meta */}
-      <div className="space-y-1.5 mb-4 flex-1">
-        <div className="flex items-center gap-2 text-slate-500 text-[12px]">
-          <FiMapPin size={12} className="shrink-0 text-[#3F51B5]/50" />
-          <span className="truncate">{job.location}</span>
-        </div>
-        <div className="flex items-center gap-2 text-slate-500 text-[12px]">
-          <FiClock size={12} className="shrink-0 text-[#3F51B5]/50" />
-          <span>{job.joiningDate}</span>
-        </div>
-      </div>
-
-      {/* Pay + map */}
-      <div className="flex items-center justify-between pt-3 border-t border-slate-50 mb-3">
-        <div className="flex items-center gap-0.5">
-    
-          <span className="text-[13px] font-bold text-[#3F51B5]">{job.payLabel}</span>
-        </div>
-        <a
-          href={job.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-[#3F51B5] transition-colors duration-150 px-2 py-1 rounded-lg hover:bg-[#3F51B5]/5"
-        >
-          <FiExternalLink size={11} />
-          {t('card.links.viewMap')}
-        </a>
-      </div>
-
-      {/* Action buttons */}
-      <div className="flex gap-2">
-        <motion.button
-          whileTap={!isDone ? { scale: 0.95 } : {}}
-          onClick={handleSkip}
-          disabled={isDone}
-          className="flex-1 hover:cursor-pointer flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-semibold border border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          {t('card.actions.skip')}
-        </motion.button>
-        <motion.button
-          whileTap={!isDone ? { scale: 0.95 } : {}}
-          onClick={handleApply}
-          disabled={isDone}
-          className={`flex-1 hover:cursor-pointer flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-bold transition-all duration-150 disabled:cursor-not-allowed ${
-            applied
-              ? 'bg-[#3F51B5]/8 text-[#3F51B5] border border-[#3F51B5]/15'
-              : 'bg-[#3F51B5] text-white shadow-[0_2px_10px_rgba(63,81,181,0.22)] hover:bg-[#3549a0] hover:shadow-[0_4px_18px_rgba(63,81,181,0.32)] disabled:opacity-40'
-          }`}
-        >
-          {applied ? t('card.actions.applied') : t('card.actions.apply')}
-        </motion.button>
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Empty State ──────────────────────────────────────────────────────────────
 
 function EmptyState({ query }: { query: string }) {
   const { t } = useTranslation('searchJobs')
@@ -259,7 +57,7 @@ function EmptyState({ query }: { query: string }) {
       <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
         <FiBriefcase size={22} className="text-slate-300" />
       </div>
-      <p className="text-slate-600 font-semibold text-[15px]">{t('empty.title')}</p>
+      <p className="text-slate-600 font-semibold text-[15px]">{t("empty.title")}</p>
       <p className="text-slate-400 text-sm mt-1">
         {query
           ? t('empty.subtitle.withQuery', { query })
@@ -269,7 +67,7 @@ function EmptyState({ query }: { query: string }) {
   )
 }
 
-// ─── Main Route ───────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Main Route Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 // module-level timer ref (avoids closure issues without useRef)
 let searchTimer: ReturnType<typeof setTimeout>
@@ -333,7 +131,7 @@ function JobsRoute() {
       className="h-screen w-screen flex flex-col overflow-hidden bg-[#f0f0f5]"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
-      {/* ── Fixed header ── */}
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Fixed header Ã¢â€â‚¬Ã¢â€â‚¬ */}
       <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 shrink-0">
         <div className="max-w-5xl mx-auto">
 
@@ -420,7 +218,7 @@ function JobsRoute() {
               }`}
             >
               <FiSliders size={15} />
-              <span className="hidden sm:inline">{t('filters.button')}</span>
+              <span className="hidden sm:inline">{t("filters.button")}</span>
               <AnimatePresence>
                 {activeFilterCount > 0 && (
                   <motion.span
@@ -510,7 +308,7 @@ function JobsRoute() {
         </div>
       </div>
 
-      {/* ── Scrollable content ── */}
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Scrollable content Ã¢â€â‚¬Ã¢â€â‚¬ */}
       <div className="flex-1 overflow-y-auto no-scrollbar min-h-0">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5">
 
@@ -529,8 +327,8 @@ function JobsRoute() {
           {/* Error */}
           {isError && (
             <div className="bg-red-50 border border-red-100 rounded-2xl p-6 text-center">
-              <p className="text-red-600 font-semibold text-sm">{t('errors.loadFailedTitle')}</p>
-              <p className="text-red-400 text-xs mt-1">{t('errors.loadFailedSubtitle')}</p>
+              <p className="text-red-600 font-semibold text-sm">{t("errors.loadFailedTitle")}</p>
+              <p className="text-red-400 text-xs mt-1">{t("errors.loadFailedSubtitle")}</p>
             </div>
           )}
 
@@ -554,3 +352,6 @@ function JobsRoute() {
     </div>
   )
 }
+
+
+
