@@ -45,7 +45,7 @@ export function Navbar() {
         <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.faqs')}
         </Link>
-        <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+        <Link to="/contact-us" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.contact')}
         </Link>
         <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">

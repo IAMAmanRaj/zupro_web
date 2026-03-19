@@ -83,12 +83,12 @@ function RouteComponent() {
       <div className="lg:hidden min-h-screen bg-white flex flex-col items-center px-5 pt-10 pb-8">
 
         {/* Headline */}
-        <h1 className="sora-bold md:mt-24 text-[#1B2A4A] text-[24px] md:text-5xl font-black leading-tight tracking-tight text-center mb-4">
+        <h1 className="sora-bold mt-4 vs:mt-8 md:mt-24 text-[#1B2A4A] text-[22px] vs:text-[40px] sm:text-[24px] md:text-5xl font-black leading-tight tracking-tight text-center mb-4">
           India's Blue-Collar &amp; Domestic<br />Jobs Network
         </h1>
 
         {/* Subtitle */}
-        <p className="text-[#6B7280] cascadia-mono-light text-[10px] md:text-[15px] text-center leading-relaxed max-w-[320px] md:max-w-[500px] mb-4">
+        <p className="text-[#6B7280] cascadia-mono-light text-[11px] vs:text-[15px] text-center leading-relaxed max-w-[400px] md:max-w-[500px] mb-4">
           Connecting workers and hirers—households, enterprises &amp; quick-commerce: instantly, locally, at scale.
         </p>
 
@@ -96,11 +96,11 @@ function RouteComponent() {
         <img
           src="/images/landing/mobile_hand_asset.png"
           alt="Zupro app showing today's jobs"
-          className="object-cover w-[340px] -mt-2 h-[340px] vs:w-[320px] vs:h-[320px] md:h-[500px] md:w-[500px] md:mt-16"
+          className="object-cover w-[320px] -mt-2 h-[320px] vs:w-[320px] vs:h-[320px] md:h-[500px] md:w-[500px] md:mt-16"
         />
 
        {/* CTA Buttons */}
-      <div className="-mt-3 flex gap-3 md:gap-4 w-full max-w-[560px] px-1">
+      <div className=" -mt-3 vs:-mt-1 flex gap-3 md:gap-4 w-full max-w-[560px] px-1">
         <button
           type="button"
           onClick={() => navigate({ to: '/onboarding/seeker' })}
@@ -118,7 +118,7 @@ function RouteComponent() {
       </div>
 
         {/* Floating down arrow */}
-        <div className="mt-4 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80">
+        <div className="mt-7 vs:mt-12 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80">
           <FaAnglesDown size={26} strokeWidth={2.5} />
         </div>
 

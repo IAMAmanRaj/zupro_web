@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeIndexRouteImport } from './routes/home/index'
+import { Route as ContactUsIndexRouteImport } from './routes/contact-us/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as SearchJobsRouteImport } from './routes/search/jobs'
 import { Route as SearchCandidatesRouteImport } from './routes/search/candidates'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const HomeIndexRoute = HomeIndexRouteImport.update({
   id: '/home/',
   path: '/home/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactUsIndexRoute = ContactUsIndexRouteImport.update({
+  id: '/contact-us/',
+  path: '/contact-us/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthIndexRoute = AuthIndexRouteImport.update({
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/search/candidates': typeof SearchCandidatesRoute
   '/search/jobs': typeof SearchJobsRoute
   '/auth/': typeof AuthIndexRoute
+  '/contact-us/': typeof ContactUsIndexRoute
   '/home/': typeof HomeIndexRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/search/candidates': typeof SearchCandidatesRoute
   '/search/jobs': typeof SearchJobsRoute
   '/auth': typeof AuthIndexRoute
+  '/contact-us': typeof ContactUsIndexRoute
   '/home': typeof HomeIndexRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/search/candidates': typeof SearchCandidatesRoute
   '/search/jobs': typeof SearchJobsRoute
   '/auth/': typeof AuthIndexRoute
+  '/contact-us/': typeof ContactUsIndexRoute
   '/home/': typeof HomeIndexRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/search/candidates'
     | '/search/jobs'
     | '/auth/'
+    | '/contact-us/'
     | '/home/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/search/candidates'
     | '/search/jobs'
     | '/auth'
+    | '/contact-us'
     | '/home'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/search/candidates'
     | '/search/jobs'
     | '/auth/'
+    | '/contact-us/'
     | '/home/'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   SearchCandidatesRoute: typeof SearchCandidatesRoute
   SearchJobsRoute: typeof SearchJobsRoute
   AuthIndexRoute: typeof AuthIndexRoute
+  ContactUsIndexRoute: typeof ContactUsIndexRoute
   HomeIndexRoute: typeof HomeIndexRoute
 }
 
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home/'
       preLoaderRoute: typeof HomeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact-us/': {
+      id: '/contact-us/'
+      path: '/contact-us'
+      fullPath: '/contact-us/'
+      preLoaderRoute: typeof ContactUsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/': {
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchCandidatesRoute: SearchCandidatesRoute,
   SearchJobsRoute: SearchJobsRoute,
   AuthIndexRoute: AuthIndexRoute,
+  ContactUsIndexRoute: ContactUsIndexRoute,
   HomeIndexRoute: HomeIndexRoute,
 }
 export const routeTree = rootRouteImport

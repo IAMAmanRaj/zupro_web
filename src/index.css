@@ -227,6 +227,12 @@ body {
   scrollbar-color: #3F51B5 #e8eaf6;
 }
 
+.zupro-scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 /* Hide scrollbar but keep scrolling */
 .no-scrollbar {
   scrollbar-width: none; /* Firefox */
