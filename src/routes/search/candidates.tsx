@@ -146,7 +146,7 @@ function CandidatesRoute() {
               </p>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold tracking-tight leading-none">
                 {t('header.title.before')}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#948dff] to-[#3F51B5]">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#948dff] to-[#3F51B5]">
                   {t('header.title.highlight')}
                 </span>
               </h1>
@@ -163,7 +163,7 @@ function CandidatesRoute() {
 
           {/* Search + filter row */}
           <div className="flex items-center gap-2">
-            <div className="flex-1 flex items-center gap-2.5 bg-white/10 border border-white/10 rounded-xl px-3.5 py-2.5 focus-within:border-white/30 focus-within:bg-white/[0.13] transition-all duration-200">
+            <div className="flex-1 flex items-center gap-2.5 bg-white/10 border border-white/10 rounded-xl px-3.5 py-2.5 focus-within:border-white/30 focus-within:bg-white/13 transition-all duration-200">
               <AnimatePresence mode="wait">
                 {isTyping ? (
                   <motion.span key="spin" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="shrink-0 text-amber-300">

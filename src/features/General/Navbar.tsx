@@ -39,6 +39,9 @@ export function Navbar() {
 
       {/* Desktop center links */}
       <div className="hidden sora-bold md:flex md:gap-6 lg:gap-10 mt-1 items-center text-[13px] lg:text-[15px] absolute top-5 left-1/2 -translate-x-1/2 gap-8">
+      <Link to="/home" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+          Home
+        </Link>
         <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
           {t('navbar.faqs')}
         </Link>
