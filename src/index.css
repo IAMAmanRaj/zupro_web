@@ -10,6 +10,7 @@
   --breakpoint-vss:350px;
   --breakpoint-vs:400px;
   --breakpoint-xs: 500px;
+  --breakpoint-xlg:1100px;
 }
 
 :root {
@@ -83,13 +84,16 @@ body {
    /* ── CSS Variables ── */
    :root {
      --primary: #3F51B5;
+     --primary-dark: #1e1b4b;
      --primary-light: rgba(63, 81, 181, 0.12);
      --primary-hover-shadow: 0 8px 24px rgba(63, 81, 181, 0.38);
    }
    
    /* ── Tailwind custom class shorthands ── */
    .bg-primary   { background-color: var(--primary); }
+   .bg-primary-dark   { background-color: var(--primary-dark); }
    .text-primary { color: var(--primary); }
+   .text-primary-dark { color: var(--primary-dark); }
    .border-primary { border-color: var(--primary); }
    
    /* ── Base font ── */

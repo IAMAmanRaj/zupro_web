@@ -27,7 +27,7 @@ export function Navbar() {
   }
 
   return (
-    <nav className="px-5 hover:bg-white transition-all duration-300 hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 bg-transparent relative z-50">
+    <nav className="px-5 bg-white hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 relative z-50">
       {/* Logo */}
       <Link
         to="/"
@@ -77,11 +77,8 @@ export function Navbar() {
           </Link>
         ) : (
           <>
-            <Link to="/auth" className="hidden lg:block hover:cursor-pointer cascadia-mono-bold opacity-95 hover:opacity-100 font-bold text-slate-700">
-              {t('navbar.signIn')}
-            </Link>
             <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2 transition-all">
-              {t('navbar.signUp')}
+              {t('navbar.getStarted')}
             </Link>
           </>
         )}
@@ -145,16 +142,9 @@ export function Navbar() {
                   <Link
                     to="/auth"
                     onClick={() => setMenuOpen(false)}
-                    className="flex-1 text-center py-2.5 rounded-xl border-2 border-[#3F51B5] text-[#3F51B5] font-bold text-sm"
-                  >
-                    {t('navbar.signIn')}
-                  </Link>
-                  <Link
-                    to="/auth"
-                    onClick={() => setMenuOpen(false)}
                     className="flex-1 text-center py-2.5 rounded-xl bg-[#3F51B5] text-white font-bold text-sm"
                   >
-                    {t('navbar.signUp')}
+                    {t('navbar.getStarted')}
                   </Link>
                 </>
               )}

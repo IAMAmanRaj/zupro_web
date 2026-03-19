@@ -9,11 +9,11 @@ function RouteComponent() {
     <>
       {/* ── DESKTOP HERO (md and above) ── */}
       <section className="relative hidden lg:flex min-h-[calc(100vh-72px)] bg-white overflow-hidden items-center">
-        <div className="relative z-10 w-full mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center justify-between gap-12 py-20">
+        <div className="relative z-10 w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20">
 
           {/* LEFT: Text block */}
           <div className="flex-1 md:max-w-[720px]">
-            <h1 className="text-[#111827] text-7xl font-black leading-[1.05] tracking-tight mb-6">
+            <h1 className="text-[#111827] text-[40px] xlg:text-[48px] xl:text-6xl font-black leading-[1.05] tracking-tight mb-6">
               <span className="sora-bold">India's Blue-Collar &</span><br />
               <span className="relative inline-block">
                 <span className="relative z-10 sora-bold">Domestic Jobs</span>
@@ -29,7 +29,7 @@ function RouteComponent() {
               </span>{' '}
               <span className="sora-bold">Network</span>
             </h1>
-            <p className="text-[#4B5563] dosis-semibold leading-relaxed mb-10 max-w-[460px] text-xl">
+            <p className="text-[#4B5563] cascadia-mono-light leading-relaxed mb-10 max-w-[460px] text-xl">
               Connecting workers and hirers — households, enterprises &amp;{' '}
               quick-commerce:{' '}
               <span className="font-semibold text-[#1B2A4A]">instantly, locally, at scale.</span>
@@ -37,7 +37,7 @@ function RouteComponent() {
           </div>
 
           {/* RIGHT: Phone hand asset */}
-          <div className="relative flex-shrink-0 w-full max-w-[520px] lg:max-w-[600px] flex items-end justify-center">
+          <div className="relative  w-full lg:max-w-[440px] xlg:w-[500px] xl:scale-130 flex items-end justify-center">
             <img
               src="/images/landing/mobile_hand_asset.png"
               alt="Zupro app showing today's jobs"
@@ -46,7 +46,7 @@ function RouteComponent() {
           </div>
         </div>
       </section>
-
+  
       {/* ── MOBILE HERO (under 768px) ── */}
       <div className="lg:hidden min-h-[calc(100vh-72px)] bg-white flex flex-col items-center px-5 pt-10 pb-8">
 
