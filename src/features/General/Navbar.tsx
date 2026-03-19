@@ -117,6 +117,9 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="absolute top-14 sora-bold left-0 right-0 bg-white shadow-lg border-t border-slate-100 px-6 py-5 flex flex-col gap-4 md:hidden"
           >
+              <Link to="/home" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+              Home
+            </Link>
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
               {t('navbar.faqs')}
             </Link>
