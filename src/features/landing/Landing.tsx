@@ -1,7 +1,4 @@
 import { HiArrowRight } from 'react-icons/hi'
-import { TbBuildingSkyscraper } from 'react-icons/tb'
-import { PiFactoryLight } from 'react-icons/pi'
-import { MdOutlineStorefront } from 'react-icons/md'
 import {
   HiOutlineGlobe,
   HiOutlineLocationMarker,
