@@ -27,12 +27,29 @@ function RouteComponent() {
   const [isVerified, setIsVerified] = useState(false)
 
   const phoneRef = useRef<HTMLInputElement>(null)
+  const formPanelRef = useRef<HTMLDivElement>(null)
   const { t } = useTranslation('common')
   const navigate = useNavigate()
   const completeOtpVerification = useOnboardingFlowStore((s) => s.completeOtpVerification)
 
   useEffect(() => {
     phoneRef.current?.focus()
+  }, [])
+
+  // Ensure /auth always starts at the top (native behavior).
+  // This fixes offsets when navigating here from other pages while Lenis was active.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      formPanelRef.current?.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+
+      const mainEl = document.querySelector('main')
+      if (mainEl instanceof HTMLElement) {
+        mainEl.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      }
+    })
+
+    return () => cancelAnimationFrame(id)
   }, [])
 
   useEffect(() => {
@@ -67,7 +84,7 @@ function RouteComponent() {
   const stepLabel = step === 'phone' ? t('auth.header.stepLabelPhone') : t('auth.header.stepLabelOtp')
 
   return (
-    <div className="h-screen flex flex-col md:flex-row font-sans">
+    <div className="h-screen flex flex-col md:flex-row font-sans overflow-y-auto ">
 
       {/* ── Desktop left image panel (md+) ─────────────────────────────────── */}
       <div className="hidden md:block md:w-[55%] relative overflow-hidden">
@@ -129,7 +146,10 @@ function RouteComponent() {
       </div>
 
       {/* ── Right / bottom form panel ───────────────────────────────────────── */}
-      <div className="flex-1 flex items-center justify-center px-6 py-8 sm:px-8 sm:py-12 bg-[#F3F4F4] overflow-y-auto">
+      <div
+        ref={formPanelRef}
+        className="flex-1 flex items-center justify-center px-6 py-8 sm:px-8 sm:py-12 bg-[#F3F4F4] "
+      >
         <div className="w-full max-w-sm">
 
           {isVerified ? (

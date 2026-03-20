@@ -97,14 +97,41 @@ export function Navbar() {
         </button>
 
         {/* Mobile hamburger */}
-        <button
+        <motion.button
           type="button"
           className="md:hidden text-slate-700 p-1"
           onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.06 }}
+          transition={{ type: 'spring', stiffness: 520, damping: 24 }}
         >
-          {menuOpen ? <RiCloseLine size={24} /> : <RiMenuLine size={24} />}
-        </button>
+          <AnimatePresence mode="wait" initial={false}>
+            {menuOpen ? (
+              <motion.span
+                key="close"
+                className="flex items-center"
+                initial={{ opacity: 0, rotate: -90, y: 2 }}
+                animate={{ opacity: 1, rotate: 0, y: 0 }}
+                exit={{ opacity: 0, rotate: 90, y: -2 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+              >
+                <RiCloseLine size={24} />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="menu"
+                className="flex items-center"
+                initial={{ opacity: 0, rotate: 90, y: -2 }}
+                animate={{ opacity: 1, rotate: 0, y: 0 }}
+                exit={{ opacity: 0, rotate: -90, y: 2 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+              >
+                <RiMenuLine size={24} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
       </div>
 
       {/* Mobile dropdown menu */}
