@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
-import { RiMenuLine, RiCloseLine } from 'react-icons/ri'
 import { FaGlobe } from 'react-icons/fa'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -22,12 +21,18 @@ export function Navbar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const isSearchActive = !!searchTo && (pathname === searchTo || pathname.startsWith(`${searchTo}/`))
 
+  const isHomeActive = pathname === '/home' || pathname.startsWith('/home/')
+  const isContactActive = pathname === '/contact-us' || pathname.startsWith('/contact-us/')
+  const isRootActive = pathname === '/'
+
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'hi' : 'en')
   }
 
   return (
-    <nav className="px-5 bg-white hover:cursor-pointer md:px-8 flex items-center justify-between h-14 md:h-16 relative z-50">
+<nav className="fixed top-0 left-0 right-0 z-50
+px-5 md:px-8 h-14 md:h-16 flex items-center justify-between
+bg-white/60 backdrop-blur-lg border-b border-white/30 shadow-sm">
       {/* Logo */}
       <Link
         to="/"
@@ -39,16 +44,28 @@ export function Navbar() {
 
       {/* Desktop center links */}
       <div className="hidden sora-bold md:flex md:gap-6 lg:gap-10 mt-1 items-center text-[13px] lg:text-[15px] absolute top-5 left-1/2 -translate-x-1/2 gap-8">
-      <Link to="/home" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+      <Link
+        to="/home"
+        className={`font-semibold transition-colors hover:text-[#3F51B5] ${isHomeActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+      >
           Home
         </Link>
-        <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+        <Link
+          to="/"
+          className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+        >
           {t('navbar.faqs')}
         </Link>
-        <Link to="/contact-us" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+        <Link
+          to="/contact-us"
+          className={`font-semibold transition-colors hover:text-[#3F51B5] ${isContactActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+        >
           {t('navbar.contact')}
         </Link>
-        <Link to="/" className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+        <Link
+          to="/"
+          className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+        >
           {t('navbar.about')}
         </Link>
       </div>
@@ -96,42 +113,44 @@ export function Navbar() {
           <span className="uppercase">{language === 'hi' ? 'en' : 'हिंदी'}</span>
         </button>
 
-        {/* Mobile hamburger */}
-        <motion.button
-          type="button"
-          className="md:hidden text-slate-700 p-1"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle menu"
-          whileTap={{ scale: 0.95 }}
-          whileHover={{ scale: 1.06 }}
-          transition={{ type: 'spring', stiffness: 520, damping: 24 }}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            {menuOpen ? (
-              <motion.span
-                key="close"
-                className="flex items-center"
-                initial={{ opacity: 0, rotate: -90, y: 2 }}
-                animate={{ opacity: 1, rotate: 0, y: 0 }}
-                exit={{ opacity: 0, rotate: 90, y: -2 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
-              >
-                <RiCloseLine size={24} />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="menu"
-                className="flex items-center"
-                initial={{ opacity: 0, rotate: 90, y: -2 }}
-                animate={{ opacity: 1, rotate: 0, y: 0 }}
-                exit={{ opacity: 0, rotate: -90, y: 2 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
-              >
-                <RiMenuLine size={24} />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.button>
+       {/* Mobile hamburger */}
+<motion.button
+  type="button"
+  className="md:hidden text-slate-700 p-1"
+  onClick={() => setMenuOpen((o) => !o)}
+  aria-label="Toggle menu"
+  whileTap={{ scale: 0.92 }}
+>
+  <div className="flex flex-col justify-center items-center w-6 h-6 gap-[5px]">
+    {/* Top bar */}
+    <motion.span
+      className="block h-[2px] w-5 bg-slate-700 origin-center rounded-full"
+      animate={menuOpen
+        ? { rotate: 45, y: 7, width: 20 }
+        : { rotate: 0, y: 0, width: 20 }
+      }
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+    />
+    {/* Middle bar */}
+    <motion.span
+      className="block h-[2px] w-5 bg-slate-700 rounded-full"
+      animate={menuOpen
+        ? { opacity: 0, scaleX: 0 }
+        : { opacity: 1, scaleX: 1 }
+      }
+      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+    />
+    {/* Bottom bar */}
+    <motion.span
+      className="block h-[2px] w-5 bg-slate-700 origin-center rounded-full"
+      animate={menuOpen
+        ? { rotate: -45, y: -7, width: 20 }
+        : { rotate: 0, y: 0, width: 20 }
+      }
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+    />
+  </div>
+</motion.button>
       </div>
 
       {/* Mobile dropdown menu */}
@@ -144,16 +163,32 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="absolute top-14 sora-bold left-0 right-0 bg-white shadow-lg border-t border-slate-100 px-6 py-5 flex flex-col gap-4 md:hidden"
           >
-              <Link to="/home" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+              <Link
+                to="/home"
+                onClick={() => setMenuOpen(false)}
+                className={`font-semibold transition-colors hover:text-[#3F51B5] ${isHomeActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+              >
               Home
             </Link>
-            <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+            >
               {t('navbar.faqs')}
             </Link>
-            <Link to="/contact-us" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+            <Link
+              to="/contact-us"
+              onClick={() => setMenuOpen(false)}
+              className={`font-semibold transition-colors hover:text-[#3F51B5] ${isContactActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+            >
               {t('navbar.contact')}
             </Link>
-            <Link to="/" onClick={() => setMenuOpen(false)} className="text-slate-700 font-semibold hover:text-[#3F51B5] transition-colors">
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+            >
               {t('navbar.about')}
             </Link>
             <div className="flex gap-3 pt-2 border-t border-slate-100">

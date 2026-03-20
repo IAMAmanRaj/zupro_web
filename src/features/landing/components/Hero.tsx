@@ -9,7 +9,7 @@ export function LandingHero() {
   return (
     <>
       {/* ── DESKTOP HERO (lg and above) ── */}
-      <section className="relative  hidden lg:flex h-[100vh] bg-white items-center">
+      <section className="relative  hidden lg:flex h-[100vh] bg-white items-center pt-24">
         <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20 ">
           {/* LEFT: Text block */}
           <div className="flex-1 md:max-w-[720px] -mt-24">
@@ -73,7 +73,7 @@ export function LandingHero() {
       </section>
 
       {/* ── MOBILE HERO (under lg) ── */}
-      <div className="lg:hidden bg-white flex flex-col items-center px-5 pt-10 pb-8">
+      <div className="lg:hidden bg-white flex flex-col items-center px-5 pt-18 pb-8">
         {/* Headline */}
         <h1 className="sora-bold mt-4 vs:mt-8 md:mt-24 text-[#1B2A4A] text-[22px] vs:text-[40px] sm:text-[24px] md:text-5xl font-black leading-tight tracking-tight text-center mb-4">
           India's Blue-Collar &amp; Domestic<br />

@@ -28,7 +28,7 @@ function Index() {
 
   return (
     <>
-      <div className="flex-1 flex flex-col bg-white items-center pt-6 px-4 overflow-hidden">
+      <div className="flex-1 flex flex-col h-[100vh]  pt-24 md:pt-30 bg-white items-center  px-4 overflow-hidden">
         <HeroCarousel slides={HOME_SLIDES} />
         <FeatureCards features={FEATURES} />
       </div>

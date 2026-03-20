@@ -353,7 +353,7 @@ export function EmployerOnboardingForm() {
 
   return (
     <div
-      className="h-screen  w-screen overflow-hidden bg-[#f0f0f5] flex items-center justify-center md:p-4"
+      className="h-screen  w-screen overflow-hidden bg-[#f0f0f5] flex items-center justify-center pt-16 md:pt-20 md:p-4"
       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
     >
       {/* ─── MOBILE LAYOUT (< md) ─────────────────────────────────────────── */}
