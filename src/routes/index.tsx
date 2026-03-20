@@ -13,8 +13,8 @@ function RouteComponent() {
   return (
     <>
       {/* ── DESKTOP HERO (lg and above) ── */}
-      <section className="relative  hidden lg:flex min-h-[calc(100vh-72px)] bg-white items-center">
-        <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20">
+      <section className="relative  hidden lg:flex h-[100vh] bg-white items-center">
+        <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20 pt-0 pb-0">
 
           {/* LEFT: Text block */}
           <div className="flex-1 md:max-w-[720px]">
@@ -74,7 +74,7 @@ function RouteComponent() {
           </div>
 
            {/* Floating down arrow */}
-       <div className="absolute hover:cursor-pointer left-1/2 -translate-x-1/2 bottom-6 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80 hover:opacity-100 transition-all duration-300">
+       <div className="absolute hover:cursor-pointer left-1/2 -translate-x-1/2 bottom-24 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80 hover:opacity-100 transition-all duration-300">
           <FaAnglesDown size={26} strokeWidth={2.5} />
         </div>
         </div>

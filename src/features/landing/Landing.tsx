@@ -15,7 +15,7 @@ export function LandingSectionTwo() {
       {/* ══════════════════════════════════════════
           BLOCK 1 — THE PROBLEM
       ══════════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-20 lg:pt-24 pb-16 lg:pb-20">
+      <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-10 pt-20 lg:pt-24 pb-16 lg:pb-20">
 
         {/* Eyebrow */}
         <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-10">
@@ -89,7 +89,7 @@ export function LandingSectionTwo() {
 
       {/* Full-bleed dark divider */}
       <div className="bg-[#1e1b4b] sora-bold  py-6 px-5 lg:px-16">
-        <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <p className="text-white text-[15px] tracking-[0.28em] uppercase font-bold">The Insight</p>
           <p className="text-white font-semibold text-[15px]">
             Behaviour change has already happened.{' '}
@@ -101,7 +101,7 @@ export function LandingSectionTwo() {
       {/* ══════════════════════════════════════════
           BLOCK 2 — THE INSIGHT
       ══════════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-16 lg:pt-24">
+      <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-16 lg:pt-24">
 
         {/* Cinematic headline */}
         <div className=" md:mb-16 lg:mb-20">
@@ -143,7 +143,7 @@ export function LandingSectionTwo() {
           BLOCK 3 — THE SOLUTION
       ══════════════════════════════════════════ */}
       <div className="bg-[#f8f8fc] w-full">
-        <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-16 lg:pt-20 pb-12 md:pb-20 lg:pb-20">
+        <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-16 lg:pt-20 pb-12 md:pb-20 lg:pb-20">
 
           <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
             The Solution
@@ -224,7 +224,7 @@ export function LandingSectionTwo() {
       {/* ══════════════════════════════════════════
           BLOCK 4 — HOW IT WORKS
       ══════════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-12 md:pt-20 lg:pt-28 pb-20 lg:pb-28">
+      <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-12 md:pt-20 lg:pt-28 pb-20 lg:pb-28">
 
         <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
           How It Works
@@ -284,7 +284,7 @@ export function LandingSectionTwo() {
       {/* ══════════════════════════════════════════
           BLOCK 7 — THE TEAM
       ══════════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-4 lg:pt-4 pb-20 lg:pb-28">
+      <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-4 lg:pt-4 pb-20 lg:pb-28">
 
         <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
           The Team
@@ -346,7 +346,7 @@ export function LandingSectionTwo() {
     BLOCK 8 — CLOSING CTA
 ══════════════════════════════════════════ */}
 <div className="bg-[#1e1b4b] w-full">
-  <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-12 sm:pt-20 lg:pt-28 pb-8 sm:pb-12 lg:pb-16">
+  <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-12 sm:pt-20 lg:pt-28 pb-8 sm:pb-12 lg:pb-16">
 
     <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12 lg:gap-20">
 
