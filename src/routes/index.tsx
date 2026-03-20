@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { FaAnglesDown } from "react-icons/fa6";
+import { LandingSectionTwo } from '../features/landing/Landing';
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -12,7 +13,7 @@ function RouteComponent() {
   return (
     <>
       {/* ── DESKTOP HERO (lg and above) ── */}
-      <section className="relative hidden lg:flex min-h-[calc(100vh-72px)] bg-white overflow-hidden items-center">
+      <section className="relative  hidden lg:flex min-h-[calc(100vh-72px)] bg-white items-center">
         <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20">
 
           {/* LEFT: Text block */}
@@ -80,7 +81,7 @@ function RouteComponent() {
       </section>
 
       {/* ── MOBILE HERO (under lg) ── */}
-      <div className="lg:hidden min-h-screen bg-white flex flex-col items-center px-5 pt-10 pb-8">
+      <div className="lg:hidden bg-white flex flex-col items-center px-5 pt-10 pb-8">
 
         {/* Headline */}
         <h1 className="sora-bold mt-4 vs:mt-8 md:mt-24 text-[#1B2A4A] text-[22px] vs:text-[40px] sm:text-[24px] md:text-5xl font-black leading-tight tracking-tight text-center mb-4">
@@ -123,6 +124,9 @@ function RouteComponent() {
         </div>
 
       </div>
+
+
+      <LandingSectionTwo/>
     </>
   )
 }

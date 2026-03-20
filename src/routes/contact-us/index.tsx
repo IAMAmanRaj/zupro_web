@@ -35,7 +35,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="min-h-screen bg-white flex flex-col items-center justify-center px-5 py-20 pt-10 md:pt-4">
+    <section className="h-full bg-white flex flex-col items-center justify-center px-5 py-20 pt-12 md:pt-24">
 
       {/* ── Header ── */}
       <div className="text-center mb-10">
