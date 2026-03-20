@@ -5,8 +5,11 @@ import {
   HiOutlineShieldCheck,
   HiOutlineLightningBolt,
 } from 'react-icons/hi'
+import { useTranslation } from 'react-i18next'
 
 export function LandingSolutionBlock() {
+  const { t } = useTranslation('home')
+
   return (
     <>
       {/* ══════════════════════════════════════════
@@ -15,12 +18,14 @@ export function LandingSolutionBlock() {
       <div className="bg-[#f8f8fc] w-full">
         <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-16 lg:pt-20 pb-12 md:pb-20 lg:pb-20">
           <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
-            The Solution
+            {t('landing.solution.eyebrow')}
           </p>
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 md:mb-16">
             <h2 className="sora-bold text-[#1e1b4b] text-2xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[1.05] tracking-tight w-full">
-              Built from the ground up<br />for India's 500M+ informal workforce.
+              {t('landing.solution.headlinePrefix')}
+              <br />
+              {t('landing.solution.headlineSuffix')}
             </h2>
           </div>
 
@@ -28,33 +33,33 @@ export function LandingSolutionBlock() {
             {[
               {
                 icon: <HiOutlineGlobe size={22} />,
-                title: 'Vernacular-First',
-                tag: null,
-                desc: 'Hindi, Tamil, Telugu + 10 more languages. No English required.',
+                title: t('landing.solution.cards.card1.title'),
+                tag: t('landing.solution.cards.card1.tag'),
+                desc: t('landing.solution.cards.card1.desc'),
               },
               {
                 icon: <HiOutlineLightningBolt size={22} />,
-                title: 'Fast Match',
-                tag: null,
-                desc: 'UltraFast matching connects hirers with the right workers quickly and accurately.',
+                title: t('landing.solution.cards.card2.title'),
+                tag: t('landing.solution.cards.card2.tag'),
+                desc: t('landing.solution.cards.card2.desc'),
               },
               {
                 icon: <HiOutlineLocationMarker size={22} />,
-                title: 'Hyperlocal',
-                tag: null,
-                desc: 'Pin-code level matching — find a maid or cook in your exact neighbourhood.',
+                title: t('landing.solution.cards.card3.title'),
+                tag: t('landing.solution.cards.card3.tag'),
+                desc: t('landing.solution.cards.card3.desc'),
               },
               {
                 icon: <HiOutlineShieldCheck size={22} />,
-                title: 'Verified Trust',
-                tag: 'For maids & cooks',
-                desc: 'Aadhaar-backed identity check for household roles. Hirers get the trust they need.',
+                title: t('landing.solution.cards.card4.title'),
+                tag: t('landing.solution.cards.card4.tag'),
+                desc: t('landing.solution.cards.card4.desc'),
               },
               {
                 icon: <HiOutlineDeviceMobile size={22} />,
-                title: 'Worker-First UI',
-                tag: 'Core focus',
-                desc: 'Designed for all literacy levels. Simple, visual, guided — workers pick it up in minutes.',
+                title: t('landing.solution.cards.card5.title'),
+                tag: t('landing.solution.cards.card5.tag'),
+                desc: t('landing.solution.cards.card5.desc'),
               },
               {
                 icon: (
@@ -74,10 +79,10 @@ export function LandingSolutionBlock() {
                     <line x1="8" y1="23" x2="16" y2="23" />
                   </svg>
                 ),
-                title: 'Voice Interface',
-                tag: 'Coming Soon',
-                tagColor: 'bg-[#7986cb]',
-                desc: 'Post or find jobs by speaking — eliminating the typing barrier for workers.',
+                title: t('landing.solution.cards.card6.title'),
+                tag: t('landing.solution.cards.card6.tag'),
+                tagColor: t('landing.solution.cards.card6.tagColor'),
+                desc: t('landing.solution.cards.card6.desc'),
               },
             ].map(({ icon, title, tag, tagColor, desc }) => (
               <div

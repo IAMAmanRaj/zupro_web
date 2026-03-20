@@ -9,15 +9,15 @@ export function LandingHero() {
   return (
     <>
       {/* ── DESKTOP HERO (lg and above) ── */}
-      <section className="relative  hidden lg:flex h-[100vh] bg-white items-center pt-24">
+      <section className="relative  hidden lg:flex h-screen bg-white items-center pt-24">
         <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20 ">
           {/* LEFT: Text block */}
           <div className="flex-1 md:max-w-[720px] -mt-24">
             <h1 className="text-[#111827] text-[40px] xlg:text-[48px] xl:text-6xl font-black leading-[1.05] tracking-tight mb-6">
-              <span className="sora-bold">India's Blue-Collar &</span>
+              <span className="sora-bold">{t('landing.hero.headlinePart1')}</span>
               <br />
               <span className="relative inline-block">
-                <span className="relative z-10 sora-bold text-[#800020]/80">Domestic Jobs</span>
+                <span className="relative z-10 sora-bold text-[#800020]/80">{t('landing.hero.headlinePart2')}</span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
                   viewBox="0 0 320 12"
@@ -28,13 +28,12 @@ export function LandingHero() {
                   <path d="M2 9C60 3 140 1 318 9" stroke="#F5A022" strokeWidth="4" strokeLinecap="round" />
                 </svg>
               </span>{' '}
-              <span className="sora-bold">Network</span>
+              <span className="sora-bold">{t('landing.hero.headlinePart3')}</span>
             </h1>
 
             <p className="text-[#4B5563] cascadia-mono-light mb-10 max-w-[460px] text-lg">
-              Connecting workers and hirers — households, enterprises &amp;{' '}
-              quick-commerce:{' '}
-              <span className="font-semibold text-[#1B2A4A]">instantly, locally, at scale.</span>
+              {t('landing.hero.subtitlePrefix')}
+              <span className="font-semibold text-[#1B2A4A]">{t('landing.hero.subtitleEmphasis')}</span>
             </p>
 
             {/* CTA Buttons */}
@@ -60,7 +59,7 @@ export function LandingHero() {
           <div className="relative w-full lg:max-w-[440px] xlg:w-[500px] xl:scale-130 flex items-end justify-center">
             <img
               src="/images/landing/mobile_hand_asset.png"
-              alt="Zupro app showing today's jobs"
+              alt={t('landing.hero.imageAlt')}
               className="relative z-10 w-full object-contain"
             />
           </div>
@@ -78,19 +77,20 @@ export function LandingHero() {
       <div className="lg:hidden bg-white flex flex-col items-center px-5 pt-18 pb-8">
         {/* Headline */}
         <h1 className="sora-bold mt-4 vs:mt-8 md:mt-24 text-[#1B2A4A] text-[22px] vs:text-[40px] sm:text-[24px] md:text-5xl font-black leading-tight tracking-tight text-center mb-4">
-          India's Blue-Collar &amp; Domestic<br />
-          Jobs Network
+          {t('landing.hero.mobileHeadlineLine1')}
+          <br />
+          {t('landing.hero.mobileHeadlineLine2')}
         </h1>
 
         {/* Subtitle */}
         <p className="text-[#6B7280] cascadia-mono-light text-[11px] vs:text-[15px] text-center leading-relaxed max-w-[400px] md:max-w-[500px] mb-4">
-          Connecting workers and hirers—households, enterprises &amp; quick-commerce: instantly, locally, at scale.
+          {t('landing.hero.subtitle')}
         </p>
 
         {/* Phone hand asset */}
         <img
           src="/images/landing/mobile_hand_asset.png"
-          alt="Zupro app showing today's jobs"
+          alt={t('landing.hero.imageAlt')}
           className="object-cover w-[280px] -mt-2 h-[280px] vs:w-[300px] vs:h-[300px] md:h-[500px] md:w-[500px] md:mt-16"
         />
 

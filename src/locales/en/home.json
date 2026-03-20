@@ -31,6 +31,171 @@
     "findJobsCta": "Find jobs",
     "hireNowCta": "Hire now"
   },
+  "landing": {
+    "hero": {
+      "headlinePart1": "India's Blue-Collar &",
+      "headlinePart2": "Domestic Jobs",
+      "headlinePart3": "Network",
+      "mobileHeadlineLine1": "India's Blue-Collar & Domestic",
+      "mobileHeadlineLine2": "Jobs Network",
+      "subtitle": "Connecting workers and hirers — households, enterprises & quick-commerce: instantly, locally, at scale.",
+      "subtitlePrefix": "Connecting workers and hirers — households, enterprises & quick-commerce: ",
+      "subtitleEmphasis": "instantly, locally, at scale.",
+      "imageAlt": "Zupro app showing today's jobs"
+    },
+    "problem": {
+      "eyebrow": "The Problem",
+      "titleLine1": "Ask any working couple",
+      "titleLine2": "in Delhi or Bangalore.",
+      "quotePrefix": "\"How did you",
+      "quoteSuffix": "find your maid?\"",
+      "quoteLines": {
+        "line1": "After weeks of asking around.",
+        "line2": "Through a neighbour.",
+        "line3": "Through luck."
+      },
+      "trailingPrefix": "In 2026, this is still how",
+      "trailingBold": "50 million",
+      "trailingSuffix": "people find work.",
+      "stats": {
+        "stat1": {
+          "value": "50M+",
+          "label": "Domestic workers in India",
+          "sub": "3rd largest employment sector after agriculture & construction"
+        },
+        "stat2": {
+          "value": "1 in 3",
+          "label": "Urban Indians is a migrant",
+          "sub": "\"I just moved — now what?\" Everyone's problem."
+        },
+        "stat3": {
+          "value": "Zero",
+          "label": "Formal digital platforms exist",
+          "sub": "Not LinkedIn. Not Naukri. No structured marketplace."
+        }
+      },
+      "calloutPrefix": "The problem is real. The market is massive.",
+      "calloutHighlight": "The platform doesn't exist yet.",
+      "untilNow": "Until now"
+    },
+    "insight": {
+      "eyebrow": "The Insight",
+      "subtitlePrefix": "Behaviour change has already happened.",
+      "subtitleHighlight": "We are the infrastructure.",
+      "sectionTitle": "Before → After",
+      "pairs": {
+        "pair1": {
+          "before": "Called restaurants directly",
+          "after": "Zomato",
+          "badge": false
+        },
+        "pair2": {
+          "before": "Went to the store",
+          "after": "Blinkit",
+          "badge": false
+        },
+        "pair3": {
+          "before": "WhatsApp / word of mouth",
+          "after": "ZUPRO",
+          "badge": true
+        }
+      },
+      "badge": "That's us"
+    },
+    "howItWorks": {
+      "eyebrow": "How It Works",
+      "headlinePrefix": "From posting a job to finding the right person —",
+      "headlineHighlight": "in minutes, not weeks.",
+      "workersLabel": "For Workers",
+      "workersSteps": {
+        "step1": "Register with mobile number — simple, guided, vernacular.",
+        "step2": "Set skills, preferred area & availability. No resume needed.",
+        "step3": "Receive instant nearby job alerts matched to your exact location.",
+        "step4": "Accept the job and connect directly with the hirer."
+      },
+      "hirersLabel": "For Hirers",
+      "hirersSteps": {
+        "step1": "Post a job in 60 seconds — type it or describe it.",
+        "step2": "Platform sends matched, verified workers instantly.",
+        "step3": "View profiles, ratings & identity-verified details.",
+        "step4": "Connect, confirm and schedule — easy from start to finish."
+      }
+    },
+    "solution": {
+      "eyebrow": "The Solution",
+      "headlinePrefix": "Built from the ground up",
+      "headlineSuffix": "for India's 500M+ informal workforce.",
+      "cards": {
+        "card1": {
+          "title": "Vernacular-First",
+          "tag": "",
+          "desc": "Hindi, Tamil, Telugu + 10 more languages. No English required."
+        },
+        "card2": {
+          "title": "Fast Match",
+          "tag": "",
+          "desc": "UltraFast matching connects hirers with the right workers quickly and accurately."
+        },
+        "card3": {
+          "title": "Hyperlocal",
+          "tag": "",
+          "desc": "Pin-code level matching — find a maid or cook in your exact neighbourhood."
+        },
+        "card4": {
+          "title": "Verified Trust",
+          "tag": "For maids & cooks",
+          "desc": "Aadhaar-backed identity check for household roles. Hirers get the trust they need."
+        },
+        "card5": {
+          "title": "Worker-First UI",
+          "tag": "Core focus",
+          "desc": "Designed for all literacy levels. Simple, visual, guided — workers pick it up in minutes."
+        },
+        "card6": {
+          "title": "Voice Interface",
+          "tag": "Coming Soon",
+          "tagColor": "bg-[#7986cb]",
+          "desc": "Post or find jobs by speaking — eliminating the typing barrier for workers."
+        }
+      }
+    },
+    "team": {
+      "eyebrow": "The Team",
+      "headlinePrefix": "Founders who have lived the problem —",
+      "headlineHighlight": "and built for it.",
+      "members": {
+        "aman": {
+          "name": "Aman Pratap Yadav",
+          "role": "Co-Founder & CEO",
+          "line1": "IIT Kanpur · Civil Engineering",
+          "line2": "Real Estate Operations — daily interface with labour markets & worker challenges"
+        },
+        "atulya": {
+          "name": "Atulya Sundaram",
+          "role": "Co-Founder & CTO",
+          "line1": "IIT Kanpur · Computer Science",
+          "line2": "Currently based in Japan — leading all tech development and product architecture"
+        }
+      },
+      "noteLine1": "IIT alumni network of investors, mentors & B2B leads",
+      "noteLine2": "One built it, one lived it · Complementary skills across ops & tech"
+    },
+    "closingCta": {
+      "title": "Zupro hai, toh job hai !",
+      "headlineLine1": "The world's largest",
+      "headlineLine2": "workforce deserves",
+      "headlineHighlight": "a platform built for them.",
+      "description": "ZUPRO is building India's blue-collar jobs infrastructure — from households to Blinkit dark stores, one job at a time.",
+      "contactLabel": "Get in touch",
+      "emailLabel": "Email",
+      "email": "zuprofounding@gmail.com"
+    },
+    "footer": {
+      "network": "India's Blue-Collar & Domestic Jobs Network",
+      "getStarted": "Get Started",
+      "contactUs": "Contact Us"
+    }
+  },
   "onboardingModal": {
     "badge": "Welcome to Zupro",
     "title": "How would you like to get started?",
