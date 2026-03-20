@@ -359,11 +359,14 @@ export function LandingSectionTwo() {
     BLOCK 8 — CLOSING CTA
 ══════════════════════════════════════════ */}
 <div className="bg-[#1e1b4b] w-full">
-  <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-20 lg:pt-28 pb-12 lg:pb-16">
+  <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-12 sm:pt-20 lg:pt-28 pb-8 sm:pb-12 lg:pb-16">
 
     <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12 lg:gap-20">
 
-      <div className="max-w-[680px]">
+                      <div className="max-w-[680px]">
+                      <p className="text-[20px] sora-bold font-bold   text-[#ffffff] mb-8">
+          Zupro hai, toh job hai !
+        </p>
         <h2 className="sora-bold text-white text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.05] tracking-tight mb-8">
           The world's largest<br />
           workforce deserves<br />
@@ -376,7 +379,7 @@ export function LandingSectionTwo() {
       </div>
 
       {/* Contact card */}
-      <div className="border border-white/10 p-8 lg:p-10 flex-shrink-0 min-w-[280px]">
+      <div className="border border-white/20 p-8 lg:p-10 flex-shrink-0 min-w-[280px]">
         <p className="text-[10px] sora-bold font-bold tracking-[0.22em] uppercase text-[#7986cb] mb-6">Get in touch</p>
 
         <div className="flex flex-col gap-5">
@@ -390,14 +393,17 @@ export function LandingSectionTwo() {
     </div>
 
     {/* ── Footer ── */}
-    <div className="mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="mt-12 sm:mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div className="flex items-center gap-4">
         <span className="sora-bold text-white font-black text-xl tracking-tight">ZUPRO</span>
         <span className="w-px h-4 bg-white/20" />
-        <span className="cascadia-mono-light text-white/30 text-xs">India's Blue-Collar & Domestic Jobs Network</span>
+        <span className="cascadia-mono-light text-white/80 text-xs">India's Blue-Collar & Domestic Jobs Network</span>
       </div>
-      <div className="flex items-center gap-6">
-        <Link to={"/contact-us"} className="cascadia-mono-light text-white/30 text-xs hover:text-white/60 transition-colors">
+      <div className="flex items-center justify-center gap-6">
+      <Link to={"/auth"} className="cascadia-mono-light text-white/80 text-xs hover:text-white/60 transition-colors">
+          Get Started
+        </Link>
+                          <Link to={"/contact-us"} className="cascadia-mono-light text-white/80 text-xs hover:text-white/60 transition-colors">
           Contact Us
         </Link>
       </div>
