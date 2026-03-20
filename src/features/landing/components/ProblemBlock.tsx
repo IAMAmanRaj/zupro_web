@@ -51,7 +51,7 @@ export function LandingProblemBlock() {
         </div>
 
         {/* Trailing context line */}
-        <div className="flex items-center w-full mb-20">
+        <div className="flex gap-2 items-center w-full mb-20">
           <div className="w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]" />
           <div className="text-[#6B7280] max-w-[350px] flex justify-center text-center sm:max-w-[500px] md:w-full cascadia-mono-light text-sm">
             <span className=''>In 2026, this is still how{' '}<span className='cascadia-mono-bold text-black'>50 million</span> people find work.</span>

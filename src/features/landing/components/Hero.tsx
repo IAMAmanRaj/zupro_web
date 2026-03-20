@@ -17,7 +17,7 @@ export function LandingHero() {
               <span className="sora-bold">India's Blue-Collar &</span>
               <br />
               <span className="relative inline-block">
-                <span className="relative z-10 sora-bold">Domestic Jobs</span>
+                <span className="relative z-10 sora-bold text-[#800020]/80">Domestic Jobs</span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
                   viewBox="0 0 320 12"
@@ -25,31 +25,31 @@ export function LandingHero() {
                   xmlns="http://www.w3.org/2000/svg"
                   preserveAspectRatio="none"
                 >
-                  <path d="M2 9C60 3 140 1 318 9" stroke="#2A5298" strokeWidth="4" strokeLinecap="round" />
+                  <path d="M2 9C60 3 140 1 318 9" stroke="#F5A022" strokeWidth="4" strokeLinecap="round" />
                 </svg>
               </span>{' '}
               <span className="sora-bold">Network</span>
             </h1>
 
-            <p className="text-[#4B5563] cascadia-mono-light leading-relaxed mb-10 max-w-[460px] text-lg">
+            <p className="text-[#4B5563] cascadia-mono-light mb-10 max-w-[460px] text-lg">
               Connecting workers and hirers — households, enterprises &amp;{' '}
               quick-commerce:{' '}
               <span className="font-semibold text-[#1B2A4A]">instantly, locally, at scale.</span>
             </p>
 
             {/* CTA Buttons */}
-            <div className="-mt-3 flex gap-3 md:gap-4 w-full max-w-[350px] px-1">
+            <div className="-mt-3 flex gap-3 md:gap-4 w-full max-w-[500px] px-1">
               <button
                 type="button"
                 onClick={() => navigate({ to: '/onboarding/seeker' })}
-                className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl bg-[#3F51B5] px-4 md:px-6 py-3 md:py-3.5 text-sm lg:text-md font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]"
+                className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl bg-[#3F51B5] px-4 md:px-6 py-3 md:py-3.5 text-sm lg:text-lg xlg:text-xl xl:text-2xl font-bold text-white shadow-md transition-all duration-200 hover:bg-[#3647a3] hover:shadow-lg active:scale-[0.98]"
               >
                 {t('hero.findJobsCta')}
               </button>
               <button
                 type="button"
                 onClick={() => navigate({ to: '/onboarding/employer' })}
-                className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl border-2 border-[#3F51B5] bg-white px-4 md:px-6 py-3 md:py-3.5 text-sm lg:text-md  font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]"
+                className="cascadia-mono-light flex-1 hover:cursor-pointer rounded-xl border-2 border-[#3F51B5] bg-white px-4 md:px-6 py-3 md:py-3.5 text-sm lg:text-lg xlg:text-xl xl:text-2xl font-bold text-[#3F51B5] shadow-sm transition-all duration-200 hover:bg-[#eef1ff] hover:shadow-md active:scale-[0.98]"
               >
                 {t('hero.hireNowCta')}
               </button>
@@ -66,10 +66,12 @@ export function LandingHero() {
           </div>
 
           {/* Floating down arrow */}
-          <div className="absolute hover:cursor-pointer left-1/2 -translate-x-1/2 bottom-24 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80 hover:opacity-100 transition-all duration-300">
+          <div className="absolute hover:cursor-pointer left-1/2 -translate-x-1/2 bottom-12 hover:scale-120 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80 hover:opacity-100 transition-all duration-300">
             <FaAnglesDown size={26} strokeWidth={2.5} />
           </div>
+
         </div>
+        
       </section>
 
       {/* ── MOBILE HERO (under lg) ── */}
@@ -89,11 +91,11 @@ export function LandingHero() {
         <img
           src="/images/landing/mobile_hand_asset.png"
           alt="Zupro app showing today's jobs"
-          className="object-cover w-[320px] -mt-2 h-[320px] vs:w-[320px] vs:h-[320px] md:h-[500px] md:w-[500px] md:mt-16"
+          className="object-cover w-[280px] -mt-2 h-[280px] vs:w-[300px] vs:h-[300px] md:h-[500px] md:w-[500px] md:mt-16"
         />
 
         {/* CTA Buttons */}
-        <div className=" -mt-3 vs:-mt-1 flex gap-3 md:gap-4 w-full max-w-[560px] px-1">
+        <div className=" -mt-3 vs:-mt-1 flex flex-col gap-3 md:gap-4 w-full max-w-[320px] px-1">
           <button
             type="button"
             onClick={() => navigate({ to: '/onboarding/seeker' })}
@@ -111,7 +113,7 @@ export function LandingHero() {
         </div>
 
         {/* Floating down arrow */}
-        <div className="mt-7 vs:mt-12 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80">
+        <div className="mt-7 vs:mt-8 animate-bounce [animation-duration:4s] text-[#3F51B5] opacity-80">
           <FaAnglesDown size={26} strokeWidth={2.5} />
         </div>
       </div>
