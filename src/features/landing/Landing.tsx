@@ -15,7 +15,7 @@ export function LandingSectionTwo() {
       {/* ══════════════════════════════════════════
           BLOCK 1 — THE PROBLEM
       ══════════════════════════════════════════ */}
-      <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-10 pt-20 lg:pt-24 pb-16 lg:pb-20">
+      <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-10 pt-20 lg:pt-4 pb-16 lg:pb-20">
 
         {/* Eyebrow */}
         <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-10">

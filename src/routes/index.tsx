@@ -14,10 +14,10 @@ function RouteComponent() {
     <>
       {/* ── DESKTOP HERO (lg and above) ── */}
       <section className="relative  hidden lg:flex h-[100vh] bg-white items-center">
-        <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20 pt-0 pb-0">
+        <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20 ">
 
           {/* LEFT: Text block */}
-          <div className="flex-1 md:max-w-[720px]">
+          <div className="flex-1 md:max-w-[720px] -mt-24">
             <h1 className="text-[#111827] text-[40px] xlg:text-[48px] xl:text-6xl font-black leading-[1.05] tracking-tight mb-6">
               <span className="sora-bold">India's Blue-Collar &</span><br />
               <span className="relative inline-block">
@@ -35,7 +35,7 @@ function RouteComponent() {
               <span className="sora-bold">Network</span>
             </h1>
 
-            <p className="text-[#4B5563] cascadia-mono-light leading-relaxed mb-10 max-w-[460px] text-xl">
+            <p className="text-[#4B5563] cascadia-mono-light leading-relaxed mb-10 max-w-[460px] text-lg">
               Connecting workers and hirers — households, enterprises &amp;{' '}
               quick-commerce:{' '}
               <span className="font-semibold text-[#1B2A4A]">instantly, locally, at scale.</span>
