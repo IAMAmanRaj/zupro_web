@@ -49,12 +49,12 @@ export function LandingSectionTwo() {
         </div>
 
         {/* Trailing context line */}
-        <div className="flex items-center gap-5 mb-20">
-          <div className="w-8 h-px bg-[#3F51B5]" />
-          <p className="text-[#6B7280] cascadia-mono-light text-sm">
-            In 2025, this is still how{' '}
-            <span className="font-bold text-[#1e1b4b]">50 million people</span> find work.
-          </p>
+        <div className="flex items-center w-full mb-20">
+          <div className="w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]" />
+          <div className="text-[#6B7280] max-w-[350px] flex justify-center text-center sm:max-w-[500px] md:w-full cascadia-mono-light text-sm">
+            <span className=''>In 2026, this is still how{' '}<span className='cascadia-mono-bold text-black'>50 million</span> people find work.</span>
+                  </div>
+                  <div className="w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]" />
         </div>
 
         {/* ── Stats — side-by-side with dividing lines ── */}
@@ -104,7 +104,7 @@ export function LandingSectionTwo() {
       <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-16 lg:pt-24">
 
         {/* Cinematic headline */}
-        <div className="mb-10 md:mb-16 lg:mb-20">
+        <div className=" md:mb-16 lg:mb-20">
           <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
             Before → After
           </p>
@@ -116,7 +116,7 @@ export function LandingSectionTwo() {
             ].map(({ before, after, dim, highlight }) => (
               <div
                 key={after}
-                className={`flex items-center justify-between gap-6 pb-4 border-b ${highlight ? 'border-[#3F51B5]/30' : 'border-[rgba(63,81,181,0.08)]'}`}
+                className={`flex hover:cursor-pointer hover:opacity-100 opacity-80 transition-all duration-300 items-center justify-between gap-6 pb-4 border-b ${highlight ? 'border-[#3F51B5]/30' : 'border-[rgba(63,81,181,0.08)]'}`}
               >
                 <p className={`text-xl md:text-2xl lg:text-3xl sora-bold font-black tracking-tight ${dim ? 'text-[#1e1b4b]/30' : 'text-[#1e1b4b]'}`}>
                   {before}
@@ -143,7 +143,7 @@ export function LandingSectionTwo() {
           BLOCK 3 — THE SOLUTION
       ══════════════════════════════════════════ */}
       <div className="bg-[#f8f8fc] w-full">
-        <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-8 lg:pt-28 pb-20 lg:pb-28">
+        <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-16 lg:pt-20 pb-12 md:pb-20 lg:pb-20">
 
           <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
             The Solution
@@ -203,7 +203,7 @@ export function LandingSectionTwo() {
                 desc: 'Post or find jobs by speaking — eliminating the typing barrier for workers.',
               },
             ].map(({ icon, title, tag, tagColor, desc }) => (
-              <div key={title} className="bg-white p-8 lg:p-10 flex flex-col gap-4">
+              <div key={title} className="bg-white opacity-85 hover:opacity-100 duration-300 transition-all hover:cursor-pointer  p-4 md:p-8 lg:p-10 flex flex-col gap-4">
                 <div className="text-[#3F51B5]">{icon}</div>
                 <div className="flex items-center gap-3 flex-wrap">
                   <span className="sora-bold text-[#1e1b4b] font-black text-lg tracking-tight">{title}</span>
@@ -224,7 +224,7 @@ export function LandingSectionTwo() {
       {/* ══════════════════════════════════════════
           BLOCK 4 — HOW IT WORKS
       ══════════════════════════════════════════ */}
-      <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-20 lg:pt-28 pb-20 lg:pb-28">
+      <div className="max-w-[1200px] mx-auto px-5 lg:px-16 pt-12 md:pt-20 lg:pt-28 pb-20 lg:pb-28">
 
         <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
           How It Works
@@ -277,16 +277,6 @@ export function LandingSectionTwo() {
             </div>
           </div>
 
-        </div>
-
-        {/* Worker UI note */}
-        <div className="mt-14 border border-[rgba(63,81,181,0.15)] p-5 flex gap-4 items-start">
-          <HiOutlineDeviceMobile size={18} className="text-[#3F51B5] flex-shrink-0 mt-0.5" />
-          <p className="cascadia-mono-light text-[#6B7280] text-xs leading-relaxed">
-            <span className="font-bold text-[#1e1b4b]">Worker UI Principle:</span>{' '}
-            Designed for low digital literacy — simple icons, guided flows, vernacular audio prompts.
-            A worker who has never used an app can onboard unaided.
-          </p>
         </div>
 
       </div>
