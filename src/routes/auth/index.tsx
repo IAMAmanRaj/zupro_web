@@ -31,6 +31,8 @@ function RouteComponent() {
   const { t } = useTranslation('common')
   const navigate = useNavigate()
   const completeOtpVerification = useOnboardingFlowStore((s) => s.completeOtpVerification)
+  const setPendingSeeker = useOnboardingFlowStore((s) => s.setPendingSeeker)
+  const setPendingEmployer = useOnboardingFlowStore((s) => s.setPendingEmployer)
 
   useEffect(() => {
     phoneRef.current?.focus()
@@ -207,6 +209,36 @@ function RouteComponent() {
                   phone={phone}
                   onBack={() => setStep('phone')}
                   onVerified={() => {
+                    // If the user comes to `/auth` directly (e.g. from "Get Started"),
+                    // there may be no pending onboarding data for `completeOtpVerification()`.
+                    // Create a minimal pending record so the store can mark the user verified.
+                    if (!useOnboardingFlowStore.getState().pending) {
+                      const role =
+                        typeof window !== 'undefined'
+                          ? new URLSearchParams(window.location.search).get('role')
+                          : null
+
+                      if (role === 'employer') {
+                        setPendingEmployer({
+                          employerName: '',
+                          jobTitle: '',
+                          jobDescription: '',
+                          jobLocation: '',
+                          payAmount: '',
+                          payType: 'monthly',
+                          educationLevel: '',
+                        })
+                      } else {
+                        setPendingSeeker({
+                          name: '',
+                          age: '',
+                          gender: '',
+                          profession: '',
+                          location: '',
+                          education: '',
+                        })
+                      }
+                    }
                     completeOtpVerification()
                     setIsVerified(true)
                   }}

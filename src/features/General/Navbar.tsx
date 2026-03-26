@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Link, useRouterState } from '@tanstack/react-router'
+import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { FaGlobe } from 'react-icons/fa'
+import { FiLogOut } from 'react-icons/fi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useLanguageStore } from '../../stores/languageStore'
@@ -10,23 +11,32 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { t } = useTranslation('common')
   const { language, setLanguage } = useLanguageStore()
+  const navigate = useNavigate()
 
   // ✅ Separate selectors — each returns a stable primitive or reference
   const isVerified = useOnboardingFlowStore((s) => s.isVerified)
   const user = useOnboardingFlowStore((s) => s.user)
+  const reset = useOnboardingFlowStore((s) => s.reset)
 
   const isLoggedIn = isVerified && !!user
-  const searchTo = user?.userType === 'seeker' ? '/search/jobs' : '/search/candidates'
-  const searchLabel = user?.userType === 'seeker' ? 'Search Jobs' : 'Search Candidates'
+  const userType = user?.userType ?? null
+  const searchTo = userType === 'employer' ? '/search/candidates' : '/search/jobs'
+  const searchLabel = userType === 'employer' ? 'Search Candidates' : 'Search Jobs'
   const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const isSearchActive = !!searchTo && (pathname === searchTo || pathname.startsWith(`${searchTo}/`))
+  const isSearchActive =
+    isLoggedIn && (pathname === searchTo || pathname.startsWith(`${searchTo}/`))
 
   const isHomeActive = pathname === '/home' || pathname.startsWith('/home/')
   const isContactActive = pathname === '/contact-us' || pathname.startsWith('/contact-us/')
-  const isRootActive = pathname === '/'
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'hi' : 'en')
+  }
+
+  const logout = () => {
+    reset()
+    setMenuOpen(false)
+    navigate({ to: '/auth' })
   }
 
   return (
@@ -51,8 +61,8 @@ bg-white backdrop-blur-lg border-b border-white/30 shadow-sm">
           Home
         </Link>
         <Link
-          to="/"
-          className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+          to="/faqs"
+          className={`font-semibold transition-colors hover:text-[#3F51B5] text-slate-700`}
         >
           {t('navbar.faqs')}
         </Link>
@@ -63,8 +73,8 @@ bg-white backdrop-blur-lg border-b border-white/30 shadow-sm">
           {t('navbar.contact')}
         </Link>
         <Link
-          to="/"
-          className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+          to="/about"
+          className={`font-semibold transition-colors hover:text-[#3F51B5] text-slate-700`}
         >
           {t('navbar.about')}
         </Link>
@@ -84,14 +94,26 @@ bg-white backdrop-blur-lg border-b border-white/30 shadow-sm">
         </button>
 
         {isLoggedIn ? (
-          <Link
-            to={searchTo}
-            className={`flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 px-6 py-2 transition-all duration-300 ${
-              isSearchActive ? 'bg-[#3F51B5] text-white border-2 border-[#3F51B5] ' : 'bg-transparent text-[#3F51B5] hover:text-white hover:bg-[#3F51B5] border-[#3F51B5]/90 border-2 '
-            }`}
-          >
-            {searchLabel}
-          </Link>
+          <>
+            <Link
+              to={searchTo}
+              className={`flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 px-6 py-2 transition-all duration-300 ${
+                isSearchActive
+                  ? 'bg-[#3F51B5] text-white border-2 border-[#3F51B5] '
+                  : 'bg-transparent text-[#3F51B5] hover:text-white hover:bg-[#3F51B5] border-[#3F51B5]/90 border-2 '
+              }`}
+            >
+              {searchLabel}
+            </Link>
+            <button
+              type="button"
+              onClick={logout}
+              aria-label={t('navbar.logout')}
+              className="p-2 hover:cursor-pointer rounded-full border border-slate-200 bg-white text-slate-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition-all"
+            >
+              <FiLogOut size={18} />
+            </button>
+          </>
         ) : (
           <>
             <Link to="/auth" className="flex cascadia-mono-bold hover:opacity-100 opacity-95 hover:cursor-pointer items-center gap-2 text-white bg-[#3F51B5] px-6 py-2 transition-all">
@@ -173,7 +195,7 @@ bg-white backdrop-blur-lg border-b border-white/30 shadow-sm">
             <Link
               to="/"
               onClick={() => setMenuOpen(false)}
-              className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+              className={`font-semibold transition-colors hover:text-[#3F51B5] text-slate-700`}
             >
               {t('navbar.faqs')}
             </Link>
@@ -187,21 +209,31 @@ bg-white backdrop-blur-lg border-b border-white/30 shadow-sm">
             <Link
               to="/"
               onClick={() => setMenuOpen(false)}
-              className={`font-semibold transition-colors hover:text-[#3F51B5] ${isRootActive ? 'text-[#3F51B5]' : 'text-slate-700'}`}
+              className={`font-semibold transition-colors hover:text-[#3F51B5] text-slate-700`}
             >
               {t('navbar.about')}
             </Link>
-            <div className="flex gap-3 pt-2 border-t border-slate-100">
+            <div className="flex flex-col gap-3 pt-2 border-t border-slate-100">
               {isLoggedIn ? (
-                <Link
-                  to={searchTo}
-                  onClick={() => setMenuOpen(false)}
-                  className={`flex-1 text-center py-2.5 rounded-xl font-bold text-sm border-2 border-[#3F51B5] ${
-                    isSearchActive ? 'bg-[#3F51B5] text-white' : 'bg-transparent text-[#3F51B5]'
-                  }`}
-                >
-                  {searchLabel}
-                </Link>
+                <>
+                  <Link
+                    to={searchTo}
+                    onClick={() => setMenuOpen(false)}
+                    className={`w-full text-center py-2.5 rounded-xl font-bold text-sm border-2 border-[#3F51B5] ${
+                      isSearchActive ? 'bg-[#3F51B5] text-white' : 'bg-transparent text-[#3F51B5]'
+                    }`}
+                  >
+                    {searchLabel}
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="w-full hover:cursor-pointer flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-100 text-red-600 font-bold text-sm border border-slate-200 hover:bg-red-50 hover:border-red-200 transition-all"
+                  >
+                    <FiLogOut size={16} />
+                    {t('navbar.logout')}
+                  </button>
+                </>
               ) : (
                 <>
                   <Link

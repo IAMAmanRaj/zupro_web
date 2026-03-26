@@ -9,7 +9,8 @@
     "faqs": "FAQs",
     "contact": "Contact Us",
     "about": "About Us",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "logout": "Logout"
   },
   "auth": {
     "mobile": {
