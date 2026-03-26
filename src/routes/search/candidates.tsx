@@ -131,11 +131,11 @@ function CandidatesRoute() {
 
   return (
     <div
-      className="h-screen w-screen flex flex-col overflow-hidden bg-[#f0f0f5]"
+      className="h-screen w-screen flex flex-col overflow-y-auto  bg-[#f0f0f5]"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
       {/* Fixed header */}
-      <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 shrink-0">
+      <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 mt-16 shrink-0">
         <div className="max-w-5xl mx-auto">
 
           {/* Title row */}

@@ -114,15 +114,15 @@ function JobsRoute() {
 
   return (
     <div
-      className="h-screen w-screen flex flex-col overflow-hidden bg-[#f0f0f5]"
+      className="h-screen w-screen flex flex-col overflow-y-auto bg-[#f0f0f5]"
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
-      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Fixed header Ã¢â€â‚¬Ã¢â€â‚¬ */}
-      <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 shrink-0">
+     
+      <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 mt-16 shrink-0">
         <div className="max-w-5xl mx-auto">
 
           {/* Title row */}
-          <div className="flex items-end justify-between mb-3">
+          <div className="flex items-end justify-between mb-3 ">
             <div>
               <p className="text-indigo-400 text-[10px] font-semibold uppercase tracking-[0.15em] mb-0.5">
                 {t('header.badge')}
@@ -294,7 +294,7 @@ function JobsRoute() {
         </div>
       </div>
 
-      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Scrollable content Ã¢â€â‚¬Ã¢â€â‚¬ */}
+      
       <div className="flex-1 overflow-y-auto no-scrollbar min-h-0">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5">
 

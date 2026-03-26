@@ -18,15 +18,15 @@ function RootLayout() {
     isTouchDevice ||
     pathname.startsWith('/onboarding/seeker') ||
     pathname.startsWith('/onboarding/employer') ||
-    pathname.startsWith('/auth')
+    pathname.startsWith('/auth') ||
+    pathname.startsWith('/search/jobs')
+  || pathname.startsWith('/search/candidates')
 
   return (
-    <div className="fixed inset-0 overscroll-none bg-[#f0f2f8] flex flex-col">
+    <div className="fixed inset-0 bg-[#f0f2f8] flex flex-col">
       <Navbar />
       <main
-        className={`flex-1 flex flex-col min-h-0 ${
-          shouldDisableLenis ? 'overflow-y-auto' : 'overflow-hidden'
-        }`}
+        className={`flex-1 flex flex-col min-h-0`}
       >
         {shouldDisableLenis ? (
           <Outlet />

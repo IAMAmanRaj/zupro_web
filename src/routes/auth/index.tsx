@@ -91,7 +91,7 @@ function RouteComponent() {
         <img
           src="/images/auth/left_asset.webp"
           alt={t('auth.desktop.bannerAlt')}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover mt-16"
         />
       </div>
 

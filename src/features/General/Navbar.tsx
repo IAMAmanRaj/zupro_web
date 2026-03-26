@@ -32,7 +32,7 @@ export function Navbar() {
   return (
 <nav className="fixed top-0 left-0 right-0 z-50
 px-5 md:px-8 h-14 md:h-16 flex items-center justify-between
-bg-white/60 backdrop-blur-lg border-b border-white/30 shadow-sm">
+bg-white backdrop-blur-lg border-b border-white/30 shadow-sm">
       {/* Logo */}
       <Link
         to="/"
