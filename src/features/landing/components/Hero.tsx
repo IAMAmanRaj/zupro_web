@@ -1,10 +1,69 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { FaAnglesDown } from 'react-icons/fa6'
+import { useRef, useEffect } from 'react'
+import gsap from 'gsap'
 
 export function LandingHero() {
   const navigate = useNavigate()
   const { t } = useTranslation('home')
+  const headlineRef = useRef<HTMLHeadingElement | null>(null)
+  const imageRef = useRef<HTMLImageElement | null>(null)
+  const ctaRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const path = headlineRef.current?.querySelector('path')
+    const image = imageRef.current
+    const cta = ctaRef.current
+  
+    if (!path || !image || !cta) return
+  
+    const length = (path as SVGPathElement).getTotalLength()
+  
+    // Initial states
+    gsap.set(path, {
+      strokeDasharray: length,
+      strokeDashoffset: length,
+    })
+  
+    gsap.set(image, {
+      rotate: -2,        // start tilted
+      y: 20,            // slight drop for realism
+      opacity: 0,
+    })
+    gsap.set(cta, {
+      y: 30,
+      opacity: 0,
+    })
+  
+    // Timeline (so both sync perfectly)
+    const tl = gsap.timeline({ delay: 0.3 })
+  
+    // SVG draw
+    tl.to(path, {
+      strokeDashoffset: 0,
+      duration: 0.6,
+      ease: 'power2.inOut',
+    })
+
+    tl.to(cta, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power3.out',
+    }, 0.2) 
+  
+    // Image animation (runs at same time)
+    tl.to(image, {
+      rotate: 0,
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      ease: 'power3.out',
+    }, 0) // 👈 start at same time as SVG
+  
+  }, [])
+
 
   return (
     <>
@@ -13,7 +72,7 @@ export function LandingHero() {
         <div className="w-full mx-auto px-6 lg:px-16 lg:flex flex-row items-center justify-center gap-12 py-20 ">
           {/* LEFT: Text block */}
           <div className="flex-1 md:max-w-[720px] -mt-24">
-            <h1 className="text-[#111827] text-[40px] xlg:text-[48px] xl:text-6xl font-black leading-[1.05] tracking-tight mb-6">
+            <h1 ref={headlineRef} className="text-[#111827] text-[40px] xlg:text-[48px] xl:text-6xl font-black leading-[1.05] tracking-tight mb-6">
               <span className="sora-bold">{t('landing.hero.headlinePart1')}</span>
               <br />
               <span className="relative inline-block">
@@ -37,7 +96,9 @@ export function LandingHero() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="-mt-3 flex gap-3 md:gap-4 w-full max-w-[500px] px-1">
+            <div
+              ref={ctaRef}
+              className="-mt-3 flex gap-3 md:gap-4 w-full max-w-[500px] px-1">
               <button
                 type="button"
                 onClick={() => navigate({ to: '/onboarding/seeker' })}
@@ -58,6 +119,7 @@ export function LandingHero() {
           {/* RIGHT: Phone hand asset */}
           <div className="relative w-full lg:max-w-[440px] xlg:w-[500px] xl:scale-130 flex items-end justify-center">
             <img
+               ref={imageRef}
               src="/images/landing/mobile_hand_asset.png"
               alt={t('landing.hero.imageAlt')}
               className="relative z-10 w-full object-contain"
@@ -70,7 +132,7 @@ export function LandingHero() {
           </div>
 
         </div>
-        
+
       </section>
 
       {/* ── MOBILE HERO (under lg) ── */}
@@ -89,13 +151,16 @@ export function LandingHero() {
 
         {/* Phone hand asset */}
         <img
+          ref={imageRef}
           src="/images/landing/mobile_hand_asset.png"
           alt={t('landing.hero.imageAlt')}
           className="object-cover w-[280px] -mt-2 h-[280px] vs:w-[300px] vs:h-[300px] md:h-[500px] md:w-[500px] md:mt-16"
         />
 
         {/* CTA Buttons */}
-        <div className=" -mt-3 vs:-mt-1 flex flex-col gap-3 md:gap-4 w-full max-w-[320px] px-1">
+        <div
+          ref={ctaRef}
+          className=" -mt-3 vs:-mt-1 flex flex-col gap-3 md:gap-4 w-full max-w-[320px] px-1">
           <button
             type="button"
             onClick={() => navigate({ to: '/onboarding/seeker' })}
