@@ -1,7 +1,7 @@
 import { HiArrowRight } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 
-export function LandingInsightBlock() {
+export function Insights() {
   const { t } = useTranslation('home')
 
   return (

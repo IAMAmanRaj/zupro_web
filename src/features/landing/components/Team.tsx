@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export function LandingTeamBlock() {
+export function Team() {
   const { t } = useTranslation('home')
 
   return (

@@ -1,7 +1,7 @@
 import { LandingFooter } from './Footer'
 import { useTranslation } from 'react-i18next'
 
-export function LandingClosingCTABlock() {
+export function ClosingCTA() {
   const { t } = useTranslation('home')
 
   return (

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export function LandingHowItWorksBlock() {
+export function HowItWorks() {
   const { t } = useTranslation('home')
 
   return (

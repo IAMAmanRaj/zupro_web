@@ -7,7 +7,7 @@ import {
 } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 
-export function LandingSolutionBlock() {
+export function Solution() {
   const { t } = useTranslation('home')
 
   return (

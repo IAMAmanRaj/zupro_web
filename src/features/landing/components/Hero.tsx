@@ -8,59 +8,76 @@ export function LandingHero() {
   const navigate = useNavigate()
   const { t } = useTranslation('home')
   const headlineRef = useRef<HTMLHeadingElement | null>(null)
-  const imageRef = useRef<HTMLImageElement | null>(null)
-  const ctaRef = useRef<HTMLDivElement | null>(null)
+  const desktopImageRef = useRef<HTMLImageElement | null>(null)
+  const desktopCtaRef = useRef<HTMLDivElement | null>(null)
+  
+  const mobileImageRef = useRef<HTMLImageElement | null>(null)
+  const mobileCtaRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const path = headlineRef.current?.querySelector('path')
-    const image = imageRef.current
-    const cta = ctaRef.current
+    const isMobile = window.innerWidth < 1024
   
-    if (!path || !image || !cta) return
+    const path = headlineRef.current?.querySelector('path')
+    if (!path) return
+  
+    let image: HTMLImageElement | null = null
+    let cta: HTMLDivElement | null = null
+  
+    if (isMobile) {
+      image = mobileImageRef.current
+      cta = mobileCtaRef.current
+    } else {
+      image = desktopImageRef.current
+      cta = desktopCtaRef.current
+    }
+  
+    if (!image || !cta) return
+
+    const buttons = cta.querySelectorAll('button')
   
     const length = (path as SVGPathElement).getTotalLength()
   
-    // Initial states
     gsap.set(path, {
       strokeDasharray: length,
       strokeDashoffset: length,
     })
   
     gsap.set(image, {
-      rotate: -2,        // start tilted
-      y: 20,            // slight drop for realism
+      rotate: 5,
+      y: window.innerWidth < 1024? -10 : -30,
+      x: window.innerWidth < 1024 ? 0 : -10,
       opacity: 0,
     })
-    gsap.set(cta, {
+  
+    gsap.set(buttons, {
       y: 30,
       opacity: 0,
     })
   
-    // Timeline (so both sync perfectly)
     const tl = gsap.timeline({ delay: 0.3 })
   
-    // SVG draw
     tl.to(path, {
       strokeDashoffset: 0,
       duration: 0.6,
       ease: 'power2.inOut',
     })
-
-    tl.to(cta, {
+  
+    tl.to(buttons, {
       y: 0,
       opacity: 1,
-      duration: 0.5,
+      duration: 0.2,
       ease: 'power3.out',
-    }, 0.2) 
+      stagger: 0.1, // 🔥 key
+    }, 0.2)
   
-    // Image animation (runs at same time)
     tl.to(image, {
       rotate: 0,
       y: 0,
+      x: window.innerWidth < 1024 ? 0 : -30,
       opacity: 1,
       duration: 0.7,
       ease: 'power3.out',
-    }, 0) // 👈 start at same time as SVG
+    }, 0)
   
   }, [])
 
@@ -97,7 +114,7 @@ export function LandingHero() {
 
             {/* CTA Buttons */}
             <div
-              ref={ctaRef}
+              ref={desktopCtaRef}
               className="-mt-3 flex gap-3 md:gap-4 w-full max-w-[500px] px-1">
               <button
                 type="button"
@@ -119,7 +136,7 @@ export function LandingHero() {
           {/* RIGHT: Phone hand asset */}
           <div className="relative w-full lg:max-w-[440px] xlg:w-[500px] xl:scale-130 flex items-end justify-center">
             <img
-               ref={imageRef}
+               ref={desktopImageRef}
               src="/images/landing/mobile_hand_asset.png"
               alt={t('landing.hero.imageAlt')}
               className="relative z-10 w-full object-contain"
@@ -151,7 +168,7 @@ export function LandingHero() {
 
         {/* Phone hand asset */}
         <img
-          ref={imageRef}
+          ref={mobileImageRef}
           src="/images/landing/mobile_hand_asset.png"
           alt={t('landing.hero.imageAlt')}
           className="object-cover w-[280px] -mt-2 h-[280px] vs:w-[300px] vs:h-[300px] md:h-[500px] md:w-[500px] md:mt-16"
@@ -159,7 +176,7 @@ export function LandingHero() {
 
         {/* CTA Buttons */}
         <div
-          ref={ctaRef}
+          ref={mobileCtaRef}
           className=" -mt-3 vs:-mt-1 flex flex-col gap-3 md:gap-4 w-full max-w-[320px] px-1">
           <button
             type="button"
