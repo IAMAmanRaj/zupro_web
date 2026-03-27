@@ -67,7 +67,7 @@ export function LandingHero() {
       opacity: 1,
       duration: 0.2,
       ease: 'power3.out',
-      stagger: 0.1, // 🔥 key
+      stagger: 0.1, 
     }, 0.2)
   
     tl.to(image, {

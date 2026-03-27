@@ -1,6 +1,8 @@
 import { HiArrowRight } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 
+import { motion } from 'framer-motion'
+
 export function Problem() {
   const { t } = useTranslation('home')
 
@@ -22,16 +24,38 @@ export function Problem() {
             <br />
             {t('landing.problem.titleLine2')}
           </h2>
-          <p className="text-[#3F51B5] cascadia-mono-light italic text-lg md:text-xl lg:text-2xl lg:text-right max-w-[375px] sm:max-w-[280px] lg:mb-2 leading-snug">
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1], // smoother than default
+            }}
+            viewport={{ once: true, margin: '-50px' }}
+            className="text-[#3F51B5] cascadia-mono-light italic text-lg md:text-xl lg:text-2xl lg:text-right max-w-[375px] sm:max-w-[280px] lg:mb-2 leading-snug"
+          >
             {t('landing.problem.quotePrefix')}
-            <br className="hidden lg:block" />
+            <br className="" />
             {t('landing.problem.quoteSuffix')}
-          </p>
+          </motion.p>
         </div>
 
         {/* ── Cinematic quote — large text, no cards ── */}
         <div className="border-t border-[rgba(63,81,181,0.12)] pt-10 mb-10">
-          <div className="flex flex-col gap-5">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.18,
+                },
+              },
+            }}
+            className="flex flex-col gap-5"
+          >
             {[
               {
                 text: t('landing.problem.quoteLines.line1'),
@@ -49,24 +73,57 @@ export function Problem() {
                 opacity: 'text-[#1e1b4b]/35',
               },
             ].map(({ text, size, opacity }) => (
-              <p key={text} className={`sora-bold font-black italic leading-none ${size} ${opacity} tracking-tight`}>
+              <motion.p
+                key={text}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                }}
+                className={`sora-bold font-black italic leading-none ${size} ${opacity} tracking-tight`}
+              >
                 {text}
-              </p>
+              </motion.p>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Trailing context line */}
         <div className="flex gap-2 items-center w-full mb-20">
-          <div className="w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]" />
+          {/* LEFT LINE (grows →) */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="origin-left w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]"
+          />
+
+          {/* CENTER TEXT (no animation) */}
           <div className="text-[#6B7280] max-w-[350px] flex justify-center text-center sm:max-w-[500px] md:w-full cascadia-mono-light text-sm">
-            <span className="">
+            <span>
               {t('landing.problem.trailingPrefix')}{' '}
-              <span className="cascadia-mono-bold text-black">{t('landing.problem.trailingBold')}</span>{' '}
+              <span className="cascadia-mono-bold text-black">
+                {t('landing.problem.trailingBold')}
+              </span>{' '}
               {t('landing.problem.trailingSuffix')}
             </span>
           </div>
-          <div className="w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]" />
+
+          {/* RIGHT LINE (grows ←) */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="origin-right w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]"
+          />
         </div>
 
         {/* ── Stats — side-by-side with dividing lines ── */}
