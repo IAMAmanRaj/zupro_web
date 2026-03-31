@@ -162,15 +162,59 @@ export function Problem() {
         </div>
 
         {/* Bottom callout */}
-        <div className="mt-14 border-t border-[rgba(63,81,181,0.12)] pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-[#1e1b4b] cascadia-mono-light font-semibold text-sm max-w-[480px] leading-relaxed">
-            {t('landing.problem.calloutPrefix')}{' '}
-            <span className="text-[#3F51B5]">{t('landing.problem.calloutHighlight')}</span>
-          </p>
-          <span className="flex sora-bold items-center gap-2 text-[#9CA3AF] text-[10px] font-bold tracking-[0.22em] uppercase">
-            {t('landing.problem.untilNow')} <HiArrowRight size={12} />
-          </span>
-        </div>
+        <motion.div
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, margin: '-40px' }}
+  variants={{
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  }}
+  className="mt-14 border-t border-[rgba(63,81,181,0.12)] pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+>
+  {/* TEXT */}
+  <motion.p
+    variants={{
+      hidden: { opacity: 0, y: 24 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 2.0,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      },
+    }}
+    className="text-[#1e1b4b] cascadia-mono-light font-semibold text-sm max-w-[480px] leading-relaxed"
+  >
+    {t('landing.problem.calloutPrefix')}{' '}
+    <span className="text-[#3F51B5]">
+      {t('landing.problem.calloutHighlight')}
+    </span>
+  </motion.p>
+
+  {/* RIGHT LABEL */}
+  <motion.span
+    variants={{
+      hidden: { opacity: 0, y: 24 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 5.0,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      },
+    }}
+    className="flex sora-bold items-center gap-2 text-[#1e1b4b] text-[15px] font-bold tracking-[0.22em] uppercase"
+  >
+    {t('landing.problem.untilNow')} <HiArrowRight size={12} />
+  </motion.span>
+</motion.div>
       </div>
     </>
   )
