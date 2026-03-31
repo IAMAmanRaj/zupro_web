@@ -44,7 +44,6 @@ export function Team() {
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.6, ease }}
           viewport={{ once: true }}
-          whileHover={{ y: -4 }}
           className="bg-white lg:p-12"
         >
           <div className="flex items-center gap-5 mb-8">
@@ -73,7 +72,6 @@ export function Team() {
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1, ease }}
           viewport={{ once: true }}
-          whileHover={{ y: -4 }}
           className="bg-white pt-8 lg:p-12"
         >
           <div className="flex items-center gap-5 mb-8">
