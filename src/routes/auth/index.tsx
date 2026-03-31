@@ -98,7 +98,7 @@ function RouteComponent() {
       </div>
 
       {/* ── Mobile top banner (< md only) ──────────────────────────────────── */}
-      <div className="md:hidden relative bg-[#1e1b4b] px-6 pt-8 pb-8 overflow-hidden">
+      <div className="md:hidden relative bg-[#1e1b4b] px-6 pt-26 pb-8 overflow-hidden">
         {/* Decorative circles */}
         <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/5 pointer-events-none" />

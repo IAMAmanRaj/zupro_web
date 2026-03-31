@@ -118,7 +118,7 @@ function JobsRoute() {
       style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
     >
      
-      <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-5 mt-16 shrink-0">
+      <div className="bg-[#1e1b4b] px-4 sm:px-6 pt-7 pb-7 mt-14 shrink-0">
         <div className="max-w-5xl mx-auto">
 
           {/* Title row */}

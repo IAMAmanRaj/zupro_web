@@ -29,7 +29,9 @@ function RootLayout() {
         className={`flex-1 flex flex-col min-h-0`}
       >
         {shouldDisableLenis ? (
-          <Outlet />
+          <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden touch-pan-y">
+            <Outlet />
+          </div>
         ) : (
           <ReactLenis
             root={false}
