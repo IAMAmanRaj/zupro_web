@@ -6,30 +6,58 @@ import {
   HiOutlineLightningBolt,
 } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 
 export function Solution() {
   const { t } = useTranslation('home')
 
   return (
     <>
-      {/* ══════════════════════════════════════════
-          BLOCK 3 — THE SOLUTION
-      ══════════════════════════════════════════ */}
+      {/* ── SECTION ── */}
       <div className="bg-[#f8f8fc] w-full">
         <div className="max-w-[1200px] xl:max-w-[1300px] mx-auto px-5 lg:px-16 pt-16 lg:pt-20 pb-12 md:pb-20 lg:pb-20">
-          <p className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8">
+          
+          {/* EYEBROW */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="text-[15px] xl:text-[20px] sora-bold font-bold tracking-[0.28em] uppercase text-[#3F51B5] mb-8"
+          >
             {t('landing.solution.eyebrow')}
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 md:mb-16">
+          {/* HEADLINE */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 md:mb-16"
+          >
             <h2 className="sora-bold text-[#1e1b4b] text-2xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[1.05] tracking-tight w-full">
               {t('landing.solution.headlinePrefix')}
               <br />
               {t('landing.solution.headlineSuffix')}
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[rgba(63,81,181,0.1)]">
+          {/* GRID */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.12,
+                },
+              },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[rgba(63,81,181,0.1)]"
+          >
             {[
               {
                 icon: <HiOutlineGlobe size={22} />,
@@ -85,30 +113,71 @@ export function Solution() {
                 desc: t('landing.solution.cards.card6.desc'),
               },
             ].map(({ icon, title, tag, tagColor, desc }) => (
-              <div
+              
+              <motion.div
                 key={title}
-                className="bg-white opacity-85 hover:opacity-100 duration-300 transition-all hover:cursor-pointer  p-4 md:p-8 lg:p-10 flex flex-col gap-4"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                }}
+              
+                className="bg-white opacity-85 hover:opacity-100 duration-300 transition-all hover:cursor-pointer p-4 md:p-8 lg:p-10 flex flex-col gap-4"
               >
-                <div className="text-[#3F51B5]">{icon}</div>
+                {/* ICON */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-[#3F51B5]"
+                >
+                  {icon}
+                </motion.div>
+
+                {/* TITLE + TAG */}
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="sora-bold text-[#1e1b4b] font-black text-lg tracking-tight">{title}</span>
+                  <span className="sora-bold text-[#1e1b4b] font-black text-lg tracking-tight">
+                    {title}
+                  </span>
+
                   {tag && (
-                    <span
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
+                      viewport={{ once: true }}
                       className={`text-[10px] sora-bold font-bold tracking-[0.14em] uppercase text-white px-2.5 py-1 rounded-full ${
                         tagColor ?? 'bg-[#3F51B5]'
                       }`}
                     >
                       {tag}
-                    </span>
+                    </motion.span>
                   )}
                 </div>
-                <p className="cascadia-mono-light text-[#6B7280] text-sm leading-relaxed">{desc}</p>
-              </div>
+
+                {/* DESC */}
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  viewport={{ once: true }}
+                  className="cascadia-mono-light text-[#6B7280] text-sm leading-relaxed"
+                >
+                  {desc}
+                </motion.p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
   )
 }
-
