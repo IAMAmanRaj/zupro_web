@@ -2,6 +2,7 @@ import { HiArrowRight } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 
 import { motion } from 'framer-motion'
+import { CountUp } from '../../../utils/landing/countUp'
 
 export function Problem() {
   const { t } = useTranslation('home')
@@ -100,7 +101,7 @@ export function Problem() {
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
             className="origin-left w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]"
           />
@@ -120,7 +121,7 @@ export function Problem() {
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
             className="origin-right w-[40%] sm:w-[90%] md:w-full h-px bg-[#3F51B5]"
           />
@@ -129,11 +130,12 @@ export function Problem() {
         {/* ── Stats — side-by-side with dividing lines ── */}
         <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[rgba(63,81,181,0.12)]">
           {[
-            {
-              value: t('landing.problem.stats.stat1.value'),
-              label: t('landing.problem.stats.stat1.label'),
-              sub: t('landing.problem.stats.stat1.sub'),
-            },
+              {
+                value: t('landing.problem.stats.stat1.value'),
+                suffix: t('landing.problem.stats.stat1.suffix'),
+                label: t('landing.problem.stats.stat1.label'),
+                sub: t('landing.problem.stats.stat1.sub'),
+              },
             {
               value: t('landing.problem.stats.stat2.value'),
               label: t('landing.problem.stats.stat2.label'),
@@ -144,10 +146,14 @@ export function Problem() {
               label: t('landing.problem.stats.stat3.label'),
               sub: t('landing.problem.stats.stat3.sub'),
             },
-          ].map(({ value, label, sub }) => (
+          ].map(({ value, suffix, label, sub }) => (
             <div key={value} className="cascadia-mono-light sm:px-10 first:pl-0 last:pr-0 py-8 sm:py-0">
               <div className="sora-bold text-[#1e1b4b] text-5xl lg:text-6xl font-black leading-none mb-3 tracking-tight">
-                {value}
+              {typeof value === 'number' ? (
+  <CountUp end={value} suffix={suffix} />
+) : (
+  value
+)}
               </div>
               <div className="text-[#3F51B5] font-semibold text-sm mb-2">{label}</div>
               <p className="text-[#9CA3AF] text-xs leading-relaxed">{sub}</p>

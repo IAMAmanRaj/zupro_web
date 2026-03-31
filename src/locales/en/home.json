@@ -58,11 +58,12 @@
       "trailingBold": "50 million",
       "trailingSuffix": "people find work.",
       "stats": {
-        "stat1": {
-          "value": "50M+",
-          "label": "Domestic workers in India",
-          "sub": "3rd largest employment sector after agriculture & construction"
-        },
+       "stat1": {
+  "value": 50,
+  "suffix": "M+",
+  "label": "Domestic workers in India",
+  "sub": "3rd largest employment sector after agriculture & construction"
+},
         "stat2": {
           "value": "1 in 3",
           "label": "Urban Indians is a migrant",
