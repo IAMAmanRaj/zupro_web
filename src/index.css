@@ -76,11 +76,6 @@ body {
   font-style: normal;
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   Paste everything below into your index.css (after your Tailwind directives)
-   ───────────────────────────────────────────────────────────────────────────── */
-
    /* ── CSS Variables ── */
    :root {
      --primary: #3F51B5;
@@ -216,10 +211,6 @@ body {
    .back-btn svg { transition: transform 0.2s ease; }
    .back-btn:hover svg { transform: translateX(-2px); }
 
-   /* ─────────────────────────────────────────────────────────────────────────────
-   Zupro custom scrollbar — paste into index.css
-   Works on Chrome/Edge/Safari (webkit) + Firefox
-   ───────────────────────────────────────────────────────────────────────────── */
 
 /* Firefox */
 .zupro-scroll::-webkit-scrollbar { width: 4px; }
